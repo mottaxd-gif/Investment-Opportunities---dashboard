@@ -1,0 +1,29 @@
+name: Update Dashboard Daily
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Update dashboard with better template
+      run: |
+        cp capital_flows_dashboard.html index.html
+        mkdir -p logs
+        echo "Dashboard updated: $(date)" >> logs/update-log.txt
+    
+    - name: Commit and push
+      run: |
+        git config --global user.email "motta.xd@gmail.com"
+        git config --global user.name "Dashboard Automation"
+        git add index.html logs/update-log.txt
+        git commit -m "Auto-update: Deploy better dashboard template [$(date +%Y-%m-%d)]" || true
+        git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
