@@ -1,0 +1,323 @@
+#!/usr/bin/env node
+
+/**
+ * Government Capital Flows Dashboard Generator
+ * Runs daily via GitHub Actions to generate fresh dashboards
+ */
+
+const fs = require('fs');
+const axios = require('axios');
+
+// Sample findings data (will be enhanced with real API calls)
+// TODO: Integrate with actual news APIs (Reuters, WSJ, etc.)
+const generateFindings = async () => {
+  const findings = [
+    {
+      rank: 1,
+      title: "Government Takes Equity Stakes — Policy Regime Shift",
+      importance: 5,
+      sector: "semiconductors",
+      what: "Trump administration now holds equity in Intel (10%), MP Materials (15%), Lithium Americas (10%), plus new quantum stakes",
+      why: "Government no longer just subsidizing. It's taking ownership. This is unprecedented and signals long-term commitment.",
+      companies: ["Intel", "MP Materials", "Lithium Americas"],
+      timeline: "Equity model now systematized",
+      source: "https://finance.yahoo.com/news/trump-administration-now-holds-stakes-023008085.html"
+    },
+    {
+      rank: 2,
+      title: "$2B Quantum Bet — 9 Companies Signed",
+      importance: 5,
+      sector: "quantum",
+      what: "Department of Commerce signed letters of intent for $2B across 9 quantum firms (IBM, GlobalFoundries, 7 others)",
+      why: "Clearest single government capital flow signal. Washington betting on quantum as 10-year infrastructure buildout.",
+      companies: ["IBM", "GlobalFoundries", "7 quantum companies (TBD)"],
+      timeline: "Awards imminent (LOI phase → award → deployment)",
+      source: "https://www.nist.gov/news-events/news/2026/05/department-commerce-announces-letters-intent-9-companies-2-billion"
+    },
+    {
+      rank: 3,
+      title: "Pentagon AI Clears 8 Tech Giants for Classified Networks",
+      importance: 5,
+      sector: "ai",
+      what: "NVIDIA, OpenAI, SpaceX, AWS, Microsoft, Oracle, Google, Reflection approved for secret + highly classified systems",
+      why: "Validates AI infrastructure as defense-critical. Multi-year, multi-billion dollar commitment incoming.",
+      companies: ["NVIDIA", "OpenAI", "SpaceX", "AWS", "Microsoft", "Oracle", "Google", "Reflection"],
+      timeline: "Deployment underway now",
+      source: "https://breakingdefense.com/2026/05/pentagon-clears-7-tech-firms-to-deploy-their-ai-on-its-classified-networks/"
+    },
+    {
+      rank: 4,
+      title: "DOE Critical Minerals Blitz — $500M-$1B",
+      importance: 4,
+      sector: "minerals",
+      what: "Department of Energy funding notices issued for rare earths, lithium, cobalt processing and mining",
+      why: "Supply chain reshoring explicitly government-backed. Clear demand guaranteed.",
+      companies: ["TBD (bidding phase)", "Rare earth processors", "Battery makers"],
+      timeline: "Funding opportunity live now; awards Q3-Q4 2026",
+      source: "https://www.energy.gov/articles/energy-department-announces-500-million-strengthen-domestic-materials-processing"
+    },
+    {
+      rank: 5,
+      title: "IBM Quantum Foundry — $1B CHIPS Award",
+      importance: 4,
+      sector: "quantum",
+      what: "IBM getting $1B CHIPS grant + $1B matching investment for new Anderon 300mm quantum foundry",
+      why: "First domestic quantum fab. Government de-risking manufacturing.",
+      companies: ["IBM"],
+      timeline: "Construction starting; production 2027+",
+      source: "https://thequantuminsider.com/2026/05/21/ibm-and-u-s-department-of-commerce-announce-proposed-1-billion-chips-award-to-fund-purpose-built-quantum-foundry/"
+    },
+    {
+      rank: 6,
+      title: "TSMC U.S. Expansion — $100B Total Commitment",
+      importance: 3,
+      sector: "semiconductors",
+      what: "TSMC doubling down on U.S. investment; now $100B total (up from $65B)",
+      why: "CHIPS Act is working. Reshoring is accelerating.",
+      companies: ["TSMC"],
+      timeline: "Ongoing; Phoenix fab expansion underway",
+      source: "https://www.tsmc.com"
+    }
+  ];
+
+  return findings;
+};
+
+// Generate HTML dashboard
+const generateHTML = (findings) => {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  const timeStr = now.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  });
+
+  const critical = findings.filter(f => f.importance === 5).length;
+  const major = findings.filter(f => f.importance === 4).length;
+  const confirmation = findings.filter(f => f.importance === 3).length;
+
+  const findingsHTML = findings.map((f, i) => `
+    <div class="finding-card" onclick="this.classList.toggle('expanded')">
+      <div class="finding-header">
+        <div class="finding-title">
+          <div class="finding-rank">#${f.rank}</div>
+          <div>
+            <h3 style="color: #e2e8f0; font-size: 1.1em; margin-bottom: 5px;">${f.title}</h3>
+            <span class="importance-badge importance-${f.importance}">Importance ${f.importance}/5</span>
+          </div>
+        </div>
+        <div class="toggle-icon">▼</div>
+      </div>
+      <div class="finding-body">
+        <div class="finding-section">
+          <h4>What</h4>
+          <p>${f.what}</p>
+        </div>
+        <div class="finding-section">
+          <h4>Why It Matters</h4>
+          <p>${f.why}</p>
+        </div>
+        <div class="finding-section">
+          <h4>Companies</h4>
+          <div class="companies-list">${f.companies.map(c => `<span class="company-tag">${c}</span>`).join('')}</div>
+        </div>
+        <div class="finding-section">
+          <h4>Timeline</h4>
+          <p>${f.timeline}</p>
+        </div>
+        <a href="${f.source}" target="_blank" class="source-link">📰 View Source</a>
+      </div>
+    </div>
+  `).join('');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Government Capital Flows Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 2px solid #334155;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .timestamp { color: #94a3b8; font-size: 0.9em; }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .summary-card {
+            background: #1e293b;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .summary-card.critical { border-left-color: #ef4444; }
+        .summary-card.major { border-left-color: #f97316; }
+        .summary-card h3 { color: #94a3b8; font-size: 0.85em; text-transform: uppercase; margin-bottom: 10px; }
+        .summary-card .number { font-size: 2.5em; font-weight: bold; color: #60a5fa; }
+        .summary-card.critical .number { color: #ef4444; }
+        .summary-card.major .number { color: #f97316; }
+        .findings { display: grid; gap: 20px; }
+        .finding-card {
+            background: #1e293b;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .finding-card:hover { border-color: #60a5fa; box-shadow: 0 4px 20px rgba(96, 165, 250, 0.1); }
+        .finding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #0f172a;
+            border-bottom: 1px solid #334155;
+        }
+        .finding-card.expanded .finding-header { background: #334155; }
+        .finding-title { display: flex; align-items: center; gap: 15px; flex: 1; }
+        .importance-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .importance-5 { background: #7f1d1d; color: #fca5a5; }
+        .importance-4 { background: #7c2d12; color: #fdba74; }
+        .importance-3 { background: #713f12; color: #fcd34d; }
+        .finding-rank {
+            width: 35px;
+            height: 35px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+        }
+        .finding-body { padding: 20px; display: none; }
+        .finding-card.expanded .finding-body { display: block; }
+        .toggle-icon { font-size: 1.5em; color: #94a3b8; transition: transform 0.3s ease; }
+        .finding-card.expanded .toggle-icon { transform: rotate(180deg); }
+        .finding-section { margin-bottom: 15px; }
+        .finding-section h4 { color: #60a5fa; font-size: 0.85em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+        .finding-section p { color: #cbd5e1; line-height: 1.6; font-size: 0.95em; }
+        .companies-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .company-tag { background: #334155; padding: 4px 12px; border-radius: 4px; font-size: 0.85em; color: #cbd5e1; border: 1px solid #475569; }
+        .source-link { color: #60a5fa; text-decoration: none; font-size: 0.9em; margin-top: 8px; }
+        .source-link:hover { text-decoration: underline; }
+        .top-trend {
+            background: linear-gradient(135deg, #7f1d1d 0%, #7c2d12 100%);
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+        .top-trend h2 { color: #fca5a5; margin-bottom: 15px; font-size: 1.3em; }
+        .top-trend p { color: #fed7aa; line-height: 1.8; margin-bottom: 15px; }
+        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #334155; color: #64748b; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Government Capital Flows</h1>
+            <p class="timestamp">${dateStr} at ${timeStr}</p>
+        </div>
+        <div class="summary-grid">
+            <div class="summary-card critical">
+                <h3>Critical Signals</h3>
+                <div class="number">${critical}</div>
+                <p style="color: #f87171; font-size: 0.9em; margin-top: 8px;">Importance 5/5</p>
+            </div>
+            <div class="summary-card major">
+                <h3>Major Signals</h3>
+                <div class="number">${major}</div>
+                <p style="color: #fb923c; font-size: 0.9em; margin-top: 8px;">Importance 4/5</p>
+            </div>
+            <div class="summary-card">
+                <h3>Confirmation</h3>
+                <div class="number">${confirmation}</div>
+                <p style="color: #fbbf24; font-size: 0.9em; margin-top: 8px;">Importance 3/5</p>
+            </div>
+            <div class="summary-card">
+                <h3>Total Capital Announced</h3>
+                <div class="number" style="font-size: 1.8em;">$4.3B+</div>
+            </div>
+        </div>
+        <div class="findings">${findingsHTML}</div>
+        <div class="top-trend">
+            <h2>🎯 Highest-Priority Trend</h2>
+            <p><strong>Quantum + Equity Stakes = Regime Change</strong></p>
+            <p>Washington is using equity stakes to lock in long-term industrial policy outcomes. Quantum is the immediate test case. Government is no longer just subsidizing—it's taking ownership positions in strategic sectors.</p>
+        </div>
+        <div class="footer">
+            <p>Report generated: ${dateStr} at ${timeStr} | Next update: Tomorrow 9:00 AM UTC</p>
+        </div>
+    </div>
+</body>
+</html>`;
+};
+
+// Main execution
+const main = async () => {
+  console.log('🚀 Starting GitHub Actions Dashboard Generator...');
+
+  try {
+    // Generate findings
+    console.log('📊 Generating findings...');
+    const findings = await generateFindings();
+
+    // Generate HTML
+    console.log('🎨 Generating HTML dashboard...');
+    const html = generateHTML(findings);
+
+    // Save to index.html
+    console.log('💾 Saving to index.html...');
+    fs.writeFileSync('index.html', html);
+
+    console.log('✅ Dashboard generated successfully!');
+    console.log(`   📈 Found ${findings.length} capital flow signals`);
+    console.log('   📤 Ready to commit and push');
+
+  } catch (error) {
+    console.error('❌ Error generating dashboard:', error.message);
+    process.exit(1);
+  }
+};
+
+main();
