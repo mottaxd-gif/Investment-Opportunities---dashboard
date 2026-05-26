@@ -340,6 +340,44 @@
             color: #e2e8f0;
         }
         
+        /* Main Region Tabs */
+        .main-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #334155;
+        }
+        
+        .main-tab {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #cbd5e1;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .main-tab.active {
+            color: #60a5fa;
+            border-bottom-color: #60a5fa;
+        }
+        
+        .main-tab:hover {
+            color: #e2e8f0;
+        }
+        
+        .dashboard-view {
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
         @media print {
             body {
                 background: white;
@@ -414,18 +452,48 @@
                 <div class="watch-item">Private follow-on funding into quantum (mega-signal of government de-risking)</div>
             </div>
         </div>
-        <div class="region-tabs">
-            <button class="region-tab active" onclick="switchRegion('global')">Global Capital Flows</button>
-            <button class="region-tab" onclick="switchRegion('brazil')">Brazil Investments</button>
+
+        <!-- Global vs Brazil Tabs -->
+        <div class="main-tabs">
+            <button class="main-tab active" onclick="switchMainTab('global')">Global</button>
+            <button class="main-tab" onclick="switchMainTab('brazil')">Brazil</button>
         </div>
-        <div class="findings" id="findingsContainer"></div>
-        <div class="footer">
+
+        <!-- Global Dashboard -->
+        <div class="dashboard-view" id="globalDashboard">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="filterBySector('all', 'global')">All Sectors</button>
+                <button class="tab-btn" onclick="filterBySector('quantum', 'global')">Quantum</button>
+                <button class="tab-btn" onclick="filterBySector('ai', 'global')">AI/Defense</button>
+                <button class="tab-btn" onclick="filterBySector('semiconductors', 'global')">Semiconductors</button>
+                <button class="tab-btn" onclick="filterBySector('minerals', 'global')">Critical Minerals</button>
+            </div>
+            <div class="filter-section">
+                <input type="text" class="filter-input" id="searchInputGlobal" placeholder="Search findings..." onkeyup="filterFindings('global')">
+            </div>
+            <div class="findings" id="findingsContainerGlobal"></div>
+        </div>
+
+        <!-- Brazil Dashboard -->
+        <div class="dashboard-view" id="brazilDashboard" style="display:none;">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="filterBySector('all', 'brazil')">All Sectors</button>
+                <button class="tab-btn" onclick="filterBySector('energy', 'brazil')">Energy</button>
+                <button class="tab-btn" onclick="filterBySector('technology', 'brazil')">Technology</button>
+                <button class="tab-btn" onclick="filterBySector('sustainability', 'brazil')">Sustainability</button>
+            </div>
+            <div class="filter-section">
+                <input type="text" class="filter-input" id="searchInputBrazil" placeholder="Search findings..." onkeyup="filterFindings('brazil')">
+            </div>
+            <div class="findings" id="findingsContainerBrazil"></div>
+        </div>
+
+        <div class="footer">        <div class="footer">
             <p>Report generated: <span id="footerTime"></span> | Next update: Tomorrow 9:00 AM</p>
         </div>
     </div>
     <script>
-        let currentRegion = 'global';
-        let currentSector = 'all';
+        let currentMainTab = 'global';
         
         const globalFindings = [
             {
@@ -532,22 +600,32 @@
             }
         ];
         
-        let filteredFindings = globalFindings;
-        
-        function switchRegion(region) {
-            currentRegion = region;
-            currentSector = 'all';
-            document.querySelectorAll('.region-tab').forEach(btn => btn.classList.remove('active'));
+        function switchMainTab(tab) {
+            currentMainTab = tab;
+            document.querySelectorAll('.main-tab').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            filteredFindings = region === 'global' ? globalFindings : brazilFindings;
-            renderFindings();
+            document.getElementById('globalDashboard').style.display = tab === 'global' ? 'block' : 'none';
+            document.getElementById('brazilDashboard').style.display = tab === 'brazil' ? 'block' : 'none';
         }
         
-        function renderFindings() {
-            const container = document.getElementById('findingsContainer');
+        function renderFindings(region) {
+            const findings = region === 'global' ? globalFindings : brazilFindings;
+            const container = document.getElementById('findingsContainer' + (region === 'global' ? 'Global' : 'Brazil'));
+            const searchInput = document.getElementById('searchInput' + (region === 'global' ? 'Global' : 'Brazil'));
+            
+            const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+            let filtered = findings;
+            
+            if (searchTerm) {
+                filtered = findings.filter(f =>
+                    f.title.toLowerCase().includes(searchTerm) ||
+                    f.what.toLowerCase().includes(searchTerm) ||
+                    f.companies.some(c => c.toLowerCase().includes(searchTerm))
+                );
+            }
+            
             container.innerHTML = '';
-            const toRender = currentSector === 'all' ? filteredFindings : filteredFindings.filter(f => f.sector === currentSector);
-            toRender.forEach(finding => {
+            filtered.forEach(finding => {
                 const card = document.createElement('div');
                 card.className = 'finding-card';
                 card.innerHTML = `
@@ -587,21 +665,59 @@
             });
         }
         
-        function filterBySector(sector) {
-            currentSector = sector;
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        function filterBySector(sector, region) {
+            const findings = region === 'global' ? globalFindings : brazilFindings;
+            const container = document.getElementById('findingsContainer' + (region === 'global' ? 'Global' : 'Brazil'));
+            const tabs = document.querySelectorAll(`#${region === 'global' ? 'globalDashboard' : 'brazilDashboard'} .tab-btn`);
+            
+            tabs.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            renderFindings();
+            
+            container.innerHTML = '';
+            const filtered = sector === 'all' ? findings : findings.filter(f => f.sector === sector);
+            
+            filtered.forEach(finding => {
+                const card = document.createElement('div');
+                card.className = 'finding-card';
+                card.innerHTML = `
+                    <div class="finding-header" onclick="this.parentElement.classList.toggle('expanded')">
+                        <div class="finding-title">
+                            <div class="finding-rank">#${finding.rank}</div>
+                            <div>
+                                <h3 style="color: #e2e8f0; font-size: 1.1em; margin-bottom: 5px;">${finding.title}</h3>
+                                <span class="importance-badge importance-${finding.importance}">Importance ${finding.importance}/5</span>
+                            </div>
+                        </div>
+                        <div class="toggle-icon">▼</div>
+                    </div>
+                    <div class="finding-body">
+                        <div class="finding-section">
+                            <h4>What</h4>
+                            <p>${finding.what}</p>
+                        </div>
+                        <div class="finding-section">
+                            <h4>Why It Matters</h4>
+                            <p>${finding.why}</p>
+                        </div>
+                        <div class="finding-section">
+                            <h4>Companies to Watch</h4>
+                            <div class="companies-list">
+                                ${finding.companies.map(c => `<span class="company-tag">${c}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="finding-section">
+                            <h4>Timeline</h4>
+                            <p>${finding.timeline}</p>
+                        </div>
+                        <a href="${finding.source}" target="_blank" class="source-link">📰 View Source</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
         }
         
-        function filterFindings() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            filteredFindings = (currentRegion === 'global' ? globalFindings : brazilFindings).filter(f =>
-                f.title.toLowerCase().includes(searchTerm) ||
-                f.what.toLowerCase().includes(searchTerm) ||
-                f.companies.some(c => c.toLowerCase().includes(searchTerm))
-            );
-            renderFindings();
+        function filterFindings(region) {
+            renderFindings(region);
         }
         
         // Set timestamp
@@ -621,7 +737,8 @@
         document.getElementById('footerTime').textContent = `${dateStr} at ${timeStr}`;
         
         // Initial render
-        renderFindings();
-    </script>    </script>
+        renderFindings('global');
+        renderFindings('brazil');
+    </script>    </script>    </script>
 </body>
 </html>
