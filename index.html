@@ -312,6 +312,34 @@
             color: #64748b;
             font-size: 0.85em;
         }
+        /* Region Tabs */
+        .region-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #334155;
+        }
+        
+        .region-tab {
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #cbd5e1;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .region-tab.active {
+            color: #60a5fa;
+            border-bottom-color: #60a5fa;
+        }
+        
+        .region-tab:hover {
+            color: #e2e8f0;
+        }
+        
         @media print {
             body {
                 background: white;
@@ -386,13 +414,20 @@
                 <div class="watch-item">Private follow-on funding into quantum (mega-signal of government de-risking)</div>
             </div>
         </div>
+        <div class="region-tabs">
+            <button class="region-tab active" onclick="switchRegion('global')">Global Capital Flows</button>
+            <button class="region-tab" onclick="switchRegion('brazil')">Brazil Investments</button>
+        </div>
         <div class="findings" id="findingsContainer"></div>
         <div class="footer">
             <p>Report generated: <span id="footerTime"></span> | Next update: Tomorrow 9:00 AM</p>
         </div>
     </div>
     <script>
-        const findings = [
+        let currentRegion = 'global';
+        let currentSector = 'all';
+        
+        const globalFindings = [
             {
                 rank: 1,
                 title: "Government Takes Equity Stakes — Policy Regime Shift",
@@ -457,12 +492,16 @@
                 why: "CHIPS Act is working. Reshoring is accelerating.",
                 companies: ["TSMC"],
                 timeline: "Ongoing; Phoenix fab expansion underway",
-            },
+                source: "#"
+            }
+        ];
+        
+        const brazilFindings = [
             {
-                rank: 7,
+                rank: 1,
                 title: "Brazil Green Energy Expansion — $50B Infrastructure Fund",
                 importance: 5,
-                sector: "brazil",
+                sector: "energy",
                 what: "Brazilian government launching $50B renewable energy fund for wind, solar, and hydroelectric projects across Northeast and South regions",
                 why: "Brazil positioning as energy exporter to Americas. Global energy transition accelerating demand. Government-backed capex de-risks projects.",
                 companies: ["Energia Brasil", "CEMIG", "EDP Renováveis", "Engie Brasil"],
@@ -470,10 +509,10 @@
                 source: "https://www.gov.br/economia/en"
             },
             {
-                rank: 8,
+                rank: 2,
                 title: "São Paulo Tech Hub — $2B Digital Innovation Initiative",
-                importance: 4,
-                sector: "brazil",
+                importance: 5,
+                sector: "technology",
                 what: "State of São Paulo committing $2B to AI, fintech, and software development ecosystem. Tax incentives for tech startups and R&D centers.",
                 why: "Brazil emerging as Latin America's tech leader. Government backing validates market. Attracts regional and global capital.",
                 companies: ["B3 (Stock Exchange)", "Brazilian Tech Startups", "Regional Software Companies"],
@@ -481,10 +520,10 @@
                 source: "#"
             },
             {
-                rank: 9,
+                rank: 3,
                 title: "Amazon Conservation Finance — $1.5B Climate Bonds",
                 importance: 4,
-                sector: "brazil",
+                sector: "sustainability",
                 what: "Federal government issuing climate-linked bonds ($1.5B) backed by Amazon preservation commitments and sustainable development projects",
                 why: "Global ESG capital flowing to climate solutions. Brazil capturing premium for real deforestation reduction. New asset class for impact investors.",
                 companies: ["BNDES (Brazilian development bank)", "Amazon Foundation", "Conservation NGOs"],
@@ -492,12 +531,23 @@
                 source: "#"
             }
         ];
-        let filteredFindings = findings;
-        let currentSector = 'all';
+        
+        let filteredFindings = globalFindings;
+        
+        function switchRegion(region) {
+            currentRegion = region;
+            currentSector = 'all';
+            document.querySelectorAll('.region-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            filteredFindings = region === 'global' ? globalFindings : brazilFindings;
+            renderFindings();
+        }
+        
         function renderFindings() {
             const container = document.getElementById('findingsContainer');
             container.innerHTML = '';
-            filteredFindings.forEach(finding => {
+            const toRender = currentSector === 'all' ? filteredFindings : filteredFindings.filter(f => f.sector === currentSector);
+            toRender.forEach(finding => {
                 const card = document.createElement('div');
                 card.className = 'finding-card';
                 card.innerHTML = `
@@ -536,26 +586,24 @@
                 container.appendChild(card);
             });
         }
+        
         function filterBySector(sector) {
             currentSector = sector;
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            if (sector === 'all') {
-                filteredFindings = findings;
-            } else {
-                filteredFindings = findings.filter(f => f.sector === sector);
-            }
             renderFindings();
         }
+        
         function filterFindings() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            filteredFindings = findings.filter(f =>
+            filteredFindings = (currentRegion === 'global' ? globalFindings : brazilFindings).filter(f =>
                 f.title.toLowerCase().includes(searchTerm) ||
                 f.what.toLowerCase().includes(searchTerm) ||
                 f.companies.some(c => c.toLowerCase().includes(searchTerm))
             );
             renderFindings();
         }
+        
         // Set timestamp
         const now = new Date();
         const dateStr = now.toLocaleDateString('en-US', {
@@ -571,8 +619,9 @@
         });
         document.getElementById('timestamp').textContent = `${dateStr} at ${timeStr}`;
         document.getElementById('footerTime').textContent = `${dateStr} at ${timeStr}`;
+        
         // Initial render
         renderFindings();
-    </script>
+    </script>    </script>
 </body>
 </html>
