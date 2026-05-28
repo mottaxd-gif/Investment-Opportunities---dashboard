@@ -15,6 +15,7 @@ jobs:
     - name: Update dashboard with better template
       run: |
         cp capital_flows_dashboard.html index.html
+        mkdir -p logs
         echo "Dashboard updated: $(date)" >> logs/update-log.txt
     
     - name: Commit and push
