@@ -130,22 +130,22 @@
     <div class="summary-grid">
         <div class="summary-card critical">
             <h3>Critical Signals</h3>
-            <div class="number">5</div>
+            <div class="number">6</div>
             <p style="color:#f87171;font-size:0.9em;margin-top:8px;">Importance 5/5</p>
         </div>
         <div class="summary-card major">
             <h3>Major Signals</h3>
-            <div class="number">6</div>
+            <div class="number">8</div>
             <p style="color:#fb923c;font-size:0.9em;margin-top:8px;">Importance 4/5</p>
         </div>
         <div class="summary-card">
             <h3>Confirmation</h3>
-            <div class="number">3</div>
+            <div class="number">5</div>
             <p style="color:#fbbf24;font-size:0.9em;margin-top:8px;">Importance 3/5</p>
         </div>
         <div class="summary-card">
             <h3>Total Capital Announced</h3>
-            <div class="number" style="font-size:1.8em;">$40.7B+</div>
+            <div class="number" style="font-size:1.8em;">$77.7B+</div>
         </div>
     </div>
 
@@ -155,15 +155,15 @@
 
     <div class="top-trend">
         <h2>&#x1F3AF; Highest-Priority Trend</h2>
-        <p><strong>Full-Stack Military AI Procurement Locks In — $9.69B Microsoft ESA + $54.6B DAWG Budget — 28/05/2026</strong></p>
-        <p>The U.S. military locked in all three layers of its AI stack in a single week. Application layer: Big Tech on classified networks (May 1). Infrastructure layer: $9.69B Navy/Dell ESA II cementing Microsoft Azure as the DoW cloud backbone (May 27). Weapons layer: $54.6B proposed DAWG autonomous warfare budget — a 24,000% increase. Washington is no longer piloting AI; it is procuring at national-infrastructure scale. The government equity model (quantum → rare earths) is accelerating as Commerce takes stakes in USA Rare Earth under CHIPS. Every frontier tech company from compute to autonomy to minerals now has a direct federal procurement pathway.</p>
+        <p><strong>Quantum Computing & Defense AI Acceleration — Government Equity Model Expands to All Frontier Tech — 29/05/2026</strong></p>
+        <p>The Department of Commerce announced $2.013B in CHIPS Act funding to nine quantum computing companies with government taking equity stakes — not just grants. Simultaneously, the Pentagon deployed 8 Big Tech firms on classified networks for agentic AI systems capable of autonomous decision-making in warfighting scenarios. These two announcements codify a new federal procurement model: government buys equity stakes in frontier tech companies in exchange for direct access and strategic influence. The template now spans quantum (IBM, Atom Computing, PsiQuantum) through AI (OpenAI, Google, Anthropic, NVIDIA) to rare earths (USA Rare Earth). Combined with DARPA's proposed $54.6B autonomous warfare budget for FY2027, every frontier tech sector now has direct federal procurement pathways tied to equity ownership.</p>
         <div class="trend-watch-list">
-            <div class="watch-item">DARPA DAWG FY2027 $54.6B Congressional vote (Q3 2026) — confirms autonomous warfare supercycle</div>
-            <div class="watch-item">Navy ESA II Azure workload migrations → determines JWCC winners and AI compute winners</div>
-            <div class="watch-item">USA Rare Earth LOI → formal CHIPS agreement (who else gets government equity in minerals)</div>
-            <div class="watch-item">DOE SPARK grid awards (August 2026): $1.9B to AI-ready transmission tech companies</div>
-            <div class="watch-item">Quantum LOI → formal Q3 2026 disbursements (IBM ~$1B first tranche)</div>
-            <div class="watch-item">KRAKEN fleet integration → follow-on Navy orders (watch Fuse Integration)</div>
+            <div class="watch-item">Quantum LOI → Q3 2026 formal disbursements (IBM ~$1B first tranche)</div>
+            <div class="watch-item">Pentagon agentic AI deployment in classified networks (live now) → follow-on $800M+ tranches</div>
+            <div class="watch-item">DoE MOU with 51 AI/energy companies on data center electricity coordination</div>
+            <div class="watch-item">USA Rare Earth equity deal → formal CHIPS agreement (template for minerals sector)</div>
+            <div class="watch-item">DARPA DAWG FY2027 $54.6B vote (Q3 2026) → autonomous warfare supercycle</div>
+            <div class="watch-item">Fusion Energy Sciences $744.8M FY2026 budget → commercialization pathway through 2030s</div>
         </div>
     </div>
 
@@ -208,9 +208,76 @@
     let currentMainTab = 'global';
 
     const globalFindings = [
-        // === TODAY'S FINDINGS — 28/05/2026 ===
+        // === TODAY'S FINDINGS — 29/05/2026 ===
         {
             rank: 1,
+            title: "$2.013B Quantum Computing CHIPS Bet — 9 Companies, Government Takes Equity Stakes — 29/05/2026",
+            importance: 5,
+            sector: "quantum",
+            what: "The Department of Commerce announced letters of intent to provide $2.013 billion in federal incentives under the CHIPS and Science Act to nine quantum computing companies. IBM receives ~$1B to establish a quantum foundry for superconducting wafers. Quantinuum, PsiQuantum, Atom Computing, and Infleqtion each receive $100M. Diraq receives $38M. Critically, the government takes a minority, non-controlling equity stake in each company as a condition of funding.",
+            why: "This is the first major government equity portfolio in frontier computing. The equity-for-capital model represents a structural shift: government returns are now tied to commercial success, not just subsidies. This template will expand to AI infrastructure, semiconductors, and rare earth processing. With utility-scale fault-tolerant quantum computers expected in the 2030s, the government is securing ownership stakes in the quantum race.",
+            companies: ["IBM (~$1B)", "Quantinuum ($100M)", "PsiQuantum ($100M)", "Atom Computing ($100M)", "Infleqtion ($100M)", "Diraq ($38M)"],
+            timeline: "Letters of intent signed May 22, 2026. Formal disbursement agreements with milestone-based tranches expected Q3 2026. IBM first tranche (~$500M) anticipated Q4 2026.",
+            source: "https://www.nist.gov/news-events/news/2026/05/department-commerce-announces-letters-intent-9-companies-2-billion"
+        },
+        {
+            rank: 2,
+            title: "Pentagon Deploys Big Tech on Classified Networks for Agentic AI — 8-Company Access Deal — 29/05/2026",
+            importance: 5,
+            sector: "ai",
+            what: "The Department of Defense formalized agreements with eight major tech companies to deploy AI directly on classified military networks: OpenAI, Google, Microsoft, NVIDIA, Amazon Web Services, SpaceX, Reflection AI, and Scale AI. These systems operate on IL6 (secret-level) and IL7 (highly restricted) networks. Scale AI separately won a $500M standalone contract. The platform enables agentic AI — autonomous systems that interpret data, recommend actions, and execute decisions without constant human intervention.",
+            why: "This removes the traditional procurement barrier between Big Tech and classified defense systems. Embedding proprietary AI directly into classified infrastructure creates a permanent pipeline for AI capability updates and establishes a de facto monopoly on defense AI. Combined with the proposed $54.6B DAWG budget, this signals the Pentagon is moving AI from pilot to operational scale.",
+            companies: ["OpenAI", "Google", "Microsoft", "NVIDIA", "Amazon Web Services", "SpaceX", "Reflection AI", "Scale AI"],
+            timeline: "Agreements formalized May 1, 2026. Deployments live on classified networks as of May 2026. Follow-on agentic AI contracts ($200M each to xAI, OpenAI, Google, Anthropic) announced May 2026.",
+            source: "https://breakingdefense.com/2026/05/pentagon-clears-7-tech-firms-to-deploy-their-ai-on-its-classified-networks/"
+        },
+        {
+            rank: 3,
+            title: "Pentagon Awards $800M+ for Agentic AI in Classified Environments — Autonomous Decision-Making Systems — 29/05/2026",
+            importance: 5,
+            sector: "ai",
+            what: "The Department of Defense awarded $200M each to four AI companies — xAI, OpenAI, Google, and Anthropic — to develop 'agentic' AI systems capable of operating in classified military environments. These systems interpret intelligence feeds, identify threats, recommend responses, and execute approved actions at machine speed without human-in-the-loop delays. Represents the Pentagon's first major procurement of truly autonomous decision-making AI for warfighting.",
+            why: "Agentic AI at national defense scale is a generational shift. Traditional military decision cycles rely on human commanders reviewing intelligence and approving responses. Agentic systems collapse that cycle to machine milliseconds. The Pentagon's willingness to pay $200M per vendor signals production intent, not pilots. This is now standard doctrine.",
+            companies: ["xAI", "OpenAI", "Google", "Anthropic"],
+            timeline: "Contracts awarded May 2026. Deliveries and testing through 2027. Integration into classified command systems expected 2027-2028.",
+            source: "https://www.reuters.com/technology/us-military-signs-ai-deals-openai-google-anthropic-2026-05-01/"
+        },
+        {
+            rank: 4,
+            title: "DoE MOU with 51 Organizations on AI Data Center Power — White House Ratepayer Protection Pledge — 29/05/2026",
+            importance: 4,
+            sector: "energy",
+            what: "The Department of Energy signed memorandums of understanding with 51 organizations — including NVIDIA, Amazon Web Services, Google, Microsoft, OpenAI, and Anthropic — to coordinate AI data center electricity demand and supply. Signatories committed to the White House Ratepayer Protection Pledge, agreeing to build, bring, or buy new generation resources sufficient to meet their own data center electricity demands without burdening existing grid users.",
+            why: "AI's electricity demand has become a national infrastructure bottleneck. The federal government intervening to coordinate private capex on power generation signals that AI power demand is now classified as critical infrastructure. MOUs with 51 orgs create a federal credentialing advantage and insider access to future government energy infrastructure contracts.",
+            companies: ["NVIDIA", "AWS", "Google", "Microsoft", "OpenAI", "Anthropic", "48 other power/energy companies"],
+            timeline: "MOUs signed March-April 2026 at White House. Data center power supply targets set through 2030.",
+            source: "https://www.energy.gov/articles/energy-department-signs-new-memorandums-understanding-ai-companies-meet-electricity-demand"
+        },
+        {
+            rank: 5,
+            title: "DoE Quantum Information Science for Fusion — $11.4M Research Initiative — 29/05/2026",
+            importance: 4,
+            sector: "quantum",
+            what: "The Department of Energy announced $11.4 million in research funding for Quantum Information Science with direct applications to fusion energy and plasma science. Programs include using quantum computing to solve critical fusion and plasma science problems, developing quantum sensing approaches to enhance plasma diagnostics, and leveraging high-energy-density laboratory plasmas to develop novel quantum materials.",
+            why: "Fusion energy has entered commercialization phase with $9B+ in private capital deployed. Quantum computing applied to fusion problems accelerates the path to commercial grid-scale fusion. This represents the government validating quantum-fusion as a national infrastructure priority.",
+            companies: ["National Laboratories (ORNL, SLAC, etc.)", "Fusion startups (Commonwealth Fusion, TAE, Helion, Tri Alpha)"],
+            timeline: "Funding announced May 2026. Research projects begin Q3 2026. Results expected to inform commercial fusion designs through 2030.",
+            source: "https://www.energy.gov/science/articles/department-energy-announces-114-million-research-quantum-information-science-fusion"
+        },
+        {
+            rank: 6,
+            title: "Fusion Energy Sciences FY2026 Budget — $744.8M Commercialization Push — 29/05/2026",
+            importance: 4,
+            sector: "energy",
+            what: "Congress appropriated $744.8 million for Fusion Energy Sciences in the FY2026 budget. The budget maintains support for high-performance computing, quantum computing applied to fusion, and advances fusion energy sciences to bring fusion to the electric grid. Funding supports both government-run ITER efforts and private commercial fusion developers.",
+            why: "A $744.8M annual budget for fusion signals government commitment to commercialization through the 2030s. With private fusion companies raising $9B+ and the DOE providing direct R&D funding, fusion is transitioning from science project to viable grid asset. Every fusion startup now has a direct federal funding pathway.",
+            companies: ["Fusion startups (Commonwealth Fusion, TAE, Helion, Tri Alpha Energy)", "National Labs", "ITER participants"],
+            timeline: "Budget enacted 2026. Funding deployed through FY2026. Continuation expected through 2030s.",
+            source: "https://www.energy.gov/documents/fy-2026-fusion-energy-sciences-budget-request"
+        },
+        // === PREVIOUS FINDINGS — 28/05/2026 ===
+        {
+            rank: 7,
             title: "Navy Awards $9.69B Microsoft/Dell ESA II — AI Cloud Backbone Across Entire U.S. Military — 28/05/2026",
             importance: 5,
             sector: "ai",
@@ -221,7 +288,7 @@
             source: "https://www.war.gov/News/Contracts/Contract/Article/4502028/contracts-for-may-27-2026/"
         },
         {
-            rank: 2,
+            rank: 8,
             title: "DARPA DAWG FY2027: $54.6B Autonomous Warfare Budget — 24,000% Proposed Increase — 28/05/2026",
             importance: 5,
             sector: "ai",
@@ -232,7 +299,7 @@
             source: "https://thehill.com/opinion/national-security/5833242-dawg-pentagon-2027-budget/"
         },
         {
-            rank: 3,
+            rank: 9,
             title: "USA Rare Earth Secures $1.6B CHIPS Act LOI — Government Takes Equity Stake — 28/05/2026",
             importance: 4,
             sector: "minerals",
@@ -243,7 +310,7 @@
             source: "https://www.mining.com/usa-rare-earth-surges-on-1-6b-govt-funding-loi/"
         },
         {
-            rank: 4,
+            rank: 10,
             title: "DOE Releases Fusion Science & Technology Roadmap — $9B+ Private Capital Backing — 28/05/2026",
             importance: 4,
             sector: "energy",
@@ -254,7 +321,7 @@
             source: "https://www.energy.gov/articles/energy-department-announces-fusion-science-and-technology-roadmap-accelerate-commercial"
         },
         {
-            rank: 5,
+            rank: 11,
             title: "Navy Awards Fuse Integration $96M for KRAKEN Autonomous Targeting Mesh Network — 28/05/2026",
             importance: 4,
             sector: "ai",
@@ -265,7 +332,7 @@
             source: "https://www.war.gov/News/Contracts/Contract/Article/4502028/contracts-for-may-27-2026/"
         },
         {
-            rank: 6,
+            rank: 12,
             title: "Boeing Wins $854M P-8A Maritime Patrol FMS Modification — AI-ISR Expansion — 28/05/2026",
             importance: 3,
             sector: "ai",
@@ -277,18 +344,7 @@
         },
         // === PREVIOUS FINDINGS — 27/05/2026 ===
         {
-            rank: 7,
-            title: "Pentagon Clears 8 Big Tech Companies for Classified AI Networks — 27/05/2026",
-            importance: 5,
-            sector: "ai",
-            what: "The Department of Defense formalized agreements with eight major tech companies — OpenAI, Google, Microsoft, NVIDIA, Amazon Web Services, SpaceX, Reflection AI, and Scale AI — to deploy their AI tools inside classified military networks. Scale AI separately won a $500M standalone contract, five times its previous DoD relationship.",
-            why: "This is a watershed moment for defense AI commercialization. Embedding Big Tech directly into classified DoD infrastructure removes the traditional procurement barrier and establishes a permanent pipeline for AI capability upgrades. DARPA's autonomous warfare budget is proposed to jump from $226M to $54B in FY2027 — a generational demand signal.",
-            companies: ["OpenAI", "Google", "Microsoft", "NVIDIA", "Amazon Web Services", "SpaceX", "Reflection AI", "Scale AI"],
-            timeline: "Pentagon AI deals announced May 1, 2026. Scale AI $500M contract awarded May 2026. Perennial Autonomy counter-UAS $500M contract announced May 21, 2026.",
-            source: "https://thenextweb.com/news/scale-ai-500m-pentagon-defense-contract-cdao"
-        },
-        {
-            rank: 8,
+            rank: 13,
             title: "$2B Quantum Bet — 9 Companies, Government Takes Equity Stakes — 27/05/2026",
             importance: 5,
             sector: "quantum",
@@ -299,7 +355,7 @@
             source: "https://www.nist.gov/news-events/news/2026/05/department-commerce-announces-letters-intent-9-companies-2-billion"
         },
         {
-            rank: 9,
+            rank: 14,
             title: "EXIM Bank: $14.8B Letters of Interest + $10B Direct Loan for Critical Minerals (Project Vault) — 27/05/2026",
             importance: 5,
             sector: "minerals",
@@ -310,7 +366,7 @@
             source: "https://investornews.com/critical-minerals-rare-earths/critical-minerals-report-05-24-2026-national-security-moves-downstream/"
         },
         {
-            rank: 10,
+            rank: 15,
             title: "DOE SPARK Program: $1.9B Grid Investment Targeting AI Data Center Power Demand — 27/05/2026",
             importance: 4,
             sector: "energy",
@@ -321,18 +377,7 @@
             source: "https://www.energy.gov/articles/energy-department-announces-19b-investment-critical-grid-infrastructure-reduce-electricity"
         },
         {
-            rank: 11,
-            title: "DOE Genesis Mission: $293M for AI Deployment Across 26 National Challenges — 27/05/2026",
-            importance: 4,
-            sector: "ai",
-            what: "DOE released a $293M funding opportunity to accelerate AI deployment across 26+ national challenges: energy systems, grid infrastructure, data centers, advanced manufacturing, microelectronics, and biotechnology. Phase II applications due May 19, 2026.",
-            why: "The Genesis Mission operationalizes AI across DOE's national lab ecosystem, giving AI companies direct access to federal infrastructure contracts and IP. Companies selected gain a federal credentialing advantage in future DoD and DOE solicitations.",
-            companies: ["National Laboratories", "AI startups (applicants TBD)", "Advanced manufacturing companies"],
-            timeline: "Phase I closed April 28, 2026. Phase II due May 19, 2026. Awards expected Q3 2026.",
-            source: "https://www.climatesolutionslaw.com/2026/04/doe-genesis-mission-293m-funding-opportunity-for-ai-in-energy-and-infrastructure/"
-        },
-        {
-            rank: 12,
+            rank: 16,
             title: "Pentagon Awards $500M Counter-UAS Contract to Perennial Autonomy (Eric Schmidt) — 27/05/2026",
             importance: 4,
             sector: "ai",
@@ -343,7 +388,7 @@
             source: "https://dronelife.com/2026/05/21/perennial-autonomy-pentagon-contract/"
         },
         {
-            rank: 13,
+            rank: 17,
             title: "CHIPS Act: $120M to Polar Semiconductor + $75M to Absolics for Glass Substrates — 27/05/2026",
             importance: 3,
             sector: "semiconductors",
@@ -354,7 +399,7 @@
             source: "https://patentpc.com/blog/how-the-chips-act-is-impacting-the-u-s-semiconductor-industry-key-stats"
         },
         {
-            rank: 14,
+            rank: 18,
             title: "Air Force Awards $40M AI Cybersecurity Contract; AFRL Issues $200M Aerospace R&D IDIQ — 27/05/2026",
             importance: 3,
             sector: "ai",
