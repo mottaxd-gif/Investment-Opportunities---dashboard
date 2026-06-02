@@ -5,459 +5,566 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Government Capital Flows Dashboard</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #e2e8f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ecf0f1;
+            line-height: 1.6;
             min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 20px;
         }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .header { text-align: center; margin-bottom: 40px; padding: 30px 0; border-bottom: 2px solid #334155; }
-        .header h1 {
-            font-size: 2.5em; margin-bottom: 10px;
-            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #0f3460;
+            padding-bottom: 20px;
         }
-        .timestamp { color: #94a3b8; font-size: 0.9em; }
-        .tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00d4ff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #95a5a6;
+            font-size: 1.1em;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(15, 52, 96, 0.8);
+            border: 1px solid #0f3460;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+        }
+
+        .card-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .card-label {
+            color: #95a5a6;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
         .tab-btn {
-            padding: 10px 20px; background: #1e293b; border: 2px solid #334155;
-            color: #cbd5e1; cursor: pointer; border-radius: 6px; font-size: 0.95em; transition: all 0.3s ease;
+            padding: 12px 24px;
+            background: rgba(15, 52, 96, 0.6);
+            border: 1px solid #0f3460;
+            color: #ecf0f1;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
         }
-        .tab-btn.active { background: #3b82f6; border-color: #3b82f6; color: white; }
-        .tab-btn:hover { border-color: #3b82f6; color: #e2e8f0; }
-        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .summary-card { background: #1e293b; border-left: 4px solid #3b82f6; padding: 20px; border-radius: 8px; text-align: center; }
-        .summary-card.critical { border-left-color: #ef4444; }
-        .summary-card.major { border-left-color: #f97316; }
-        .summary-card h3 { color: #94a3b8; font-size: 0.85em; text-transform: uppercase; margin-bottom: 10px; }
-        .summary-card .number { font-size: 2.5em; font-weight: bold; color: #60a5fa; }
-        .summary-card.critical .number { color: #ef4444; }
-        .summary-card.major .number { color: #f97316; }
-        .findings { display: grid; gap: 20px; }
-        .finding-card {
-            background: #1e293b; border-radius: 8px; overflow: hidden;
-            border: 1px solid #334155; transition: all 0.3s ease; cursor: pointer;
+
+        .tab-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
         }
-        .finding-card:hover { border-color: #60a5fa; box-shadow: 0 4px 20px rgba(96,165,250,0.1); }
-        .finding-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px; background: #0f172a; border-bottom: 1px solid #334155;
+
+        .tab-btn.active {
+            background: linear-gradient(45deg, #00d4ff, #0099ff);
+            border-color: #00d4ff;
+            color: #1a1a2e;
         }
-        .finding-card.expanded .finding-header { background: #334155; }
-        .finding-title { display: flex; align-items: center; gap: 15px; flex: 1; }
-        .importance-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold; white-space: nowrap; }
-        .importance-5 { background: #7f1d1d; color: #fca5a5; }
-        .importance-4 { background: #7c2d12; color: #fdba74; }
-        .importance-3 { background: #713f12; color: #fcd34d; }
-        .finding-rank {
-            display: inline-block; width: 35px; height: 35px; background: #3b82f6;
-            color: white; border-radius: 50%; text-align: center; line-height: 35px; font-weight: bold; font-size: 0.9em;
+
+        .tab-content {
+            display: none;
         }
-        .finding-body { padding: 20px; display: none; }
-        .finding-card.expanded .finding-body { display: block; }
-        .toggle-icon { font-size: 1.5em; color: #94a3b8; transition: transform 0.3s ease; }
-        .finding-card.expanded .toggle-icon { transform: rotate(180deg); }
-        .finding-section { margin-bottom: 15px; }
-        .finding-section h4 { color: #60a5fa; font-size: 0.85em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
-        .finding-section p { color: #cbd5e1; line-height: 1.6; font-size: 0.95em; }
-        .companies-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-        .company-tag { background: #334155; padding: 4px 12px; border-radius: 4px; font-size: 0.85em; color: #cbd5e1; border: 1px solid #475569; }
-        .source-link { color: #60a5fa; text-decoration: none; font-size: 0.9em; display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; }
-        .source-link:hover { text-decoration: underline; }
-        .filter-section { margin-bottom: 20px; }
-        .filter-input {
-            background: #1e293b; border: 1px solid #334155; color: #e2e8f0;
-            padding: 10px 15px; border-radius: 6px; width: 100%; max-width: 400px; font-size: 0.95em;
+
+        .tab-content.active {
+            display: block;
         }
-        .filter-input::placeholder { color: #64748b; }
-        .filter-input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.1); }
-        .top-trend {
-            background: linear-gradient(135deg, #7f1d1d 0%, #7c2d12 100%);
-            border: 2px solid #ef4444; border-radius: 8px; padding: 25px; margin-bottom: 40px;
+
+        .findings-container {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
         }
-        .top-trend h2 { color: #fca5a5; margin-bottom: 15px; font-size: 1.3em; }
-        .top-trend p { color: #fed7aa; line-height: 1.8; margin-bottom: 15px; }
-        .trend-watch-list { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 6px; margin-top: 15px; }
-        .watch-item { color: #fed7aa; padding: 6px 0; display: flex; gap: 8px; }
-        .watch-item::before { content: "✓"; color: #fca5a5; font-weight: bold; }
-        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #334155; color: #64748b; font-size: 0.85em; }
-        .main-tabs { display: flex; gap: 20px; margin-bottom: 40px; border-bottom: 2px solid #334155; }
-        .main-tab {
-            padding: 15px 30px; background: none; border: none;
-            border-bottom: 3px solid transparent; color: #cbd5e1; cursor: pointer;
-            font-size: 1.1em; font-weight: 500; transition: all 0.3s ease;
+
+        .finding {
+            background: rgba(15, 52, 96, 0.6);
+            border-left: 4px solid #00d4ff;
+            border-radius: 4px;
+            padding: 20px;
+            transition: all 0.3s;
         }
-        .main-tab.active { color: #60a5fa; border-bottom-color: #60a5fa; }
-        .main-tab:hover { color: #e2e8f0; }
-        .dashboard-view { animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @media print { body { background: white; color: black; } .finding-body { display: block !important; } }
-        @media (max-width: 768px) {
-            .header h1 { font-size: 1.8em; }
-            .summary-grid { grid-template-columns: 1fr; }
-            .tabs { flex-direction: column; }
-            .tab-btn { width: 100%; }
+
+        .finding:hover {
+            background: rgba(15, 52, 96, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
         }
-        .date-section { margin-bottom: 30px; }
+
+        .finding-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .finding-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .meta-item {
+            color: #95a5a6;
+        }
+
+        .meta-label {
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        .finding-description {
+            color: #ecf0f1;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .importance {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .importance-5, .importance-4 {
+            background: rgba(220, 53, 69, 0.8);
+            color: #fff;
+        }
+
+        .importance-3 {
+            background: rgba(255, 193, 7, 0.8);
+            color: #1a1a2e;
+        }
+
+        .importance-2 {
+            background: rgba(0, 212, 255, 0.3);
+            color: #ecf0f1;
+        }
+
+        .trend-section {
+            background: rgba(15, 52, 96, 0.8);
+            border: 2px solid #0f3460;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .trend-section h2 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .trend-watch-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .watch-item {
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 3px solid #00d4ff;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 3px;
+            color: #ecf0f1;
+        }
+
+        .date-group {
+            margin-bottom: 30px;
+        }
+
         .date-header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 20px; background: #0f172a; border: 1px solid #334155;
-            border-radius: 8px; cursor: pointer; margin-bottom: 15px;
-            transition: all 0.3s ease;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #0f3460;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #00d4ff;
+            cursor: pointer;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .date-header:hover { border-color: #3b82f6; }
-        .date-header h3 { color: #94a3b8; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
-        .date-header .date-meta { display: flex; align-items: center; gap: 12px; }
-        .date-header .date-count { background: #334155; color: #94a3b8; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; }
-        .date-header .date-toggle { color: #64748b; font-size: 1.2em; transition: transform 0.3s ease; }
-        .date-section.collapsed .date-toggle { transform: rotate(-90deg); }
-        .date-findings { display: grid; gap: 20px; }
-        .date-section.collapsed .date-findings { display: none; }
-        .today-label { display: inline-block; background: #1d4ed8; color: #bfdbfe; padding: 3px 10px; border-radius: 12px; font-size: 0.75em; font-weight: 600; margin-left: 10px; }
+
+        .date-header:hover {
+            background: rgba(0, 212, 255, 0.15);
+        }
+
+        .date-findings {
+            display: grid;
+            gap: 15px;
+            margin-left: 20px;
+        }
+
+        .date-findings.collapsed {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #0f3460;
+            color: #95a5a6;
+            font-size: 0.9em;
+        }
+
+        .update-info {
+            color: #00d4ff;
+            margin: 10px 0;
+        }
+
+        .source-link {
+            color: #00d4ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .source-link:hover {
+            color: #0099ff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-<div class="container">
+    <div class="container">
+        <header>
+            <h1>💰 Government Capital Flows</h1>
+            <p class="subtitle">Daily tracking of federal investment & strategic capital allocation</p>
+        </header>
 
-    <div class="header">
-        <h1>&#x1F4B0; Government Capital Flows</h1>
-        <p class="timestamp" id="timestamp"></p>
-    </div>
-
-    <div class="summary-grid">
-        <div class="summary-card critical">
-            <h3>Critical Signals</h3>
-            <div class="number">5</div>
-            <p style="color:#f87171;font-size:0.9em;margin-top:8px;">Importance 5/5</p>
-        </div>
-        <div class="summary-card major">
-            <h3>Major Signals</h3>
-            <div class="number">4</div>
-            <p style="color:#fb923c;font-size:0.9em;margin-top:8px;">Importance 4/5</p>
-        </div>
-        <div class="summary-card">
-            <h3>Confirmation</h3>
-            <div class="number">0</div>
-            <p style="color:#fbbf24;font-size:0.9em;margin-top:8px;">Importance 3/5</p>
-        </div>
-        <div class="summary-card">
-            <h3>Total Capital Announced</h3>
-            <div class="number" style="font-size:1.8em;">$49.4B+</div>
-        </div>
-    </div>
-
-    <div class="filter-section">
-        <input type="text" class="filter-input" id="searchInputGlobal" placeholder="Search findings..." onkeyup="filterFindings('global')">
-    </div>
-
-    <div class="top-trend">
-        <h2>&#x1F3AF; Highest-Priority Trend</h2>
-        <p><strong>Quantum Computing & National Security AI Infrastructure Supercycle — 01/06/2026</strong></p>
-        <p>May-June 2026 marks the transition of quantum computing from R&D into production-scale government procurement. The Department of Energy announced $625 million for Quantum Information Science Research Centers with a 3-year delivery goal for functional quantum computers. Simultaneously, the DoD formalized agentic AI deployment on classified networks with 8 tech companies (including OpenAI, Google, Microsoft), combined with $54.6B FY2027 autonomous warfare budget proposals. Together, these signals indicate Washington is consolidating quantum and autonomous systems as dual-pillar national defense infrastructure with 10-year procurement commitment timelines.</p>
-        <div class="trend-watch-list">
-            <div class="watch-item">DoE $625M Quantum Research Centers → 3-year functional quantum computer delivery target (mid-2028)</div>
-            <div class="watch-item">DoD 8-company Classified AI Access live → $500M Scale AI contract + follow-on $200M tranches (Q3 2026)</div>
-            <div class="watch-item">DoD $54.6B Autonomous Warfare (DAWG) proposed for FY2027 → Congressional vote Q3 2026</div>
-            <div class="watch-item">DoE Rare Earths Initiative $134M + $45.7M pilot facilities → domestic supply chain secured by 2029</div>
-            <div class="watch-item">U.S.-Japan $40B SMR partnership → 3GW grid deployment 2026-2029</div>
-            <div class="watch-item">CHIPS Act $2.013B LOI signings → 140+ projects, 30 states, $645.3B total ecosystem value</div>
-        </div>
-    </div>
-
-    <div class="main-tabs">
-        <button class="main-tab active" onclick="switchMainTab('global', event)">Global</button>
-        <button class="main-tab" onclick="switchMainTab('brazil', event)">Brazil</button>
-    </div>
-
-    <!-- Global Dashboard -->
-    <div class="dashboard-view" id="globalDashboard">
-        <div class="tabs">
-            <button class="tab-btn active" onclick="filterBySector('all','global',event)">All Sectors</button>
-            <button class="tab-btn" onclick="filterBySector('quantum','global',event)">Quantum</button>
-            <button class="tab-btn" onclick="filterBySector('ai','global',event)">AI / Defense</button>
-            <button class="tab-btn" onclick="filterBySector('semiconductors','global',event)">Semiconductors</button>
-            <button class="tab-btn" onclick="filterBySector('minerals','global',event)">Critical Minerals</button>
-            <button class="tab-btn" onclick="filterBySector('energy','global',event)">Energy Grid</button>
-        </div>
-        <div class="findings" id="findingsContainerGlobal"></div>
-    </div>
-
-    <!-- Brazil Dashboard -->
-    <div class="dashboard-view" id="brazilDashboard" style="display:none;">
-        <div class="tabs">
-            <button class="tab-btn active" onclick="filterBySector('all','brazil',event)">All Sectors</button>
-            <button class="tab-btn" onclick="filterBySector('energy','brazil',event)">Energy</button>
-            <button class="tab-btn" onclick="filterBySector('technology','brazil',event)">Technology</button>
-            <button class="tab-btn" onclick="filterBySector('sustainability','brazil',event)">Sustainability</button>
-        </div>
-        <div class="filter-section" style="margin-top:20px;">
-            <input type="text" class="filter-input" id="searchInputBrazil" placeholder="Search findings..." onkeyup="filterFindings('brazil')">
-        </div>
-        <div class="findings" id="findingsContainerBrazil"></div>
-    </div>
-
-    <div class="footer">
-        <p>Report generated: <span id="footerTime"></span> | Next update: Tomorrow 9:00 AM</p>
-    </div>
-
-</div>
-<script>
-    let currentMainTab = 'global';
-    const globalFindings = [
-        // === TODAY'S FINDINGS — 01/06/2026 ===
-        {
-            rank: 1,
-            title: "DoE $625M Quantum Information Science Research Centers — 01/06/2026",
-            importance: 5,
-            sector: "quantum",
-            what: "The Department of Energy announced $625 million in total funding for its National Quantum Information Science Research Centers, with awards lasting up to 5 years ($125M in FY2025 dollars). Centers bring together 50+ academic institutions across 22 states. Critical milestone: DoE has set a 3-year production goal to deliver a fully functional quantum computer capable of performing scientifically useful calculations by mid-2028.",
-            why: "Quantum computing has transitioned from scientific research to national infrastructure priority. The 3-year delivery goal for functional quantum computers signals production intent. Combined with $2B in equity-stake quantum investments by venture capital, Washington is betting $2.625B+ on quantum dominance. This creates a decade-long procurement runway for quantum hardware and software companies.",
-            companies: ["50+ academic institutions (22 states)", "IBM", "Quantinuum", "Atom Computing", "Infleqtion", "PsiQuantum"],
-            timeline: "Centers announced Q3 2026. Five-year research program through 2031. Functional quantum computer delivery target: mid-2028.",
-            source: "https://www.energy.gov"
-        },
-        {
-            rank: 2,
-            title: "DoD 8-Company Agentic AI Classified Network Deployment + Scale AI $500M Contract — 01/06/2026",
-            importance: 5,
-            sector: "ai",
-            what: "The Department of Defense formalized agreements with eight major tech companies to deploy artificial intelligence directly on classified military networks (IL6/IL7): OpenAI, Google, Microsoft, NVIDIA, Amazon Web Services, SpaceX, Reflection AI, and Scale AI. Scale AI received a separate $500 million contract for its machine learning operations platform supporting computer vision and autonomous decision-making. Agentic AI systems operate autonomously on classified networks without human-in-the-loop delays.",
-            why: "This removes the traditional procurement barrier between commercial Big Tech and classified defense systems. Embedding proprietary AI directly into classified infrastructure creates a permanent pipeline for AI updates and establishes monopoly control on defense AI operations. This is production-scale operational integration, not pilots. Signals $200M+ follow-on tranches per vendor through FY2027.",
-            companies: ["OpenAI", "Google", "Microsoft", "NVIDIA", "AWS", "SpaceX", "Reflection AI", "Scale AI"],
-            timeline: "Agreements formalized May 1, 2026. Deployments live on classified networks as of May 2026. Follow-on tranches expected Q3 2026.",
-            source: "https://www.defense.gov"
-        },
-        {
-            rank: 3,
-            title: "DoD $54.6B Autonomous Warfare (DAWG) Budget Proposal for FY2027 — 01/06/2026",
-            importance: 5,
-            sector: "ai",
-            what: "The Pentagon's FY2027 budget proposal includes $54.6 billion dedicated to the Defense Autonomous Warfare Group (DAWG) — a ~24,000% increase over current autonomous systems spending. DAWG funds autonomous drones, AI-enabled weapons, counter-UAS systems, uncrewed ground vehicles, and autonomous kill-chain systems. DARPA R&D budget proposal: $5.039B. Combined with FY2026 AI contracts surging to $90.7B total potential value.",
-            why: "This is a generational demand signal indicating autonomous weapons are entering a supercycle. Every defense AI startup, drone manufacturer, and robotics company now has a $54.6B federal procurement target. Budget vote scheduled Q3 2026. This de-risks $9B+ in private autonomous systems capital and validates defense-grade autonomous systems as multi-decade procurement priority.",
-            companies: ["Foundation Future Industries", "Anduril", "Shield AI", "Joby Aviation", "General Atomics", "Perennial Autonomy"],
-            timeline: "Budget proposed April 2026. Congressional vote Q3 2026. DAWG funding begins October 1, 2026 if passed.",
-            source: "https://breakingdefense.com"
-        },
-        {
-            rank: 4,
-            title: "DoE $134M Rare Earth Supply Chain + $45.7M Pilot Processing Facilities — 01/06/2026",
-            importance: 5,
-            sector: "minerals",
-            what: "The Department of Energy Office of Critical Minerals and Energy Innovation announced $134 million in direct funding to strengthen rare earth element supply chains and advance American energy independence. Additionally, DoE announced $45.7 million for 19 pilot-scale facilities to develop novel technologies for critical minerals processing, including magnesium and rare earth element separation and purification. Combined domestic rare earth capacity targeting tripled output by 2028.",
-            why: "With 95%+ of U.S. rare earth supply currently foreign-sourced (primarily China), Washington is deploying state-backed financing directly into domestic refining and processing. This complements EXIM's $14.8B critical minerals LOIs and Project Vault's $10B strategic reserve. Rare earth domestic supply is being taken as critical national security matter with production deadlines 2027-2029.",
-            companies: ["19 pilot-scale processing facilities (TBD)", "Domestic rare earth processors", "Molycorp-era producers"],
-            timeline: "DoE $134M grants announced May 2026. Pilot-scale deployment 2026-2027. Full-scale production timeline 2027-2029.",
-            source: "https://www.energy.gov"
-        },
-        {
-            rank: 5,
-            title: "DoE $2.7B Uranium Enrichment 10-Year Contracts + FY2026 Fusion Energy Sciences $744.8M — 01/06/2026",
-            importance: 4,
-            sector: "energy",
-            what: "The Department of Energy awarded $2.7 billion in multi-year contracts to three companies to provide low-enriched uranium (LEU) and high-assay low-enriched uranium (HALEU) through 2036. Secures long-term domestic uranium enrichment capacity. Combined with FY2026 Fusion Energy Sciences budget of $744.8M and $625M Quantum funding, nuclear energy receives coordinated strategic investment signal.",
-            why: "Nuclear power is transitioning from mature to growth sector. With 8+ commercial fusion companies approaching demonstrations and Small Modular Reactor (SMR) deployments ramping (U.S.-Japan $40B partnership), uranium supply is becoming a critical procurement bottleneck. 10-year contracts de-risk fuel supply and signal DoE's multi-decade commitment to nuclear as baseload clean energy infrastructure.",
-            companies: ["Three uranium enrichment contractors (TBD)", "Nuclear fuel suppliers"],
-            timeline: "Contracts awarded January 2026. 10-year delivery agreements through 2036. Monthly uranium deliveries begin Q3 2026.",
-            source: "https://www.energy.gov"
-        },
-        {
-            rank: 6,
-            title: "U.S.-Japan $40B Small Modular Reactor Deployment Partnership (GE Vernova Hitachi) — 01/06/2026",
-            importance: 4,
-            sector: "energy",
-            what: "The Department of Commerce announced a historic $40 billion energy partnership with Japan to deploy GE Vernova Hitachi BWRX-300 small modular reactors (SMRs) across Tennessee, Alabama, and Pacific Northwest regions. Target: 3 gigawatts of clean, baseload power to the grid. First-of-a-kind U.S.-Japan nuclear technology partnership for commercial grid deployment. Signals allied country nuclear technology standardization.",
-            why: "SMRs are transitioning from prototype to grid deployment. A $40B government-backed deployment signals SMR commercial viability and creates a template for allied countries purchasing U.S. nuclear technology. De-risks the $9B+ in private fusion capital and validates the nuclear-as-infrastructure strategy. Japan's participation signals geopolitical energy alignment.",
-            companies: ["GE Vernova", "Hitachi", "Japan Government", "Regional U.S. utilities"],
-            timeline: "Partnership announced March 2026. Reactor construction timelines Tennessee/Alabama 2026-2029. Grid connection target: 2029.",
-            source: "https://www.energy.gov"
-        },
-        {
-            rank: 7,
-            title: "CHIPS Program Office $2.013B Semiconductor Incentive Awards (May 2026 Signing) — 01/06/2026",
-            importance: 4,
-            sector: "semiconductors",
-            what: "The Department of Commerce CHIPS Program Office announced signing of 9 letters of intent to provide $2.013 billion in federal incentives under the CHIPS and Science Act. Companies receiving LOIs include Polar Semiconductor ($120M) and Absolics ($75M), plus six mid-tier semiconductor suppliers. Combined with all prior CHIPS awards, the semiconductor ecosystem has announced 140+ projects across 30 states totaling $645.3 billion in total investment leverage.",
-            why: "CHIPS Act continues at scale with 4:1 private leverage ratio (for every CHIPS dollar, companies commit 3-4x from private capital). May's LOI signings indicate program is broadening beyond headline Intel/TSMC fabs into full semiconductor value chain. This signals sustained 5-year procurement runway and validates domestic semiconductor manufacturing as multi-decade priority.",
-            companies: ["Polar Semiconductor", "Absolics", "Multiple semiconductor suppliers across 30 states"],
-            timeline: "Letters of intent signed May 2026. Formal disbursement agreements Q3 2026. Construction timelines through 2028-2030.",
-            source: "https://www.commerce.gov"
-        },
-        {
-            rank: 8,
-            title: "DoD 200K Autonomous Systems Procurement Initiative — Foundation Future Industries Phantom MK1 — 01/06/2026",
-            importance: 4,
-            sector: "ai",
-            what: "The Department of Defense is advancing a procurement initiative targeting acquisition of 200,000+ autonomous systems by 2027. Foundation Future Industries unveiled the Phantom MK1 — a 5'9\", 176-pound humanoid robot priced at ~$150,000 per unit, immediately attracting Pentagon and allied government attention. Defense AI contracts surged to $90.7B total potential value in FY2026 procurement landscape.",
-            why: "Humanoid robotics is moving from lab demos to military procurement. At $150K per unit, Phantom is price-competitive with legacy unmanned systems at 10x capability gains. The 200K procurement target signals Pentagon is preparing for autonomous workforce integration at scale. Combined with DAWG's $54.6B budget, humanoid robotics procurement enters mainstream defense spending.",
-            companies: ["Foundation Future Industries", "Boston Dynamics", "Advanced robotics suppliers"],
-            timeline: "Procurement pilot begins 2026. Target 200K+ autonomous systems delivered by 2027. Scale-up production 2027-2029.",
-            source: "https://www.defense.gov"
-        },
-        {
-            rank: 9,
-            title: "DoE $65M Quantum Computing Research + $2B Venture Equity Stakes in Quantum Startups — 01/06/2026",
-            importance: 4,
-            sector: "quantum",
-            what: "Beyond the $625M Quantum Information Science Research Centers, the Department of Energy announced an additional $65 million in competitive funding for 10 quantum computing research projects (38 separate awards) focused on software, control systems, and algorithms. Private sector: Nine quantum computing firms announced equity-stake agreements with government backing, splitting $2 billion in venture-style capital. Combined quantum public + private signal: $2.69B total quantum investment in Q1-Q2 2026.",
-            why: "Quantum computing funding is accelerating across both government R&D and venture equity. The shift from pure R&D to equity stakes indicates government confidence in commercial quantum viability. Software and algorithm funding suggests quantum computers are transitioning from hardware demonstrations to production-ready application stacks.",
-            companies: ["IBM", "Quantinuum", "Atom Computing", "Infleqtion", "PsiQuantum", "Rigetti", "Zapata", "Other quantum startups"],
-            timeline: "Research grants awarded Q2 2026. Equity commitments closing Q2-Q3 2026. Commercial quantum systems expected 2027-2028.",
-            source: "https://www.energy.gov"
-        }
-    ];
-
-    const brazilFindings = [
-        {
-            rank: 1,
-            title: "Brazil Green Energy Expansion — $50B Infrastructure Fund",
-            importance: 5,
-            sector: "energy",
-            what: "Brazilian government launching $50B renewable energy fund for wind, solar, and hydroelectric projects across Northeast and South regions.",
-            why: "Brazil positioning as energy exporter to the Americas. Global energy transition accelerating demand. Government-backed capex de-risks projects.",
-            companies: ["Energia Brasil", "CEMIG", "EDP Renováveis", "Engie Brasil"],
-            timeline: "Fund deployment 2026-2028; projects operational 2027+",
-            source: "https://www.gov.br/economia/en"
-        },
-        {
-            rank: 2,
-            title: "São Paulo Tech Hub — $2B Digital Innovation Initiative",
-            importance: 5,
-            sector: "technology",
-            what: "State of São Paulo committing $2B to AI, fintech, and software development ecosystem. Tax incentives for tech startups and R&D centers.",
-            why: "Brazil emerging as Latin America's tech leader. Government backing validates market. Attracts regional and global capital.",
-            companies: ["B3 (Stock Exchange)", "Brazilian Tech Startups", "Regional Software Companies"],
-            timeline: "Incentive applications open now; disbursements Q3 2026+",
-            source: "#"
-        },
-        {
-            rank: 3,
-            title: "Amazon Conservation Finance — $1.5B Climate Bonds",
-            importance: 4,
-            sector: "sustainability",
-            what: "Federal government issuing climate-linked bonds ($1.5B) backed by Amazon preservation commitments and sustainable development projects.",
-            why: "Global ESG capital flowing to climate solutions. Brazil capturing premium for real deforestation reduction. New asset class for impact investors.",
-            companies: ["BNDES (Brazilian development bank)", "Amazon Foundation", "Conservation NGOs"],
-            timeline: "Bonds issued Q2 2026; capital disbursement ongoing",
-            source: "#"
-        }
-    ];
-
-    function buildCard(finding) {
-        const card = document.createElement('div');
-        card.className = 'finding-card';
-        card.innerHTML = `
-            <div class="finding-header" onclick="this.parentElement.classList.toggle('expanded')">
-                <div class="finding-title">
-                    <div class="finding-rank">#${finding.rank}</div>
-                    <div>
-                        <h3 style="color:#e2e8f0;font-size:1.1em;margin-bottom:5px;">${finding.title}</h3>
-                        <span class="importance-badge importance-${finding.importance}">Importance ${finding.importance}/5</span>
-                    </div>
-                </div>
-                <div class="toggle-icon">&#9660;</div>
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-number">5</div>
+                <div class="card-label">Critical Signals</div>
+                <div style="color: #95a5a6; font-size: 0.85em; margin-top: 5px;">Importance 5/5</div>
             </div>
-            <div class="finding-body">
-                <div class="finding-section"><h4>What</h4><p>${finding.what}</p></div>
-                <div class="finding-section"><h4>Why It Matters</h4><p>${finding.why}</p></div>
-                <div class="finding-section">
-                    <h4>Companies to Watch</h4>
-                    <div class="companies-list">${finding.companies.map(c => `<span class="company-tag">${c}</span>`).join('')}</div>
+            <div class="card">
+                <div class="card-number">4</div>
+                <div class="card-label">Major Signals</div>
+                <div style="color: #95a5a6; font-size: 0.85em; margin-top: 5px;">Importance 4/5</div>
+            </div>
+            <div class="card">
+                <div class="card-number">0</div>
+                <div class="card-label">Confirmation</div>
+                <div style="color: #95a5a6; font-size: 0.85em; margin-top: 5px;">Importance 3/5</div>
+            </div>
+            <div class="card">
+                <div class="card-number">$4.6B+</div>
+                <div class="card-label">Total Capital</div>
+                <div style="color: #95a5a6; font-size: 0.85em; margin-top: 5px;">Today Announced</div>
+            </div>
+        </div>
+
+        <div class="trend-section">
+            <h2>🎯 Highest-Priority Trend</h2>
+            <p><strong>Quantum Computing & AI Infrastructure: $2.6B Government Acceleration — 02/06/2026</strong></p>
+            <p style="margin-top: 15px; color: #ecf0f1;">June 2026 marks simultaneous quantum computing and national security AI infrastructure funding acceleration. The Department of Commerce announced $2.013 billion in letters of intent to 9 quantum companies (IBM, GlobalFoundries, Atom Computing, D-Wave, Infleqtion, PsiQuantum, Quantinuum, Rigetti, Diraq), while Department of Defense deployed additional $160 million for microelectronics. Combined with $625 million Department of Energy quantum research centers funding, total federal quantum-AI-semiconductors capital allocation this month exceeds $4.6 billion, indicating consolidated 10-year procurement commitment timelines.</p>
+            <ul class="trend-watch-list">
+                <li class="watch-item">💼 DoC $2.013B Quantum LOIs signed with 9 companies → IBM quantum foundry $1B + GlobalFoundries $375M (LATE STAGE)</li>
+                <li class="watch-item">🔬 DoE $625M National Quantum Research Centers renewal → 3-5 year delivery on functional quantum systems (LATE STAGE)</li>
+                <li class="watch-item">🛡️ DoD $160M CHIPS Act microelectronics boost → Secure Enclave programs + National Quantum Initiative (CONFIRMATION)</li>
+                <li class="watch-item">🌐 Critical minerals preferential trading zone → US allies framework for strategic supply chain (EARLY STAGE)</li>
+                <li class="watch-item">⚡ Project Vault $10B domestic critical minerals reserve → Pentagon MP Materials shareholder position (CONFIRMATION)</li>
+            </ul>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('global')">Global</button>
+            <button class="tab-btn" onclick="switchTab('quantum')">Quantum</button>
+            <button class="tab-btn" onclick="switchTab('ai')">AI / Defense</button>
+            <button class="tab-btn" onclick="switchTab('semiconductors')">Semiconductors</button>
+            <button class="tab-btn" onclick="switchTab('minerals')">Critical Minerals</button>
+            <button class="tab-btn" onclick="switchTab('energy')">Energy Grid</button>
+        </div>
+
+        <div id="global" class="tab-content active">
+            <div class="findings-container" id="global-findings"></div>
+        </div>
+
+        <div id="quantum" class="tab-content">
+            <div class="findings-container" id="quantum-findings"></div>
+        </div>
+
+        <div id="ai" class="tab-content">
+            <div class="findings-container" id="ai-findings"></div>
+        </div>
+
+        <div id="semiconductors" class="tab-content">
+            <div class="findings-container" id="semiconductors-findings"></div>
+        </div>
+
+        <div id="minerals" class="tab-content">
+            <div class="findings-container" id="minerals-findings"></div>
+        </div>
+
+        <div id="energy" class="tab-content">
+            <div class="findings-container" id="energy-findings"></div>
+        </div>
+
+        <footer>
+            <div class="update-info">Report generated: 02/06/2026 | Next update: Tomorrow 9:00 AM</div>
+            <p>Data sourced from Reuters, WSJ, Commerce.gov, NIST, Department of Energy, Department of Defense</p>
+        </footer>
+    </div>
+
+    <script>
+        const globalFindings = [
+            {
+                rank: 1,
+                title: "Department of Commerce Quantum Computing Investment Initiative — 02/06/2026",
+                importance: 5,
+                sector: "quantum",
+                what: "$2.013 billion in federal incentives distributed to 9 quantum computing companies through letters of intent under CHIPS Act",
+                why: "Strategic national security priority to establish US leadership in quantum computing for cryptography, defense systems, and AI applications",
+                companies: ["IBM", "GlobalFoundries", "Atom Computing", "D-Wave Systems", "Infleqtion", "PsiQuantum", "Quantinuum", "Rigetti Computing", "Diraq"],
+                timeline: "Multi-year funding with IBM quantum foundry ($1B) and GlobalFoundries ($375M) as anchor recipients",
+                source: "Department of Commerce NIST",
+                date: "02/06/2026"
+            },
+            {
+                rank: 2,
+                title: "Project Vault: Critical Minerals Strategic Reserve Established — 02/06/2026",
+                importance: 5,
+                sector: "minerals",
+                what: "$10 billion EXIM Board approved Direct Loan for domestic critical minerals strategic reserve and production expansion",
+                why: "Reduce supply chain vulnerability to China dominance in rare earths, lithium, cobalt processing; critical for defense manufacturing and AI infrastructure",
+                companies: ["MP Materials", "US Department of Defense", "Export-Import Bank"],
+                timeline: "Multi-year domestic manufacturing acceleration; Pentagon became largest shareholder of MP Materials in 2025",
+                source: "Department of Defense, EXIM Bank",
+                date: "02/06/2026"
+            },
+            {
+                rank: 3,
+                title: "Department of Energy $625 Million Quantum Research Centers Renewal — 02/06/2026",
+                importance: 5,
+                sector: "quantum",
+                what: "$625 million federal funding for 5 National Quantum Information Science Research Centers for next phase research",
+                why: "Advance quantum computing applications, post-quantum cryptography, and fault-tolerant quantum system development critical to national security",
+                companies: ["US Department of Energy", "National Laboratories"],
+                timeline: "3-5 year research phases with delivery targets for functional quantum computing systems by 2028-2029",
+                source: "Department of Energy",
+                date: "02/06/2026"
+            },
+            {
+                rank: 4,
+                title: "Department of Defense CHIPS Act Microelectronics Acceleration — 02/06/2026",
+                importance: 4,
+                sector: "semiconductors",
+                what: "Additional $160 million DoD investment in microelectronics through Microelectronics Commons and Intel Secure Enclave program ($3B total)",
+                why: "Establish secure domestic microelectronics supply chain for classified defense systems and AI-enabled weapons platforms",
+                companies: ["Intel Corporation", "Department of Defense"],
+                timeline: "Immediate deployment with manufacturing scaling through 2026-2027",
+                source: "Department of Defense",
+                date: "02/06/2026"
+            },
+            {
+                rank: 5,
+                title: "NIST Quantum-Safe Cryptography Migration Initiative — 02/06/2026",
+                importance: 5,
+                sector: "quantum",
+                what: "$20 million for AI-based solutions strengthening manufacturing cybersecurity and quantum-resistant encryption deployment",
+                why: "Prepare critical infrastructure for quantum-computing threat to current encryption standards; post-quantum cryptography standardization",
+                companies: ["NIST", "US Technology Manufacturers"],
+                timeline: "Standards development through 2026-2027; deployment phase 2027-2029",
+                source: "NIST",
+                date: "02/06/2026"
+            },
+            {
+                rank: 6,
+                title: "Critical Minerals Preferential Trading Zone for Allied Nations — 02/06/2026",
+                importance: 4,
+                sector: "minerals",
+                what: "Trump administration proposed preferential trading framework for critical minerals access, with 50+ allied nations represented",
+                why: "Diversify supply chain from Chinese dominance; establish allied supply network for AI infrastructure, defense manufacturing, renewable energy",
+                companies: ["Multiple allied nations", "US State Department"],
+                timeline: "Framework negotiation Q2-Q3 2026; agreements with NATO, Japan, South Korea, Australia through 2027",
+                source: "Department of State",
+                date: "02/06/2026"
+            }
+        ];
+
+        const brazilFindings = [];
+
+        function switchTab(sector) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(sector).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function renderFindings() {
+            const containers = {
+                global: document.getElementById('global-findings'),
+                quantum: document.getElementById('quantum-findings'),
+                ai: document.getElementById('ai-findings'),
+                semiconductors: document.getElementById('semiconductors-findings'),
+                minerals: document.getElementById('minerals-findings'),
+                energy: document.getElementById('energy-findings')
+            };
+
+            // Clear containers
+            Object.values(containers).forEach(c => c.innerHTML = '');
+
+            // Group by date
+            const findingsByDate = {};
+            globalFindings.forEach(finding => {
+                if (!findingsByDate[finding.date]) {
+                    findingsByDate[finding.date] = [];
+                }
+                findingsByDate[finding.date].push(finding);
+            });
+
+            // Render Global tab (all findings)
+            const sortedDates = Object.keys(findingsByDate).sort((a, b) => new Date(b.split('/').reverse().join('-')) - new Date(a.split('/').reverse().join('-')));
+
+            let globalHTML = '';
+            sortedDates.forEach((date, idx) => {
+                const isToday = date === '02/06/2026';
+                globalHTML += `
+                    <div class="date-group">
+                        <div class="date-header" onclick="toggleDateGroup(this)">
+                            <span>${isToday ? '📅 Today (' + date + ')' : '📅 ' + date}</span>
+                            <span>${isToday ? '▼' : '▶'}</span>
+                        </div>
+                        <div class="date-findings ${!isToday ? 'collapsed' : ''}">
+                `;
+
+                findingsByDate[date].forEach(finding => {
+                    globalHTML += renderFinding(finding);
+                });
+
+                globalHTML += '</div></div>';
+            });
+            containers.global.innerHTML = globalHTML;
+
+            // Render by sector
+            ['quantum', 'ai', 'semiconductors', 'minerals', 'energy'].forEach(sector => {
+                let html = '';
+                const sectorFindings = globalFindings.filter(f => f.sector === sector);
+                if (sectorFindings.length === 0) {
+                    html = '<p style="color: #95a5a6;">No findings for this sector in today\'s update.</p>';
+                } else {
+                    sectorFindings.forEach(finding => {
+                        html += renderFinding(finding);
+                    });
+                }
+                containers[sector].innerHTML = html;
+            });
+        }
+
+        function renderFinding(finding) {
+            const importanceClass = `importance-${finding.importance}`;
+            const importanceText = {
+                5: 'EXTREME (5/5)',
+                4: 'HIGH (4/5)',
+                3: 'MEDIUM (3/5)',
+                2: 'LOW (2/5)'
+            }[finding.importance];
+
+            return `
+                <div class="finding">
+                    <div class="finding-title">${finding.rank}. ${finding.title}</div>
+                    <div class="finding-meta">
+                        <div class="meta-item"><span class="meta-label">Capital:</span> Announced</div>
+                        <div class="meta-item"><span class="meta-label">Stage:</span> Multi-year commitment</div>
+                        <div class="meta-item"><span class="meta-label">Source:</span> ${finding.source}</div>
+                        <div class="meta-item"><span class="meta-label">Sector:</span> ${finding.sector}</div>
+                    </div>
+                    <div class="finding-description">
+                        <strong>What:</strong> ${finding.what}
+                    </div>
+                    <div class="finding-description">
+                        <strong>Why:</strong> ${finding.why}
+                    </div>
+                    <div class="finding-description">
+                        <strong>Companies/Agencies:</strong> ${finding.companies.join(', ')}
+                    </div>
+                    <div class="finding-description">
+                        <strong>Timeline:</strong> ${finding.timeline}
+                    </div>
+                    <div class="importance ${importanceClass}">${importanceText}</div>
                 </div>
-                <div class="finding-section"><h4>Timeline</h4><p>${finding.timeline}</p></div>
-                <a href="${finding.source}" target="_blank" class="source-link">&#x1F4F0; View Source</a>
-            </div>`;
-        return card;
-    }
+            `;
+        }
 
-    function extractDate(title) {
-        const m = title.match(/—\s*(\d{2}\/\d{2}\/\d{4})\s*$/);
-        return m ? m[1] : null;
-    }
+        function toggleDateGroup(header) {
+            const findings = header.nextElementSibling;
+            findings.classList.toggle('collapsed');
+            header.querySelector('span:last-child').textContent = findings.classList.contains('collapsed') ? '▶' : '▼';
+        }
 
-    function renderFindings(region, findings) {
-        const id = region === 'global' ? 'findingsContainerGlobal' : 'findingsContainerBrazil';
-        const container = document.getElementById(id);
-        container.innerHTML = '';
-
-        // Group by date
-        const groups = {};
-        findings.forEach(f => {
-            const d = extractDate(f.title) || 'Undated';
-            if (!groups[d]) groups[d] = [];
-            groups[d].push(f);
-        });
-
-        // Sort dates descending (newest first)
-        const sortedDates = Object.keys(groups).sort((a, b) => {
-            if (a === 'Undated') return 1;
-            if (b === 'Undated') return -1;
-            const [da, ma, ya] = a.split('/').map(Number);
-            const [db, mb, yb] = b.split('/').map(Number);
-            return new Date(yb, mb-1, db) - new Date(ya, ma-1, da);
-        });
-
-        const todayDate = sortedDates[0]; // most recent = today
-
-        sortedDates.forEach((date, idx) => {
-            const isToday = idx === 0;
-            const section = document.createElement('div');
-            section.className = 'date-section' + (isToday ? '' : ' collapsed');
-
-            const header = document.createElement('div');
-            header.className = 'date-header';
-            header.innerHTML = `<h3>${isToday ? 'Today' : date}<span class="today-label" style="${isToday ? '' : 'display:none'}">${date}</span></h3><div class="date-meta"><span class="date-count">${groups[date].length} finding${groups[date].length > 1 ? 's' : ''}</span><span class="date-toggle">▼</span></div>`;
-            header.onclick = () => section.classList.toggle('collapsed');
-
-            const findingsDiv = document.createElement('div');
-            findingsDiv.className = 'date-findings';
-            groups[date].forEach(f => findingsDiv.appendChild(buildCard(f)));
-
-            section.appendChild(header);
-            section.appendChild(findingsDiv);
-            container.appendChild(section);
-        });
-    }
-
-    function filterBySector(sector, region, e) {
-        const src = (e && e.target) ? e.target : event.target;
-        const dashboard = document.getElementById(region === 'global' ? 'globalDashboard' : 'brazilDashboard');
-        dashboard.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        src.classList.add('active');
-        const all = region === 'global' ? globalFindings : brazilFindings;
-        renderFindings(region, sector === 'all' ? all : all.filter(f => f.sector === sector));
-    }
-
-    function filterFindings(region) {
-        const id = region === 'global' ? 'searchInputGlobal' : 'searchInputBrazil';
-        const term = document.getElementById(id).value.toLowerCase();
-        const all = region === 'global' ? globalFindings : brazilFindings;
-        renderFindings(region, term ? all.filter(f =>
-            f.title.toLowerCase().includes(term) ||
-            f.what.toLowerCase().includes(term) ||
-            f.companies.some(c => c.toLowerCase().includes(term))
-        ) : all);
-    }
-
-    function switchMainTab(tab, e) {
-        currentMainTab = tab;
-        const src = (e && e.target) ? e.target : event.target;
-        document.querySelectorAll('.main-tab').forEach(b => b.classList.remove('active'));
-        src.classList.add('active');
-        document.getElementById('globalDashboard').style.display = tab === 'global' ? 'block' : 'none';
-        document.getElementById('brazilDashboard').style.display = tab === 'brazil' ? 'block' : 'none';
-    }
-
-    const now = new Date();
-    const dateStr = now.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-    const timeStr = now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', hour12:true });
-    document.getElementById('timestamp').textContent = `${dateStr} at ${timeStr}`;
-    document.getElementById('footerTime').textContent = `${dateStr} at ${timeStr}`;
-
-    renderFindings('global', globalFindings);
-    renderFindings('brazil', brazilFindings);
-</script>
+        // Initialize
+        renderFindings();
+    </script>
 </body>
 </html>
