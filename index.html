@@ -219,38 +219,6 @@
             color: #ecf0f1;
         }
 
-        .date-group {
-            margin-bottom: 30px;
-        }
-
-        .date-header {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid #0f3460;
-            padding: 12px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #00d4ff;
-            cursor: pointer;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .date-header:hover {
-            background: rgba(0, 212, 255, 0.15);
-        }
-
-        .date-findings {
-            display: grid;
-            gap: 15px;
-            margin-left: 20px;
-        }
-
-        .date-findings.collapsed {
-            display: none;
-        }
-
         footer {
             text-align: center;
             margin-top: 50px;
@@ -263,17 +231,6 @@
         .update-info {
             color: #00d4ff;
             margin: 10px 0;
-        }
-
-        .source-link {
-            color: #00d4ff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .source-link:hover {
-            color: #0099ff;
-            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
@@ -332,19 +289,19 @@
             <ul class="trend-watch-list">
                 <li class="watch-item">💼 DoC $2.013B Quantum LOIs signed with 9 companies → IBM (IBM) quantum foundry $1B + GlobalFoundries (GFS) $375M (LATE STAGE)</li>
                 <li class="watch-item">🔬 DoE $625M National Quantum Research Centers renewal → 3-5 year delivery on functional quantum systems (LATE STAGE)</li>
-                <li class="watch-item">🛡️ DoD $160M CHIPS Act microelectronics boost → Secure Enclave programs + National Quantum Initiative (CONFIRMATION)</li>
+                <li class="watch-item">🛡️ DoD $160M CHIPS Act microelectronics boost → Intel (INTC) Secure Enclave programs + National Quantum Initiative (CONFIRMATION)</li>
                 <li class="watch-item">🌐 Critical minerals preferential trading zone → US allies framework for strategic supply chain (EARLY STAGE)</li>
                 <li class="watch-item">⚡ Project Vault $10B domestic critical minerals reserve → Pentagon MP Materials (MP) shareholder position (CONFIRMATION)</li>
             </ul>
         </div>
 
         <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('global')">Global</button>
-            <button class="tab-btn" onclick="switchTab('quantum')">Quantum</button>
-            <button class="tab-btn" onclick="switchTab('ai')">AI / Defense</button>
-            <button class="tab-btn" onclick="switchTab('semiconductors')">Semiconductors</button>
-            <button class="tab-btn" onclick="switchTab('minerals')">Critical Minerals</button>
-            <button class="tab-btn" onclick="switchTab('energy')">Energy Grid</button>
+            <button class="tab-btn active" onclick="switchTab(event, 'global')">Global</button>
+            <button class="tab-btn" onclick="switchTab(event, 'quantum')">Quantum</button>
+            <button class="tab-btn" onclick="switchTab(event, 'ai')">AI / Defense</button>
+            <button class="tab-btn" onclick="switchTab(event, 'semiconductors')">Semiconductors</button>
+            <button class="tab-btn" onclick="switchTab(event, 'minerals')">Critical Minerals</button>
+            <button class="tab-btn" onclick="switchTab(event, 'energy')">Energy Grid</button>
         </div>
 
         <div id="global" class="tab-content active">
@@ -378,7 +335,7 @@
     </div>
 
     <script>
-        const globalFindings = [
+        const findings = [
             {
                 rank: 1,
                 title: "Department of Commerce Quantum Computing Investment Initiative — 02/06/2026",
@@ -387,7 +344,7 @@
                 what: "$2.013 billion in federal incentives distributed to 9 quantum computing companies through letters of intent under CHIPS Act",
                 why: "Strategic national security priority to establish US leadership in quantum computing for cryptography, defense systems, and AI applications",
                 companies: ["IBM (IBM)", "GlobalFoundries (GFS)", "Atom Computing", "D-Wave Systems", "Infleqtion", "PsiQuantum", "Quantinuum", "Rigetti Computing", "Diraq"],
-                timeline: "Multi-year funding with IBM quantum foundry ($1B) and GlobalFoundries ($375M) as anchor recipients",
+                timeline: "Multi-year funding with IBM (IBM) quantum foundry ($1B) and GlobalFoundries (GFS) ($375M) as anchor recipients",
                 source: "Department of Commerce NIST",
                 date: "02/06/2026"
             },
@@ -399,7 +356,7 @@
                 what: "$10 billion EXIM Board approved Direct Loan for domestic critical minerals strategic reserve and production expansion",
                 why: "Reduce supply chain vulnerability to China dominance in rare earths, lithium, cobalt processing; critical for defense manufacturing and AI infrastructure",
                 companies: ["MP Materials (MP)", "US Department of Defense", "Export-Import Bank"],
-                timeline: "Multi-year domestic manufacturing acceleration; Pentagon became largest shareholder of MP Materials in 2025",
+                timeline: "Multi-year domestic manufacturing acceleration; Pentagon became largest shareholder of MP Materials (MP) in 2025",
                 source: "Department of Defense, EXIM Bank",
                 date: "02/06/2026"
             },
@@ -453,73 +410,19 @@
             }
         ];
 
-        const brazilFindings = [];
+        function switchTab(evt, tabName) {
+            const contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
 
-        function switchTab(sector) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(sector).classList.add('active');
-            event.target.classList.add('active');
-        }
+            const btns = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+            }
 
-        function renderFindings() {
-            const containers = {
-                global: document.getElementById('global-findings'),
-                quantum: document.getElementById('quantum-findings'),
-                ai: document.getElementById('ai-findings'),
-                semiconductors: document.getElementById('semiconductors-findings'),
-                minerals: document.getElementById('minerals-findings'),
-                energy: document.getElementById('energy-findings')
-            };
-
-            // Clear containers
-            Object.values(containers).forEach(c => c.innerHTML = '');
-
-            // Group by date
-            const findingsByDate = {};
-            globalFindings.forEach(finding => {
-                if (!findingsByDate[finding.date]) {
-                    findingsByDate[finding.date] = [];
-                }
-                findingsByDate[finding.date].push(finding);
-            });
-
-            // Render Global tab (all findings)
-            const sortedDates = Object.keys(findingsByDate).sort((a, b) => new Date(b.split('/').reverse().join('-')) - new Date(a.split('/').reverse().join('-')));
-
-            let globalHTML = '';
-            sortedDates.forEach((date, idx) => {
-                const isToday = date === '02/06/2026';
-                globalHTML += `
-                    <div class="date-group">
-                        <div class="date-header" onclick="toggleDateGroup(this)">
-                            <span>${isToday ? '📅 Today (' + date + ')' : '📅 ' + date}</span>
-                            <span>${isToday ? '▼' : '▶'}</span>
-                        </div>
-                        <div class="date-findings ${!isToday ? 'collapsed' : ''}">
-                `;
-
-                findingsByDate[date].forEach(finding => {
-                    globalHTML += renderFinding(finding);
-                });
-
-                globalHTML += '</div></div>';
-            });
-            containers.global.innerHTML = globalHTML;
-
-            // Render by sector
-            ['quantum', 'ai', 'semiconductors', 'minerals', 'energy'].forEach(sector => {
-                let html = '';
-                const sectorFindings = globalFindings.filter(f => f.sector === sector);
-                if (sectorFindings.length === 0) {
-                    html = '<p style="color: #95a5a6;">No findings for this sector in today\'s update.</p>';
-                } else {
-                    sectorFindings.forEach(finding => {
-                        html += renderFinding(finding);
-                    });
-                }
-                containers[sector].innerHTML = html;
-            });
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
         }
 
         function renderFinding(finding) {
@@ -557,10 +460,53 @@
             `;
         }
 
-        function toggleDateGroup(header) {
-            const findings = header.nextElementSibling;
-            findings.classList.toggle('collapsed');
-            header.querySelector('span:last-child').textContent = findings.classList.contains('collapsed') ? '▶' : '▼';
+        function initializeDashboard() {
+            const sectors = ['global', 'quantum', 'ai', 'semiconductors', 'minerals', 'energy'];
+
+            sectors.forEach(sector => {
+                const container = document.getElementById(`${sector}-findings`);
+                if (!container) return;
+
+                let html = '';
+
+                if (sector === 'global') {
+                    findings.forEach(finding => {
+                        html += renderFinding(finding);
+                    });
+                } else if (sector === 'ai') {
+                    const filtered = findings.filter(f => f.sector === 'semiconductors' || f.sector === 'quantum');
+                    if (filtered.length === 0) {
+                        html = '<p style="color: #95a5a6;">No findings for this sector in today\'s update.</p>';
+                    } else {
+                        filtered.forEach(finding => {
+                            html += renderFinding(finding);
+                        });
+                    }
+                } else {
+                    const filtered = findings.filter(f => f.sector === sector);
+                    if (filtered.length === 0) {
+                        html = '<p style="color: #95a5a6;">No findings for this sector in today\'s update.</p>';
+                    } else {
+                        filtered.forEach(finding => {
+                            html += renderFinding(finding);
+                        });
+                    }
+                }
+
+                container.innerHTML = html;
+            });
         }
 
-        // Initial
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
+
+        // Fallback if DOMContentLoaded already fired
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeDashboard);
+        } else {
+            initializeDashboard();
+        }
+    </script>
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
