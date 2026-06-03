@@ -250,12 +250,21 @@
                 width: 100%;
             }
         }
+
+        .date-group { margin-bottom: 15px; }
+        .date-group-header { padding: 12px 16px; border-radius: 4px; font-weight: bold; font-size: 0.95em; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; user-select: none; }
+        .today-header { background: rgba(0, 212, 255, 0.12); border-left: 4px solid #00d4ff; color: #00d4ff; }
+        .older-header { background: rgba(15, 52, 96, 0.5); border-left: 4px solid #0f3460; color: #95a5a6; cursor: pointer; transition: all 0.2s; }
+        .older-header:hover { background: rgba(15, 52, 96, 0.85); color: #ecf0f1; border-color: #00d4ff; }
+        .date-group-body { display: grid; gap: 20px; margin-bottom: 10px; }
+        .date-group-body.collapsed { display: none; }
+        .finding-count { font-size: 0.82em; font-weight: normal; opacity: 0.75; margin-left: auto; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>💰 Government Capital Flows</h1>
+            <h1>ð° Government Capital Flows</h1>
             <p class="subtitle">Daily tracking of federal investment & strategic capital allocation</p>
         </header>
 
@@ -283,15 +292,15 @@
         </div>
 
         <div class="trend-section">
-            <h2>🎯 Highest-Priority Trend</h2>
-            <p><strong>Pentagon Deploys Agentic AI to Classified Military at Scale — $1.3B+ Awarded in AI Defense Contracts — 03/06/2026</strong></p>
-            <p style="margin-top: 15px; color: #ecf0f1;">The U.S. military has crossed a critical threshold: AI is no longer a planning tool but an autonomous operational asset deployed on classified networks. OpenAI, xAI, Google, and Anthropic each received $200M to build agentic AI for classified IL6/IL7 environments — systems that interpret data and execute actions without human direction. On top of Scale AI's $500M CDAO contract, total AI defense awards this cycle exceed $1.3B. ARPA-E's $135M fusion commitment (its largest ever) and DOE's $450M public-private lab partnership add urgency to energy independence, while the equity-as-investment model (Intel 9.9%, Quantum LOIs) continues reshaping how Washington deploys strategic capital.</p>
+            <h2>ð¯ Highest-Priority Trend</h2>
+            <p><strong>Pentagon Deploys Agentic AI to Classified Military at Scale â $1.3B+ Awarded in AI Defense Contracts â 03/06/2026</strong></p>
+            <p style="margin-top: 15px; color: #ecf0f1;">The U.S. military has crossed a critical threshold: AI is no longer a planning tool but an autonomous operational asset deployed on classified networks. OpenAI, xAI, Google, and Anthropic each received $200M to build agentic AI for classified IL6/IL7 environments â systems that interpret data and execute actions without human direction. On top of Scale AI's $500M CDAO contract, total AI defense awards this cycle exceed $1.3B. ARPA-E's $135M fusion commitment (its largest ever) and DOE's $450M public-private lab partnership add urgency to energy independence, while the equity-as-investment model (Intel 9.9%, Quantum LOIs) continues reshaping how Washington deploys strategic capital.</p>
             <ul class="trend-watch-list">
-                <li class="watch-item">🤖 Pentagon agentic AI: $200M each to OpenAI, xAI, Google, Anthropic for IL6/IL7 classified systems — autonomous AI now operational in defense (CONFIRMATION)</li>
-                <li class="watch-item">⚡ ARPA-E $135M + DOE $450M fusion surge — energy independence treated as national security imperative (CONFIRMATION)</li>
-                <li class="watch-item">🛡️ Scale AI $500M CDAO + Perennial Autonomy $500M C-UAS = $1B in autonomous defense infrastructure awarded this cycle (LATE STAGE)</li>
-                <li class="watch-item">⚛️ Quantum LOIs ($2.013B) with equity stakes now final — IBM $1B Anderon foundry + GlobalFoundries $375M moving to execution (LATE STAGE)</li>
-                <li class="watch-item">🪨 Project Vault $10B EXIM loan + USA Rare Earth $1.6B LOI — two-pronged attack on China's 91% rare earth processing monopoly (LATE STAGE)</li>
+                <li class="watch-item">ð¤ Pentagon agentic AI: $200M each to OpenAI, xAI, Google, Anthropic for IL6/IL7 classified systems â autonomous AI now operational in defense (CONFIRMATION)</li>
+                <li class="watch-item">â¡ ARPA-E $135M + DOE $450M fusion surge â energy independence treated as national security imperative (CONFIRMATION)</li>
+                <li class="watch-item">ð¡ï¸ Scale AI $500M CDAO + Perennial Autonomy $500M C-UAS = $1B in autonomous defense infrastructure awarded this cycle (LATE STAGE)</li>
+                <li class="watch-item">âï¸ Quantum LOIs ($2.013B) with equity stakes now final â IBM $1B Anderon foundry + GlobalFoundries $375M moving to execution (LATE STAGE)</li>
+                <li class="watch-item">ðª¨ Project Vault $10B EXIM loan + USA Rare Earth $1.6B LOI â two-pronged attack on China's 91% rare earth processing monopoly (LATE STAGE)</li>
             </ul>
         </div>
 
@@ -336,10 +345,10 @@
 
     <script>
         const findings = [
-            // ── 03/06/2026 ────────────────────────────────────
+            // ââ 03/06/2026 ââââââââââââââââââââââââââââââââââââ
             {
                 rank: 1,
-                title: "Pentagon Deploys Agentic AI to Classified Military Networks — $200M Each to xAI, OpenAI, Google, Anthropic — 03/06/2026",
+                title: "Pentagon Deploys Agentic AI to Classified Military Networks â $200M Each to xAI, OpenAI, Google, Anthropic â 03/06/2026",
                 importance: 5,
                 sector: "ai",
                 what: "The U.S. Department of Defense awarded $200M contracts each to xAI, OpenAI, Google, and Anthropic to build autonomous 'agentic' AI systems operating on Impact Level 6/7 classified military networks without constant human direction; a separate DoD announcement named 8 companies (AWS, Google, Microsoft, NVIDIA, OpenAI, Oracle, Reflection, SpaceX) for classified IL6/IL7 AI infrastructure.",
@@ -351,10 +360,10 @@
             },
             {
                 rank: 2,
-                title: "ARPA-E $135M Fusion Technology Commitment — Agency's Largest Fusion Investment Ever — 03/06/2026",
+                title: "ARPA-E $135M Fusion Technology Commitment â Agency's Largest Fusion Investment Ever â 03/06/2026",
                 importance: 4,
                 sector: "energy",
-                what: "ARPA-E Director Conner Prochaska announced a $135 million commitment to develop and commercialize fusion technologies at the 2026 ARPA-E Energy Innovation Summit — the largest fusion investment in the agency's history.",
+                what: "ARPA-E Director Conner Prochaska announced a $135 million commitment to develop and commercialize fusion technologies at the 2026 ARPA-E Energy Innovation Summit â the largest fusion investment in the agency's history.",
                 why: "Signals a major escalation in federal urgency around commercial fusion; complements DOE's $450M public-private research partnership with national labs and the broader Build-Innovate-Grow strategy to deliver commercial fusion power to the grid by the mid-2030s.",
                 companies: ["ARPA-E", "Department of Energy", "Commonwealth Fusion Systems (private)", "TAE Technologies (private)", "Helion Energy (private)"],
                 timeline: "Announced at 2026 ARPA-E Energy Innovation Summit; DOE Fusion Science and Technology Roadmap targets commercial fusion delivery by mid-2030s",
@@ -363,7 +372,7 @@
             },
             {
                 rank: 3,
-                title: "DOE $450M Public-Private Fusion Research Partnership with National Labs — 03/06/2026",
+                title: "DOE $450M Public-Private Fusion Research Partnership with National Labs â 03/06/2026",
                 importance: 4,
                 sector: "energy",
                 what: "The Department of Energy announced a $450 million funding round and one of the largest public-private research partnerships in the history of DOE national labs, focused on accelerating commercial fusion energy development.",
@@ -375,7 +384,7 @@
             },
             {
                 rank: 4,
-                title: "Foundation Future Industries $24M Pentagon Contract — Humanoid Robot Soldiers Tested in Ukraine — 03/06/2026",
+                title: "Foundation Future Industries $24M Pentagon Contract â Humanoid Robot Soldiers Tested in Ukraine â 03/06/2026",
                 importance: 3,
                 sector: "ai",
                 what: "Foundation Future Industries won $24M in Pentagon contracts (including SBIR Phase 3 designation) to develop humanoid robot soldiers for military breaching scenarios; robots have already been tested in Ukraine and the company is backed by Eric Trump.",
@@ -385,10 +394,10 @@
                 source: "The Next Web",
                 date: "03/06/2026"
             },
-            // ── 02/06/2026 ────────────────────────────────────
+            // ââ 02/06/2026 ââââââââââââââââââââââââââââââââââââ
             {
                 rank: 5,
-                title: "Government Equity-as-Investment Model: U.S. Acquires 9.9% Intel Stake ($8.9B) — 02/06/2026",
+                title: "Government Equity-as-Investment Model: U.S. Acquires 9.9% Intel Stake ($8.9B) â 02/06/2026",
                 importance: 5,
                 sector: "semiconductors",
                 what: "U.S. government acquires 9.9% equity stake in Intel by converting $5.7B CHIPS Act funds and $3.2B Secure Enclave defense program into direct ownership, plus a 5-year warrant for an additional 5% if foundry drops below 51% U.S. ownership",
@@ -400,23 +409,23 @@
             },
             {
                 rank: 6,
-                title: "Department of Commerce $2.013B Quantum Computing LOIs — Equity Stakes in 9 Companies — 02/06/2026",
+                title: "Department of Commerce $2.013B Quantum Computing LOIs â Equity Stakes in 9 Companies â 02/06/2026",
                 importance: 5,
                 sector: "quantum",
                 what: "$2.013 billion in federal incentives via letters of intent to 9 quantum computing companies under CHIPS and Science Act, with U.S. government taking minority equity stakes in each recipient",
                 why: "Strategic national security priority to establish U.S. leadership in quantum computing for cryptography, defense systems, and AI. Government adopts the equity-stake model first proven with Intel, now scaling to the quantum sector",
                 companies: ["IBM (IBM)", "GlobalFoundries (GFS)", "D-Wave Quantum (QBTS)", "Rigetti Computing (RGTI)", "Quantinuum (private)", "Infleqtion (private)", "PsiQuantum (private)", "Atom Computing (private)", "Diraq (private)"],
-                timeline: "IBM receives ~$1B to establish Anderon, the first U.S. pure-play quantum chip foundry; GlobalFoundries $375M; startups $38M–$100M each",
+                timeline: "IBM receives ~$1B to establish Anderon, the first U.S. pure-play quantum chip foundry; GlobalFoundries $375M; startups $38Mâ$100M each",
                 source: "Department of Commerce / NIST / CNN Business / Fortune",
                 date: "02/06/2026"
             },
             {
                 rank: 7,
-                title: "Project Vault: $10B EXIM Loan + $30B Total Mobilized for Critical Minerals Reserve — 02/06/2026",
+                title: "Project Vault: $10B EXIM Loan + $30B Total Mobilized for Critical Minerals Reserve â 02/06/2026",
                 importance: 5,
                 sector: "minerals",
                 what: "Export-Import Bank approved $10B Direct Loan for Project Vault domestic critical minerals strategic reserve; total U.S. government mobilization exceeds $30B including letters of interest, investments, and other support mechanisms",
-                why: "China controls 91% of refined rare earths and 92% of magnets — a direct chokepoint for AI infrastructure, defense manufacturing, and EV supply chains. Project Vault is the largest single U.S. domestic minerals initiative in history",
+                why: "China controls 91% of refined rare earths and 92% of magnets â a direct chokepoint for AI infrastructure, defense manufacturing, and EV supply chains. Project Vault is the largest single U.S. domestic minerals initiative in history",
                 companies: ["MP Materials (MP)", "Export-Import Bank", "Department of Defense", "Department of Energy"],
                 timeline: "Launched February 2026; Pentagon became largest MP Materials shareholder in 2025; DOE also deploying $45.7M across 19 domestic critical mineral projects",
                 source: "CNBC / Department of Energy / State Dept / DOE CMEI",
@@ -424,10 +433,10 @@
             },
             {
                 rank: 8,
-                title: "Pentagon $500M Counter-Drone AI Contract: Perennial Autonomy — Largest C-UAS Award Ever — 02/06/2026",
+                title: "Pentagon $500M Counter-Drone AI Contract: Perennial Autonomy â Largest C-UAS Award Ever â 02/06/2026",
                 importance: 4,
                 sector: "ai",
-                what: "Pentagon Joint Interagency Task Force 401 (JIATF-401) awarded $500M IDIQ contract to Perennial Autonomy for AI-enabled counter-unmanned aerial systems — the largest single C-UAS award the Pentagon has ever issued",
+                what: "Pentagon Joint Interagency Task Force 401 (JIATF-401) awarded $500M IDIQ contract to Perennial Autonomy for AI-enabled counter-unmanned aerial systems â the largest single C-UAS award the Pentagon has ever issued",
                 why: "Perennial Autonomy systems intercepted 4,000+ Russian drones in Ukraine since mid-2024, proving battlefield efficacy; Pentagon accelerating domestic AI-autonomous defense procurement as drone warfare becomes ubiquitous",
                 companies: ["Perennial Autonomy (private)", "Department of Defense", "JIATF-401"],
                 timeline: "Awarded May 19, 2026; 3-year IDIQ covering Bumblebee quadcopter, Hornet midrange strike drone, and Merops interceptor deployed in Ukraine",
@@ -436,10 +445,10 @@
             },
             {
                 rank: 9,
-                title: "Scale AI Wins $500M Pentagon CDAO Contract — 5x Expansion — 02/06/2026",
+                title: "Scale AI Wins $500M Pentagon CDAO Contract â 5x Expansion â 02/06/2026",
                 importance: 4,
                 sector: "ai",
-                what: "Scale AI awarded $500M contract from Pentagon Chief Digital and Artificial Intelligence Office (CDAO) — a five-fold expansion of its existing defense deal for AI decision-making, data labeling, and analytics infrastructure",
+                what: "Scale AI awarded $500M contract from Pentagon Chief Digital and Artificial Intelligence Office (CDAO) â a five-fold expansion of its existing defense deal for AI decision-making, data labeling, and analytics infrastructure",
                 why: "Pentagon systematically embedding AI into military planning, logistics, and command decision workflows; Scale AI becoming primary defense AI data infrastructure partner as DoD moves beyond pilots to enterprise-wide AI deployment",
                 companies: ["Scale AI (private)", "Department of Defense", "CDAO"],
                 timeline: "Recent award; supports integration of AI tools into classified military decision-making and data-processing workflows across all DoD branches",
@@ -448,7 +457,7 @@
             },
             {
                 rank: 10,
-                title: "Defense Production Act Invoked for AI Power Grid — $1.4T Utility Investment Surge — 02/06/2026",
+                title: "Defense Production Act Invoked for AI Power Grid â $1.4T Utility Investment Surge â 02/06/2026",
                 importance: 4,
                 sector: "energy",
                 what: "President Trump invoked Section 303 of the Defense Production Act (April 2026), formally designating large-scale grid infrastructure as essential to national defense and unlocking emergency federal financing for domestic supply chain expansion of transformers, switchgear, and batteries",
@@ -460,11 +469,11 @@
             },
             {
                 rank: 11,
-                title: "DOE $625M National Quantum Research Centers — Next Phase Funding — 02/06/2026",
+                title: "DOE $625M National Quantum Research Centers â Next Phase Funding â 02/06/2026",
                 importance: 4,
                 sector: "quantum",
                 what: "$625 million Department of Energy funding announced for the next phase of 5 National Quantum Information Science Research Centers, focused on fault-tolerant quantum computing, quantum networking, and post-quantum cryptography",
-                why: "Complements DoC $2.013B commercial quantum LOIs with foundational research; DOE also restructured to include dedicated Fusion, AI, and Quantum offices — signaling long-term institutional commitment to quantum as a strategic technology",
+                why: "Complements DoC $2.013B commercial quantum LOIs with foundational research; DOE also restructured to include dedicated Fusion, AI, and Quantum offices â signaling long-term institutional commitment to quantum as a strategic technology",
                 companies: ["Department of Energy", "National Laboratories", "University Research Partners"],
                 timeline: "3-5 year research phases with functional quantum system delivery targets by 2028-2029; DOE FES budget approved at $806M for 2026 (2% increase from 2025)",
                 source: "Department of Energy / FedScoop",
@@ -472,11 +481,11 @@
             },
             {
                 rank: 12,
-                title: "Micron Predicted as Next Government Equity Stake Target After Intel — 02/06/2026",
+                title: "Micron Predicted as Next Government Equity Stake Target After Intel â 02/06/2026",
                 importance: 3,
                 sector: "semiconductors",
                 what: "Analysts predict Micron Technology is next semiconductor firm to receive Trump administration equity investment; Micron already has $6.1B in existing CHIPS Act grants for Idaho, New York, and Virginia fab construction and modernization",
-                why: "Government equity model is now proven with Intel; AI memory chips (HBM) are a critical chokepoint for inference infrastructure — China accelerating its push into advanced AI memory makes Micron a high-priority strategic asset",
+                why: "Government equity model is now proven with Intel; AI memory chips (HBM) are a critical chokepoint for inference infrastructure â China accelerating its push into advanced AI memory makes Micron a high-priority strategic asset",
                 companies: ["Micron Technology (MU)", "Department of Commerce", "Department of Defense"],
                 timeline: "Prediction published June 1, 2026; existing CHIPS Act $6.1B grants already in deployment; formal announcement could come Q3 2026",
                 source: "The Motley Fool / The Globe and Mail",
@@ -534,38 +543,74 @@
             `;
         }
 
+        function toggleGroup(groupId, header) {
+            const el = document.getElementById(groupId);
+            if (el.classList.contains('collapsed')) {
+                el.classList.remove('collapsed');
+                header.innerHTML = header.innerHTML.replace('\u25b6', '\u25bc');
+            } else {
+                el.classList.add('collapsed');
+                header.innerHTML = header.innerHTML.replace('\u25bc', '\u25b6');
+            }
+        }
+
         function initializeDashboard() {
             const sectors = ['global', 'quantum', 'ai', 'semiconductors', 'minerals', 'energy'];
+            const TODAY = '03/06/2026';
 
             sectors.forEach(sector => {
                 const container = document.getElementById(`${sector}-findings`);
                 if (!container) return;
 
-                let html = '';
-
+                let sectorFindings;
                 if (sector === 'global') {
-                    findings.forEach(finding => {
-                        html += renderFinding(finding);
-                    });
+                    sectorFindings = findings;
                 } else if (sector === 'ai') {
-                    const filtered = findings.filter(f => f.sector === 'semiconductors' || f.sector === 'quantum');
-                    if (filtered.length === 0) {
-                        html = '<p style="color: #95a5a6;">No findings for this sector in today\'s update.</p>';
-                    } else {
-                        filtered.forEach(finding => {
-                            html += renderFinding(finding);
-                        });
-                    }
+                    sectorFindings = findings.filter(f => f.sector === 'semiconductors' || f.sector === 'quantum');
                 } else {
-                    const filtered = findings.filter(f => f.sector === sector);
-                    if (filtered.length === 0) {
-                        html = '<p style="color: #95a5a6;">No findings for this sector in today\'s update.</p>';
-                    } else {
-                        filtered.forEach(finding => {
-                            html += renderFinding(finding);
-                        });
-                    }
+                    sectorFindings = findings.filter(f => f.sector === sector);
                 }
+
+                if (sectorFindings.length === 0) {
+                    container.innerHTML = '<p style="color: #95a5a6;">No findings for this sector in today\'s update.</p>';
+                    return;
+                }
+
+                // Group by date suffix in title
+                const groups = {};
+                sectorFindings.forEach(f => {
+                    const m = f.title.match(/\u2014 (\d{2}\/\d{2}\/\d{4})$/);
+                    const key = m ? m[1] : 'Unknown';
+                    if (!groups[key]) groups[key] = [];
+                    groups[key].push(f);
+                });
+
+                // Sort dates descending
+                const sortedDates = Object.keys(groups).sort((a, b) => {
+                    const p = d => { const [dd,mm,yyyy] = d.split('/'); return new Date(yyyy, mm-1, dd); };
+                    return p(b) - p(a);
+                });
+
+                let html = '';
+                sortedDates.forEach(date => {
+                    const isToday = date === TODAY;
+                    const gId = 'grp-' + sector + '-' + date.replace(/\//g,'-');
+                    const count = groups[date].length;
+                    const badge = '<span class="finding-count">(' + count + ' finding' + (count !== 1 ? 's' : '') + ')</span>';
+                    if (isToday) {
+                        html += '<div class="date-group">';
+                        html += '<div class="date-group-header today-header">\uD83D\uDCC5 Today \u2014 ' + date + ' ' + badge + '</div>';
+                        html += '<div class="date-group-body" id="' + gId + '">';
+                        groups[date].forEach(f => { html += renderFinding(f); });
+                        html += '</div></div>';
+                    } else {
+                        html += '<div class="date-group">';
+                        html += '<div class="date-group-header older-header" onclick="toggleGroup(\'' + gId + '\', this)">\u25b6 \uD83D\uDCC5 ' + date + ' ' + badge + '</div>';
+                        html += '<div class="date-group-body collapsed" id="' + gId + '">';
+                        groups[date].forEach(f => { html += renderFinding(f); });
+                        html += '</div></div>';
+                    }
+                });
 
                 container.innerHTML = html;
             });
