@@ -52,7 +52,7 @@ header p.sub{margin:0;color:var(--ink-2);font-size:14.5px;max-width:76ch}
 .tile .v{font-size:25px;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
 .tile .n{font-size:12px;color:var(--ink-2);margin-top:2px}
 .controls{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 15px;margin-bottom:14px;
-  display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+  display:flex;flex-wrap:wrap;gap:14px 18px;align-items:flex-end}
 .cgroup{display:flex;flex-direction:column;gap:7px;min-width:0}
 .clab{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:500}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -64,7 +64,7 @@ header p.sub{margin:0;color:var(--ink-2);font-size:14.5px;max-width:76ch}
 .chip[aria-pressed="true"]{background:var(--chip-on);border-color:var(--chip-on);color:#fff}
 .chip.ghost[aria-pressed="true"]{background:transparent;border-color:var(--chip-on);color:var(--s1)}
 input[type=search]{font:inherit;font-size:13.5px;padding:6px 10px;border-radius:8px;border:1px solid var(--hair);
-  background:var(--plane);color:var(--ink);min-width:190px}
+  background:var(--plane);color:var(--ink);width:150px}
 input[type=search]:focus{outline:2px solid var(--s1);outline-offset:1px}
 .card{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:16px 16px 10px;position:relative}
 .card h2{font-size:15.5px;margin:0 0 2px;font-weight:600}
@@ -75,8 +75,8 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .reflines{stroke:var(--s1);stroke-width:1.5;opacity:.55}
 .tick{fill:var(--muted);font-size:11px;font-family:var(--mono);letter-spacing:-.02em}
 .axtitle{fill:var(--ink-2);font-size:12.5px;font-weight:500}
-.qlab{fill:var(--muted);font-size:11.5px;font-weight:600;letter-spacing:.01em}
-.qcount{fill:var(--muted);font-size:11px}
+.qlab{fill:var(--muted);font-size:11.5px;font-weight:600;letter-spacing:.01em;paint-order:stroke;stroke:var(--surface);stroke-width:3.5px;stroke-linejoin:round}
+.qcount{fill:var(--muted);font-size:11px;paint-order:stroke;stroke:var(--surface);stroke-width:3.5px;stroke-linejoin:round}
 .dot{fill:var(--s1-fill);stroke:var(--s1);stroke-width:1.25;vector-effect:non-scaling-stroke}
 .dot.off{fill:var(--dim-fill);stroke:var(--dim);stroke-width:1}
 .dot.hit{stroke-width:2.25}
@@ -95,6 +95,8 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .sizekey .item{display:flex;flex-direction:column;align-items:center;gap:4px}
 .sizekey svg{width:auto}
 .sizekey span{font-size:11px;color:var(--ink-2);font-family:var(--mono)}
+.sizekey .note{align-self:center;max-width:23ch}
+.sizekey .note span{font-family:var(--sans);font-size:11.5px;line-height:1.5;text-align:left;color:var(--muted)}
 .sm{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .smcell{border:1px solid var(--hair);border-radius:9px;padding:9px 10px 4px}
 .smcell h3{margin:0 0 1px;font-size:13px;font-weight:600}
@@ -111,6 +113,7 @@ th[aria-sort="descending"]:after{content:" ↓"}
 tbody tr:hover{background:var(--s1-soft)}
 .tscroll{max-height:620px;overflow:auto;border:1px solid var(--hair);border-radius:9px;margin-top:4px}
 .hidden{display:none !important}
+.sronly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 footer{margin-top:22px;font-size:12.5px;color:var(--muted);line-height:1.65}
 footer b{color:var(--ink-2);font-weight:600}
 .warn{background:var(--surface);border:1px solid var(--hair);border-left:3px solid #fab219;
@@ -135,6 +138,10 @@ footer b{color:var(--ink-2);font-weight:600}
     <div class="chips" id="ufchips"></div>
   </div>
   <div class="cgroup">
+    <span class="clab">Faixa de população</span>
+    <div class="chips" id="rangechips"></div>
+  </div>
+  <div class="cgroup">
     <span class="clab">Escala do eixo X</span>
     <div class="chips">
       <button class="chip ghost" id="sc-log" aria-pressed="true">Logarítmica</button>
@@ -145,7 +152,7 @@ footer b{color:var(--ink-2);font-weight:600}
     <span class="clab">Buscar município</span>
     <input type="search" id="q" placeholder="ex.: Extrema" autocomplete="off">
   </div>
-  <div class="cgroup" style="margin-left:auto">
+  <div class="cgroup">
     <span class="clab">Visualização</span>
     <div class="chips">
       <button class="chip ghost" id="v-chart" aria-pressed="true">Gráfico</button>
@@ -158,8 +165,8 @@ footer b{color:var(--ink-2);font-weight:600}
 <section class="card" id="view-chart">
   <h2>População × TGCA, área da bolha ∝ PIB total</h2>
   <p class="cap" id="cap-chart"></p>
-  <svg id="chart" viewBox="0 0 1140 700" role="img" aria-labelledby="chart-desc"></svg>
-  <desc id="chart-desc">Gráfico de dispersão de 677 municípios: população no eixo X, TGCA no eixo Y, tamanho da bolha proporcional ao PIB total. Os dados completos estão na aba Tabela.</desc>
+  <svg id="chart" viewBox="0 0 1140 700" role="img" aria-describedby="chart-desc"></svg>
+  <p id="chart-desc" class="sronly">Gráfico de dispersão: população no eixo X, TGCA no eixo Y, tamanho da bolha proporcional ao PIB total. Todos os valores estão disponíveis na aba Tabela.</p>
   <div id="tip" role="status" aria-live="polite"></div>
   <div class="legend">
     <div>
@@ -176,7 +183,7 @@ footer b{color:var(--ink-2);font-weight:600}
 </section>
 
 <section class="card hidden" id="view-tab">
-  <h2>Tabela completa</h2>
+  <h2>Tabela</h2>
   <p class="cap" id="cap-tab"></p>
   <div class="tscroll">
     <table>
@@ -238,11 +245,18 @@ function quad(d){
 ROWS.forEach(function(d){ d.q = quad(d); });
 
 /* ---------- estado da UI ---------- */
-var state = {ufs:new Set(UFS), scale:'log', q:'', view:'chart', sort:{key:'pop', dir:-1}};
+var RANGES = [
+  {v:250000,  lab:'Até 250 mil'},
+  {v:500000,  lab:'Até 500 mil'},
+  {v:1000000, lab:'Até 1 milhão'},
+  {v:Infinity,lab:'Toda a base'}
+];
+var state = {ufs:new Set(UFS), scale:'log', q:'', view:'chart', range:500000, sort:{key:'pop', dir:-1}};
 function visible(){
   var term = state.q.trim().toLowerCase();
   return ROWS.filter(function(d){
     if(!state.ufs.has(d.uf)) return false;
+    if(d.pop > state.range) return false;
     if(term && d.mun.toLowerCase().indexOf(term) < 0) return false;
     return true;
   });
@@ -251,19 +265,37 @@ function visible(){
 /* ---------- geometria ---------- */
 var W=1140, H=700, M={t:26, r:44, b:62, l:74};
 var PW = W-M.l-M.r, PH = H-M.t-M.b;
-var XLOG={min:23000,max:12500000}, XLIN={min:0,max:11800000}, YD={min:-2.1,max:6.9};
+var YD={min:-2.1,max:6.9};
+function xdom(){
+  var mx = state.range===Infinity ? 12500000 : state.range*1.06;
+  return {min:23000, max:mx, linmax: state.range===Infinity ? 11800000 : state.range*1.04};
+}
+var XLOG={min:23000,max:12500000}, XLIN={min:0,max:11800000};
 function sx(v){
+  var D=xdom();
   if(state.scale==='log'){
-    var a=Math.log10(XLOG.min), b=Math.log10(XLOG.max);
-    return M.l + (Math.log10(Math.max(v,XLOG.min))-a)/(b-a)*PW;
+    var a=Math.log10(D.min), b=Math.log10(D.max);
+    return M.l + (Math.log10(Math.max(v,D.min))-a)/(b-a)*PW;
   }
-  return M.l + (v-XLIN.min)/(XLIN.max-XLIN.min)*PW;
+  return M.l + v/D.linmax*PW;
 }
 function sy(v){ return M.t + (YD.max-v)/(YD.max-YD.min)*PH; }
 function sr(pib){ return 2.6 + 39*Math.sqrt(pib/PIBMAX); }
 
-var XT_LOG=[25000,50000,100000,250000,500000,1000000,2500000,5000000,10000000];
-var XT_LIN=[0,2000000,4000000,6000000,8000000,10000000];
+var XT_BY_RANGE = {
+  '250000':  [25000,50000,100000,150000,250000],
+  '500000':  [25000,50000,100000,200000,350000,500000],
+  '1000000': [25000,50000,100000,250000,500000,1000000],
+  'Infinity':[25000,50000,100000,250000,500000,1000000,2500000,5000000,10000000]
+};
+function xticks(){
+  if(state.scale==='log') return XT_BY_RANGE[String(state.range)];
+  var mx=xdom().linmax, out=[], step=mx/5;
+  var pow=Math.pow(10,Math.floor(Math.log10(step)));
+  step=Math.ceil(step/pow)*pow;
+  for(var v=0; v<=mx+1; v+=step) out.push(v);
+  return out;
+}
 var YT=[-2,-1,0,1,2,3,4,5,6];
 
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]);});}
@@ -274,7 +306,7 @@ var pts = [];
 
 function drawChart(){
   var data = visible().slice().sort(function(a,b){return b.pib-a.pib;});
-  var xs = state.scale==='log' ? XT_LOG : XT_LIN;
+  var xs = xticks();
   var rx = sx(REF.x), ry = sy(REF.y);
   var s = [];
 
@@ -284,7 +316,7 @@ function drawChart(){
 
   /* grid */
   YT.forEach(function(t){ s.push('<line class="gridline" x1="'+M.l+'" y1="'+sy(t)+'" x2="'+(M.l+PW)+'" y2="'+sy(t)+'"/>'); });
-  xs.forEach(function(t){ if(t<=0&&state.scale==='lin') return;
+  xs.forEach(function(t){ if(t<=0) return;
     s.push('<line class="gridline" x1="'+sx(t)+'" y1="'+M.t+'" x2="'+sx(t)+'" y2="'+(M.t+PH)+'"/>'); });
 
   /* linhas de referência (o "0,0" pedido) */
@@ -310,7 +342,8 @@ function drawChart(){
   /* eixos */
   s.push('<line class="axisline" x1="'+M.l+'" y1="'+(M.t+PH)+'" x2="'+(M.l+PW)+'" y2="'+(M.t+PH)+'"/>');
   s.push('<line class="axisline" x1="'+M.l+'" y1="'+M.t+'" x2="'+M.l+'" y2="'+(M.t+PH)+'"/>');
-  xs.forEach(function(t){ if(t<=0&&state.scale==='lin'){ } 
+  xs.forEach(function(t){
+    if(Math.abs(sx(t)-sx(REF.x)) < 26) return;   /* não briga com o rótulo dos 60 mil */
     s.push('<text class="tick" x="'+sx(t)+'" y="'+(M.t+PH+19)+'" text-anchor="middle">'+fpop(t)+'</text>'); });
   YT.forEach(function(t){
     s.push('<text class="tick" x="'+(M.l-10)+'" y="'+(sy(t)+4)+'" text-anchor="end">'+nf(t,0)+'%</text>'); });
@@ -367,9 +400,14 @@ function drawChart(){
 
   svg.innerHTML = s.join('');
 
+  var fora = ROWS.filter(function(d){
+    var term2=state.q.trim().toLowerCase();
+    return state.ufs.has(d.uf) && d.pop>state.range && (!term2 || d.mun.toLowerCase().indexOf(term2)>=0);
+  }).length;
   document.getElementById('cap-chart').textContent =
-    data.length + (data.length===1?' município exibido · escala ':' municípios exibidos · escala ') +
-    (state.scale==='log' ? 'logarítmica (comprime a distância entre São Paulo e as cidades médias)' : 'linear (fiel às proporções, concentra as cidades médias à esquerda)') +
+    data.length + (data.length===1?' município · escala ':' municípios · escala ') +
+    (state.scale==='log' ? 'logarítmica' : 'linear') +
+    (fora ? ' · '+fora+(fora===1?' município acima de ':' municípios acima de ')+fpop(state.range)+' hab. fora da faixa (use “Toda a base” para incluí-los)' : ' · faixa completa') +
     ' · passe o mouse sobre uma bolha para os valores.';
   drawTiles(data);
 }
@@ -439,7 +477,7 @@ function tile(k,v,n){ return '<div class="tile"><div class="k">'+esc(k)+'</div><
 
 /* ---------- legenda de tamanho ---------- */
 function drawSizeKey(){
-  var vals=[1000000, 10000000, 100000000, 1000000000];
+  var vals=[1000000, 10000000, 100000000];
   var h=[];
   vals.forEach(function(v){
     var r=sr(v), d=Math.ceil(r*2)+4;
@@ -447,6 +485,7 @@ function drawSizeKey(){
       '<circle class="dot" cx="'+(d/2)+'" cy="'+(d/2)+'" r="'+r.toFixed(1)+'"/></svg>'+
       '<span>'+fpib(v)+'</span></div>');
   });
+  h.push('<div class="item note"><span>Escala fixa em todas as faixas. O maior é São Paulo, R$ 1,07 tri.</span></div>');
   document.getElementById('sizekey').innerHTML=h.join('');
 }
 
@@ -454,13 +493,14 @@ function drawSizeKey(){
 function drawSmall(){
   var w=340,h=250,m={t:14,r:12,b:30,l:38};
   var pw=w-m.l-m.r, ph=h-m.t-m.b;
-  var a=Math.log10(XLOG.min), b=Math.log10(XLOG.max);
-  function px(v){return m.l+(Math.log10(Math.max(v,XLOG.min))-a)/(b-a)*pw;}
+  var D=xdom();
+  var a=Math.log10(D.min), b=Math.log10(D.max);
+  function px(v){return m.l+(Math.log10(Math.max(v,D.min))-a)/(b-a)*pw;}
   function py(v){return m.t+(YD.max-v)/(YD.max-YD.min)*ph;}
   var term=state.q.trim().toLowerCase();
   var out=[];
   UFS.forEach(function(uf){
-    var ds=ROWS.filter(function(d){return d.uf===uf && (!term || d.mun.toLowerCase().indexOf(term)>=0);});
+    var ds=ROWS.filter(function(d){return d.uf===uf && d.pop<=state.range && (!term || d.mun.toLowerCase().indexOf(term)>=0);});
     var dim = !state.ufs.has(uf);
     var rx=px(REF.x), ry=py(REF.y), s=[];
     s.push('<rect x="'+rx+'" y="'+m.t+'" width="'+(m.l+pw-rx)+'" height="'+(ry-m.t)+'" fill="var(--q-hi)"/>');
@@ -470,7 +510,8 @@ function drawSmall(){
     s.push('<line class="axisline" x1="'+m.l+'" y1="'+(m.t+ph)+'" x2="'+(m.l+pw)+'" y2="'+(m.t+ph)+'"/>');
     s.push('<line class="axisline" x1="'+m.l+'" y1="'+m.t+'" x2="'+m.l+'" y2="'+(m.t+ph)+'"/>');
     [-2,0,2,4,6].forEach(function(t){s.push('<text class="tick" x="'+(m.l-6)+'" y="'+(py(t)+4)+'" text-anchor="end">'+t+'%</text>');});
-    [50000,500000,5000000].forEach(function(t){s.push('<text class="tick" x="'+px(t)+'" y="'+(m.t+ph+16)+'" text-anchor="middle">'+fpop(t)+'</text>');});
+    var smt = state.range===Infinity ? [50000,500000,5000000] : (state.range>=1000000 ? [50000,250000,1000000] : [50000,150000,state.range]);
+    smt.forEach(function(t){s.push('<text class="tick" x="'+px(t)+'" y="'+(m.t+ph+16)+'" text-anchor="middle">'+fpop(t)+'</text>');});
     ds.slice().sort(function(x,y){return y.pib-x.pib;}).forEach(function(d){
       var r=Math.max(1.8, sr(d.pib)*0.42);
       s.push('<circle class="dot'+(dim?' off':'')+'" cx="'+px(d.pop).toFixed(1)+'" cy="'+py(d.tgca).toFixed(1)+'" r="'+r.toFixed(1)+'"><title>'+
@@ -541,6 +582,20 @@ function syncChips(){
     b.setAttribute('aria-pressed', state.ufs.has(b.dataset.uf) ? 'true':'false');
   });
 }
+function buildRangeChips(){
+  var c=document.getElementById('rangechips');
+  c.innerHTML = RANGES.map(function(r){
+    return '<button class="chip ghost" data-r="'+r.v+'" aria-pressed="'+(r.v===state.range?'true':'false')+'">'+r.lab+'</button>';
+  }).join('');
+  c.addEventListener('click', function(ev){
+    var b=ev.target.closest('button[data-r]'); if(!b) return;
+    state.range = b.dataset.r==='Infinity' ? Infinity : +b.dataset.r;
+    Array.prototype.forEach.call(c.querySelectorAll('button[data-r]'), function(x){
+      x.setAttribute('aria-pressed', x===b ? 'true':'false');
+    });
+    hideTip(); render();
+  });
+}
 function pair(aId,bId,onA,onB){
   var A=document.getElementById(aId), B=document.getElementById(bId);
   A.addEventListener('click',function(){A.setAttribute('aria-pressed','true');B.setAttribute('aria-pressed','false');onA();});
@@ -580,6 +635,7 @@ function render(){
 })();
 
 buildChips();
+buildRangeChips();
 drawSizeKey();
 render();
 })();
