@@ -1,0 +1,678 @@
+﻿Município;UF;População (Censo 2022);TGCA (% a.a.);PIB total (R$ mil);PIB per capita (R$);Quadrante;Linha — ponderação limitada (%);Distância da linha limitada (p.p.);Prioridade — limitada;Linha — ponderação integral (%);Distância da linha integral (p.p.);Prioridade — integral
+Alagoinhas;BA;151055;0,55;5705227,49;37769,21;Grandes · crescendo;1,1953;-0,6453;Não prioritário;1,2566;-0,7066;Não prioritário
+Amargosa;BA;36521;0,46;608765,198;16668,91;Pequenas · crescendo;1,5311;-1,0711;Não prioritário;1,6681;-1,2081;Não prioritário
+Araci;BA;48294;-0,4;642812,114;13310,39;Pequenas · estagnadas;1,465;-1,865;Não prioritário;1,5871;-1,9871;Não prioritário
+Barra;BA;51092;0,3;558492,724;10931,12;Pequenas · estagnadas;1,4516;-1,1516;Não prioritário;1,5708;-1,2708;Não prioritário
+Barra do Choça;BA;36539;0,4;540749,955;14799,25;Pequenas · crescendo;1,5309;-1,1309;Não prioritário;1,6679;-1,2679;Não prioritário
+Barreiras;BA;159734;1,26;9499498,974;59470,74;Grandes · crescendo;1,182;0,078;Prioritário;1,2404;0,0196;Prioritário
+Bom Jesus da Lapa;BA;65550;0,36;1554154,439;23709,45;Grandes · crescendo;1,3927;-1,0327;Não prioritário;1,4986;-1,1386;Não prioritário
+Brumado;BA;70510;0,75;1931839,323;27398,09;Grandes · crescendo;1,3755;-0,6255;Não prioritário;1,4774;-0,7274;Não prioritário
+Caetité;BA;52012;0,51;1216743,242;23393,51;Pequenas · crescendo;1,4474;-0,9374;Não prioritário;1,5656;-1,0556;Não prioritário
+Camamu;BA;30469;-0,9;557661,535;18302,59;Pequenas · estagnadas;1,5739;-2,4739;Não prioritário;1,7206;-2,6206;Não prioritário
+Camaçari;BA;300372;1,78;27418877,532;91283,07;Grandes · crescendo;1,0327;0,7473;Prioritário;1,0574;0,7226;Prioritário
+Campo Alegre de Lourdes;BA;30671;0,76;383421,237;12501,1;Pequenas · crescendo;1,5723;-0,8123;Não prioritário;1,7187;-0,9587;Não prioritário
+Campo Formoso;BA;71377;0,52;1617786,003;22665,37;Grandes · crescendo;1,3726;-0,8526;Não prioritário;1,4739;-0,9539;Não prioritário
+Canavieiras;BA;32683;0,08;510979,086;15634,4;Pequenas · estagnadas;1,5573;-1,4773;Não prioritário;1,7003;-1,6203;Não prioritário
+Candeias;BA;72382;-1;5750025,525;79439,99;Grandes · estagnadas;1,3693;-2,3693;Não prioritário;1,4698;-2,4698;Não prioritário
+Cansanção;BA;37439;0,89;510493,321;13635,34;Pequenas · crescendo;1,5252;-0,6352;Não prioritário;1,6609;-0,7709;Não prioritário
+Capim Grosso;BA;33235;1,41;801015,808;24101,57;Pequenas · crescendo;1,5534;-0,1434;Não prioritário;1,6954;-0,2854;Não prioritário
+Casa Nova;BA;72086;0,87;1135275,591;15748,91;Grandes · crescendo;1,3702;-0,5002;Não prioritário;1,471;-0,601;Não prioritário
+Catu;BA;48148;-0,48;928641,003;19287,22;Pequenas · estagnadas;1,4657;-1,9457;Não prioritário;1,588;-2,068;Não prioritário
+Conceição do Coité;BA;67825;0,84;1122063,228;16543,51;Grandes · crescendo;1,3846;-0,5446;Não prioritário;1,4887;-0,6487;Não prioritário
+Conceição do Jacuípe;BA;35308;1,34;2634469,119;74613,94;Pequenas · crescendo;1,539;-0,199;Não prioritário;1,6779;-0,3379;Não prioritário
+Correntina;BA;32457;0,39;3806363,285;117274,03;Pequenas · crescendo;1,559;-1,169;Não prioritário;1,7023;-1,3123;Não prioritário
+Cruz das Almas;BA;60348;0,25;1279175,071;21196,64;Grandes · estagnadas;1,4123;-1,1623;Não prioritário;1,5225;-1,2725;Não prioritário
+Curaçá;BA;34180;0,5;499931,719;14626,44;Pequenas · crescendo;1,5467;-1,0467;Não prioritário;1,6873;-1,1873;Não prioritário
+Cícero Dantas;BA;30907;-0,1;503222,235;16365,48;Pequenas · estagnadas;1,5705;-1,6705;Não prioritário;1,7165;-1,8165;Não prioritário
+Dias d'Ávila;BA;71485;0,61;2377818,192;33263,18;Grandes · crescendo;1,3722;-0,7622;Não prioritário;1,4734;-0,8634;Não prioritário
+Entre Rios;BA;38098;-0,36;790786,138;20756,63;Pequenas · estagnadas;1,5211;-1,8811;Não prioritário;1,6558;-2,0158;Não prioritário
+Esplanada;BA;32554;-0,16;810979,757;24911,83;Pequenas · estagnadas;1,5583;-1,7183;Não prioritário;1,7014;-1,8614;Não prioritário
+Euclides da Cunha;BA;61456;0,67;959547,942;15613,58;Grandes · crescendo;1,408;-0,738;Não prioritário;1,5173;-0,8473;Não prioritário
+Eunápolis;BA;113710;0,97;4264492,925;37503,24;Grandes · crescendo;1,2624;-0,2924;Não prioritário;1,3389;-0,3689;Não prioritário
+Feira de Santana;BA;616272;0,85;21846454,667;35449,37;Grandes · crescendo;0,8627;-0,0127;Não prioritário;0,8491;0,0009;Prioritário
+Gandu;BA;32178;0,62;598642,986;18604,11;Pequenas · crescendo;1,561;-0,941;Não prioritário;1,7048;-1,0848;Não prioritário
+Guanambi;BA;87817;0,94;2028013,245;23093,63;Grandes · crescendo;1,3235;-0,3835;Não prioritário;1,4138;-0,4738;Não prioritário
+Ilhéus;BA;178649;-0,17;7234380,827;40494,94;Grandes · estagnadas;1,1556;-1,3256;Não prioritário;1,208;-1,378;Não prioritário
+Inhambupe;BA;33790;-0,33;728056,798;21546,52;Pequenas · estagnadas;1,5494;-1,8794;Não prioritário;1,6906;-2,0206;Não prioritário
+Ipiaú;BA;40706;-0,74;714937,605;17563,45;Pequenas · estagnadas;1,5054;-2,2454;Não prioritário;1,6366;-2,3766;Não prioritário
+Ipirá;BA;56876;-0,44;799164,101;14050,99;Pequenas · estagnadas;1,4263;-1,8663;Não prioritário;1,5397;-1,9797;Não prioritário
+Irecê;BA;74507;1;1963173,351;26348,84;Grandes · crescendo;1,3624;-0,3624;Não prioritário;1,4614;-0,4614;Não prioritário
+Itaberaba;BA;65073;0,45;1267186,907;19473,31;Grandes · crescendo;1,3944;-0,9444;Não prioritário;1,5007;-1,0507;Não prioritário
+Itabuna;BA;186708;-0,75;5152367,087;27595,86;Grandes · estagnadas;1,1451;-1,8951;Não prioritário;1,1952;-1,9452;Não prioritário
+Itamaraju;BA;59605;-0,53;1395505,741;23412,56;Pequenas · estagnadas;1,4152;-1,9452;Não prioritário;1,5261;-2,0561;Não prioritário
+Itapetinga;BA;65897;-0,3;1938472,475;29416,7;Grandes · estagnadas;1,3915;-1,6915;Não prioritário;1,497;-1,797;Não prioritário
+Itapicuru;BA;31679;-0,06;534862,537;16883,82;Pequenas · estagnadas;1,5647;-1,6247;Não prioritário;1,7093;-1,7693;Não prioritário
+Itiúba;BA;33872;-0,3;429677,861;12685,34;Pequenas · estagnadas;1,5489;-1,8489;Não prioritário;1,6899;-1,9899;Não prioritário
+Jacobina;BA;82590;0,5;2030142,295;24580,97;Grandes · crescendo;1,3381;-0,8381;Não prioritário;1,4316;-0,9316;Não prioritário
+Jaguaquara;BA;45964;-0,85;807068,769;17558,71;Pequenas · estagnadas;1,4767;-2,3267;Não prioritário;1,6014;-2,4514;Não prioritário
+Jaguarari;BA;32703;0,4;805703,944;24637;Pequenas · crescendo;1,5572;-1,1572;Não prioritário;1,7001;-1,3001;Não prioritário
+Jequié;BA;158813;0,4;3882706,96;24448,29;Grandes · crescendo;1,1834;-0,7834;Não prioritário;1,2421;-0,8421;Não prioritário
+Jeremoabo;BA;37626;-0,04;623856,272;16580,46;Pequenas · estagnadas;1,524;-1,564;Não prioritário;1,6594;-1,6994;Não prioritário
+Juazeiro;BA;237821;1,53;6159603,827;25900,17;Grandes · crescendo;1,0879;0,4421;Prioritário;1,1251;0,4049;Prioritário
+Lauro de Freitas;BA;203331;1,84;8918479,61;43861,88;Grandes · crescendo;1,125;0,715;Prioritário;1,1705;0,6695;Prioritário
+Livramento de Nossa Senhora;BA;43903;0,45;705491,381;16069,32;Pequenas · crescendo;1,4875;-1,0375;Não prioritário;1,6147;-1,1647;Não prioritário
+Luís Eduardo Magalhães;BA;107909;5;11559024,195;107118,26;Grandes · crescendo;1,2748;3,7252;Prioritário;1,3541;3,6459;Prioritário
+Macaúbas;BA;41859;-0,71;549585,766;13129,45;Pequenas · estagnadas;1,4988;-2,2088;Não prioritário;1,6286;-2,3386;Não prioritário
+Maragogipe;BA;35859;-1,44;479211,8;13363,78;Pequenas · estagnadas;1,5354;-2,9754;Não prioritário;1,6734;-3,1134;Não prioritário
+Mata de São João;BA;42566;0,44;1734856,86;40756,87;Pequenas · crescendo;1,4948;-1,0548;Não prioritário;1,6237;-1,1837;Não prioritário
+Monte Santo;BA;47780;-0,34;590805,465;12365,12;Pequenas · estagnadas;1,4675;-1,8075;Não prioritário;1,5902;-1,9302;Não prioritário
+Morro do Chapéu;BA;33594;-0,21;1565321,407;46595,27;Pequenas · estagnadas;1,5508;-1,7608;Não prioritário;1,6923;-1,9023;Não prioritário
+Mucuri;BA;37977;0,44;3127407,236;82350,03;Pequenas · crescendo;1,5218;-1,0818;Não prioritário;1,6568;-1,2168;Não prioritário
+Nova Viçosa;BA;39509;0,2;699743,948;17711;Pequenas · estagnadas;1,5125;-1,3125;Não prioritário;1,6453;-1,4453;Não prioritário
+Paulo Afonso;BA;112870;0,34;4258890,934;37732,71;Grandes · estagnadas;1,2642;-0,9242;Não prioritário;1,3411;-1,0011;Não prioritário
+Pilão Arcado;BA;35357;0,55;367179,251;10384,91;Pequenas · crescendo;1,5387;-0,9887;Não prioritário;1,6775;-1,1275;Não prioritário
+Pojuca;BA;32136;-0,55;3036558,676;94490,87;Pequenas · estagnadas;1,5613;-2,1113;Não prioritário;1,7052;-2,2552;Não prioritário
+Porto Seguro;BA;168326;2,4;5009893,696;29763,04;Grandes · crescendo;1,1697;1,2303;Prioritário;1,2252;1,1748;Prioritário
+Poções;BA;48293;0,43;681871,458;14119,47;Pequenas · crescendo;1,465;-1,035;Não prioritário;1,5871;-1,1571;Não prioritário
+Prado;BA;35003;2,06;776982,13;22197,59;Pequenas · crescendo;1,5411;0,5189;Prioritário;1,6804;0,3796;Prioritário
+Remanso;BA;40586;0,42;573383,292;14127,61;Pequenas · crescendo;1,5061;-1,0861;Não prioritário;1,6375;-1,2175;Não prioritário
+Riacho de Santana;BA;30711;-0,61;406699,912;13242,81;Pequenas · estagnadas;1,572;-2,182;Não prioritário;1,7183;-2,3283;Não prioritário
+Riachão do Jacuípe;BA;33386;0,23;565913,377;16950,62;Pequenas · estagnadas;1,5523;-1,3223;Não prioritário;1,6941;-1,4641;Não prioritário
+Ribeira do Pombal;BA;54010;0,43;918879,756;17154,16;Pequenas · crescendo;1,4385;-1,0085;Não prioritário;1,5547;-1,1247;Não prioritário
+Rio Real;BA;35362;-0,5;1275891,66;36080,87;Pequenas · estagnadas;1,5387;-2,0387;Não prioritário;1,6774;-2,1774;Não prioritário
+Salvador;BA;2417678;-0,84;76698777,218;31724,15;Grandes · estagnadas;0,5394;-1,3794;Não prioritário;0,453;-1,293;Não prioritário
+Santa Maria da Vitória;BA;38604;-0,24;696761,133;18048,94;Pequenas · estagnadas;1,5179;-1,7579;Não prioritário;1,652;-1,892;Não prioritário
+Santaluz;BA;37834;0,69;678132,686;17923,9;Pequenas · crescendo;1,5227;-0,8327;Não prioritário;1,6579;-0,9679;Não prioritário
+Santo Amaro;BA;56012;-0,33;1375771,156;24562,08;Pequenas · estagnadas;1,4299;-1,7599;Não prioritário;1,5441;-1,8741;Não prioritário
+Santo Antônio de Jesus;BA;103055;1,04;3028413,726;29386,38;Grandes · crescendo;1,2857;-0,2457;Não prioritário;1,3674;-0,3274;Não prioritário
+Santo Estêvão;BA;52276;0,76;1295366,193;24779,37;Pequenas · crescendo;1,4462;-0,6862;Não prioritário;1,5641;-0,8041;Não prioritário
+Seabra;BA;46160;0,83;861824,933;18670,38;Pequenas · crescendo;1,4757;-0,6457;Não prioritário;1,6002;-0,7702;Não prioritário
+Senhor do Bonfim;BA;74523;0,12;1260521,545;16914,53;Grandes · estagnadas;1,3624;-1,2424;Não prioritário;1,4614;-1,3414;Não prioritário
+Sento Sé;BA;38154;0,28;1566194,071;41049,28;Pequenas · estagnadas;1,5207;-1,2407;Não prioritário;1,6554;-1,3754;Não prioritário
+Serra do Ramalho;BA;34222;0,72;521085,967;15226,64;Pequenas · crescendo;1,5464;-0,8264;Não prioritário;1,6869;-0,9669;Não prioritário
+Serrinha;BA;80435;0,57;1420688,878;17662,57;Grandes · crescendo;1,3443;-0,7743;Não prioritário;1,4393;-0,8693;Não prioritário
+Simões Filho;BA;114559;-0,25;8508321,271;74270,21;Grandes · estagnadas;1,2607;-1,5107;Não prioritário;1,3368;-1,5868;Não prioritário
+São Desidério;BA;32828;1,34;8525861,621;259713,1;Pequenas · crescendo;1,5563;-0,2163;Não prioritário;1,699;-0,359;Não prioritário
+São Francisco do Conde;BA;38733;0,92;26505736,857;684319,23;Pequenas · crescendo;1,5171;-0,5971;Não prioritário;1,651;-0,731;Não prioritário
+São Gonçalo dos Campos;BA;39513;1,51;1673385,933;42350,26;Pequenas · crescendo;1,5124;-0,0024;Não prioritário;1,6453;-0,1353;Não prioritário
+São Sebastião do Passé;BA;40958;-0,24;957089,48;23367,58;Pequenas · estagnadas;1,5039;-1,7439;Não prioritário;1,6349;-1,8749;Não prioritário
+Teixeira de Freitas;BA;145216;0,4;3670771,175;25278,01;Grandes · crescendo;1,2046;-0,8046;Não prioritário;1,268;-0,868;Não prioritário
+Tucano;BA;48736;0,03;823511,194;16897,39;Pequenas · estagnadas;1,4628;-1,4328;Não prioritário;1,5845;-1,5545;Não prioritário
+Valença;BA;85655;-0,23;2194454,273;25619,69;Grandes · estagnadas;1,3294;-1,5594;Não prioritário;1,421;-1,651;Não prioritário
+Vera Cruz;BA;42529;1,04;709330,481;16678,75;Pequenas · crescendo;1,495;-0,455;Não prioritário;1,6239;-0,5839;Não prioritário
+Vitória da Conquista;BA;370879;1,61;12666570,589;34152,84;Grandes · crescendo;0,9828;0,6272;Prioritário;0,9963;0,6137;Prioritário
+Xique-Xique;BA;44757;-0,08;780079,645;17429,22;Pequenas · estagnadas;1,483;-1,563;Não prioritário;1,6092;-1,6892;Não prioritário
+Afonso Cláudio;ES;30684;-0,11;740219,596;24123,96;Pequenas · estagnadas;1,5722;-1,6822;Não prioritário;1,7186;-1,8286;Não prioritário
+Anchieta;ES;29984;1,91;2317578,734;77293,85;Pequenas · crescendo;1,5777;0,3323;Prioritário;1,7252;0,1848;Prioritário
+Aracruz;ES;94765;1,23;7724839,436;81515,74;Grandes · crescendo;1,3055;-0,0755;Não prioritário;1,3917;-0,1617;Não prioritário
+Baixo Guandu;ES;30674;0,45;910611,357;29686,75;Pequenas · crescendo;1,5723;-1,1223;Não prioritário;1,7187;-1,2687;Não prioritário
+Barra de São Francisco;ES;42498;0,37;1326676,964;31217,4;Pequenas · crescendo;1,4952;-1,1252;Não prioritário;1,6242;-1,2542;Não prioritário
+Cachoeiro de Itapemirim;ES;185786;-0,17;7593554,334;40872,59;Grandes · estagnadas;1,1463;-1,3163;Não prioritário;1,1966;-1,3666;Não prioritário
+Cariacica;ES;353491;0,11;19710842,61;55760,52;Grandes · estagnadas;0,9942;-0,8842;Não prioritário;1,0102;-0,9002;Não prioritário
+Castelo;ES;36930;0,51;1395637,924;37791,44;Pequenas · crescendo;1,5284;-1,0184;Não prioritário;1,6649;-1,1549;Não prioritário
+Colatina;ES;120033;0,61;5157944,636;42971,05;Grandes · crescendo;1,2496;-0,6396;Não prioritário;1,3232;-0,7132;Não prioritário
+Domingos Martins;ES;35416;0,89;1294973,94;36564,66;Pequenas · crescendo;1,5383;-0,6483;Não prioritário;1,677;-0,787;Não prioritário
+Guarapari;ES;124656;1,42;3391094,556;27203,62;Grandes · crescendo;1,2407;0,1793;Prioritário;1,3123;0,1077;Prioritário
+Itapemirim;ES;39832;2,17;6134485,638;154008,98;Pequenas · crescendo;1,5105;0,6595;Prioritário;1,6429;0,5271;Prioritário
+Linhares;ES;166786;1,4;10014356,32;60043,15;Grandes · crescendo;1,1718;0,2282;Prioritário;1,2279;0,1721;Prioritário
+Marataízes;ES;41929;1,73;7102417,666;169391,53;Pequenas · crescendo;1,4984;0,2316;Prioritário;1,6281;0,1019;Prioritário
+Nova Venécia;ES;49065;0,53;1886120,51;38441,26;Pequenas · crescendo;1,4612;-0,9312;Não prioritário;1,5825;-1,0525;Não prioritário
+Santa Maria de Jetibá;ES;41636;1,65;2592684,786;62270,27;Pequenas · crescendo;1,5001;0,1499;Prioritário;1,6301;0,0199;Prioritário
+Serra;ES;520653;1,86;37649154,625;72311,41;Grandes · crescendo;0,9026;0,9574;Prioritário;0,898;0,962;Prioritário
+São Gabriel da Palha;ES;32252;0,1;988351,287;30644,65;Pequenas · estagnadas;1,5605;-1,4605;Não prioritário;1,7041;-1,6041;Não prioritário
+São Mateus;ES;123752;1,05;4355437,433;35194,89;Grandes · crescendo;1,2424;-0,1924;Não prioritário;1,3144;-0,2644;Não prioritário
+Viana;ES;73423;1,02;5957535,596;81139,91;Grandes · crescendo;1,3659;-0,3459;Não prioritário;1,4657;-0,4457;Não prioritário
+Vila Velha;ES;467722;1,01;19711327,558;42143,26;Grandes · crescendo;0,9279;0,0821;Prioritário;0,9291;0,0809;Prioritário
+Vitória;ES;322869;0,08;28257606,334;87520,35;Grandes · estagnadas;1,0156;-0,9356;Não prioritário;1,0365;-0,9565;Não prioritário
+Anápolis;GO;398869;1,47;20432108,565;51225,11;Grandes · crescendo;0,9656;0,5044;Prioritário;0,9752;0,4948;Prioritário
+Aparecida de Goiânia;GO;527796;1,23;20888936,559;39577,67;Grandes · crescendo;0,8994;0,3306;Prioritário;0,894;0,336;Prioritário
+Bela Vista de Goiás;GO;34445;2,84;1983166,35;57574,87;Pequenas · crescendo;1,5449;1,2951;Prioritário;1,685;1,155;Prioritário
+Caldas Novas;GO;98622;2,84;3782024,337;38348,69;Grandes · crescendo;1,2961;1,5439;Prioritário;1,3802;1,4598;Prioritário
+Catalão;GO;114427;2,34;10345992,501;90415,66;Grandes · crescendo;1,2609;1,0791;Prioritário;1,3371;1,0029;Prioritário
+Cidade Ocidental;GO;91767;4,21;1351012,615;14722,21;Grandes · crescendo;1,3131;2,8969;Prioritário;1,4011;2,8089;Prioritário
+Cristalina;GO;62337;2,46;5707718,214;91562,29;Grandes · crescendo;1,4046;1,0554;Prioritário;1,5131;0,9469;Prioritário
+Formosa;GO;115901;1,23;3918238,829;33806,77;Grandes · crescendo;1,2579;-0,0279;Não prioritário;1,3334;-0,1034;Não prioritário
+Goianira;GO;71916;6,43;1604686,6;22313,35;Grandes · crescendo;1,3708;5,0592;Prioritário;1,4717;4,9583;Prioritário
+Goianésia;GO;73707;1,79;2691742,145;36519,49;Grandes · crescendo;1,365;0,425;Prioritário;1,4646;0,3254;Prioritário
+Goiatuba;GO;35664;0,78;2725199,918;76413,19;Pequenas · crescendo;1,5367;-0,7567;Não prioritário;1,675;-0,895;Não prioritário
+Goiânia;GO;1437366;0,83;75780845,992;52722,02;Grandes · crescendo;0,6624;0,1676;Prioritário;0,6037;0,2263;Prioritário
+Hidrolândia;GO;27742;3,96;1528148,591;55084,3;Pequenas · crescendo;1,5961;2,3639;Prioritário;1,7478;2,2122;Prioritário
+Inhumas;GO;52204;0,66;1880643,106;36024,89;Pequenas · crescendo;1,4466;-0,7866;Não prioritário;1,5645;-0,9045;Não prioritário
+Iporá;GO;35684;1,1;1227630,812;34402,84;Pequenas · crescendo;1,5365;-0,4365;Não prioritário;1,6748;-0,5748;Não prioritário
+Itaberaí;GO;44734;1,98;2305609,003;51540,42;Pequenas · crescendo;1,4831;0,4969;Prioritário;1,6093;0,3707;Prioritário
+Itumbiara;GO;107970;1,26;6555376,192;60714,79;Grandes · crescendo;1,2747;-0,0147;Não prioritário;1,3539;-0,0939;Não prioritário
+Jaraguá;GO;45223;0,64;1205295,699;26652,27;Pequenas · crescendo;1,4805;-0,8405;Não prioritário;1,6061;-0,9661;Não prioritário
+Jataí;GO;105729;1,54;10026116,752;94828,45;Grandes · crescendo;1,2796;0,2604;Prioritário;1,36;0,18;Prioritário
+Luziânia;GO;209129;1,52;6264671,451;29956,01;Grandes · crescendo;1,1183;0,4017;Prioritário;1,1623;0,3577;Prioritário
+Mineiros;GO;70081;2,37;4536324,835;64729,74;Grandes · crescendo;1,3769;0,9931;Prioritário;1,4792;0,8908;Prioritário
+Morrinhos;GO;51351;1,8;2524023,048;49152,36;Pequenas · crescendo;1,4505;0,3495;Prioritário;1,5693;0,2307;Prioritário
+Nerópolis;GO;31932;2,33;1548491,902;48493,42;Pequenas · crescendo;1,5628;0,7672;Prioritário;1,707;0,623;Prioritário
+Niquelândia;GO;34964;-1,59;1516123,426;43362,41;Pequenas · estagnadas;1,5414;-3,1314;Não prioritário;1,6807;-3,2707;Não prioritário
+Novo Gama;GO;103804;0,74;1349983,116;13005,12;Grandes · crescendo;1,284;-0,544;Não prioritário;1,3653;-0,6253;Não prioritário
+Padre Bernardo;GO;34967;1,97;1036140,69;29631,96;Pequenas · crescendo;1,5413;0,4287;Prioritário;1,6807;0,2893;Prioritário
+Palmeiras de Goiás;GO;31858;2,63;2083486,395;65399,16;Pequenas · crescendo;1,5634;1,0666;Prioritário;1,7077;0,9223;Prioritário
+Pires do Rio;GO;32373;0,99;1928361,815;59566,98;Pequenas · crescendo;1,5596;-0,5696;Não prioritário;1,703;-0,713;Não prioritário
+Planaltina;GO;105031;2,13;1939904,035;18469,82;Grandes · crescendo;1,2812;0,8488;Prioritário;1,3619;0,7681;Prioritário
+Porangatu;GO;44317;0,38;2072827,411;46772,74;Pequenas · crescendo;1,4853;-1,1053;Não prioritário;1,612;-1,232;Não prioritário
+Posse;GO;34914;0,88;938125,116;26869,6;Pequenas · crescendo;1,5417;-0,6617;Não prioritário;1,6811;-0,8011;Não prioritário
+Quirinópolis;GO;48447;0,96;3123504,061;64472,6;Pequenas · crescendo;1,4642;-0,5042;Não prioritário;1,5862;-0,6262;Não prioritário
+Rio Verde;GO;225696;2,07;22310032,201;98849,92;Grandes · crescendo;1,1003;0,9697;Prioritário;1,1402;0,9298;Prioritário
+Santa Helena de Goiás;GO;38492;0,45;1995751,751;51848,48;Pequenas · crescendo;1,5186;-1,0686;Não prioritário;1,6529;-1,2029;Não prioritário
+Santo Antônio do Descoberto;GO;72127;1,1;972898,933;13488,69;Grandes · crescendo;1,3701;-0,2701;Não prioritário;1,4709;-0,3709;Não prioritário
+Senador Canedo;GO;155635;5,23;5495055,229;35307,32;Grandes · crescendo;1,1882;4,0418;Prioritário;1,248;3,982;Prioritário
+São Luís de Montes Belos;GO;33852;1;2008425,161;59329,59;Pequenas · crescendo;1,549;-0,549;Não prioritário;1,6901;-0,6901;Não prioritário
+Trindade;GO;142431;2,61;3631624,099;25497,43;Grandes · crescendo;1,2092;1,4008;Prioritário;1,2737;1,3363;Prioritário
+Uruaçu;GO;42546;1,19;1637351,708;38484,27;Pequenas · crescendo;1,4949;-0,3049;Não prioritário;1,6238;-0,4338;Não prioritário
+Valparaíso de Goiás;GO;198861;3,53;3621839,692;18212,92;Grandes · crescendo;1,1302;2,3998;Prioritário;1,1769;2,3531;Prioritário
+Águas Lindas de Goiás;GO;225693;2,94;3062184,834;13567,92;Grandes · crescendo;1,1003;1,8397;Prioritário;1,1402;1,7998;Prioritário
+Alfenas;MG;78970;0,57;3669898,617;46472,06;Grandes · crescendo;1,3487;-0,7787;Não prioritário;1,4446;-0,8746;Não prioritário
+Almenara;MG;40364;0,34;813916,6;20164,42;Pequenas · estagnadas;1,5074;-1,1674;Não prioritário;1,6391;-1,2991;Não prioritário
+Além Paraíba;MG;30717;-0,93;1045758,927;34044,96;Pequenas · estagnadas;1,572;-2,502;Não prioritário;1,7182;-2,6482;Não prioritário
+Andradas;MG;40553;0,71;1483245,48;36575,48;Pequenas · crescendo;1,5063;-0,7963;Não prioritário;1,6377;-0,9277;Não prioritário
+Araguari;MG;117808;0,59;6858533,812;58217,9;Grandes · crescendo;1,2541;-0,6641;Não prioritário;1,3287;-0,7387;Não prioritário
+Araxá;MG;111691;1,48;8847239,614;79211,75;Grandes · crescendo;1,2667;0,2133;Prioritário;1,3441;0,1359;Prioritário
+Araçuaí;MG;34297;-0,41;1081893,247;31544,84;Pequenas · estagnadas;1,5459;-1,9559;Não prioritário;1,6863;-2,0963;Não prioritário
+Arcos;MG;41416;1,04;3058033,013;73837;Pequenas · crescendo;1,5013;-0,4613;Não prioritário;1,6316;-0,5916;Não prioritário
+Barbacena;MG;125317;-0,06;4108617,172;32785,79;Grandes · estagnadas;1,2394;-1,2994;Não prioritário;1,3108;-1,3708;Não prioritário
+Barão de Cocais;MG;30778;0,72;1547169,755;50268,69;Pequenas · crescendo;1,5715;-0,8515;Não prioritário;1,7177;-0,9977;Não prioritário
+Belo Horizonte;MG;2315560;-0,21;130197670,721;56227,29;Grandes · estagnadas;0,5496;-0,7596;Não prioritário;0,4655;-0,6755;Não prioritário
+Betim;MG;411846;0,69;52614325,377;127752,43;Grandes · crescendo;0,958;-0,268;Não prioritário;0,9659;-0,2759;Não prioritário
+Boa Esperança;MG;39848;0,28;1413663,549;35476,4;Pequenas · estagnadas;1,5104;-1,2304;Não prioritário;1,6428;-1,3628;Não prioritário
+Bocaiúva;MG;48032;0,28;1435951,111;29895,72;Pequenas · estagnadas;1,4663;-1,1863;Não prioritário;1,5887;-1,3087;Não prioritário
+Bom Despacho;MG;51737;1,05;2193212,185;42391,56;Pequenas · crescendo;1,4487;-0,3987;Não prioritário;1,5671;-0,5171;Não prioritário
+Brasília de Minas;MG;32025;0,21;510727,719;15947,78;Pequenas · estagnadas;1,5621;-1,3521;Não prioritário;1,7062;-1,4962;Não prioritário
+Brumadinho;MG;38915;1,14;2845329,902;73116,53;Pequenas · crescendo;1,516;-0,376;Não prioritário;1,6497;-0,5097;Não prioritário
+Caeté;MG;38776;-0,41;1004130,96;25895,68;Pequenas · estagnadas;1,5169;-1,9269;Não prioritário;1,6507;-2,0607;Não prioritário
+Campo Belo;MG;52277;0,12;1458095,82;27891,73;Pequenas · estagnadas;1,4462;-1,3262;Não prioritário;1,5641;-1,4441;Não prioritário
+Capelinha;MG;39626;1,17;1111827,021;28058,02;Pequenas · crescendo;1,5118;-0,3418;Não prioritário;1,6444;-0,4744;Não prioritário
+Carangola;MG;31240;-0,28;780302,918;24977,69;Pequenas · estagnadas;1,568;-1,848;Não prioritário;1,7134;-1,9934;Não prioritário
+Caratinga;MG;87360;0,21;2871549,04;32870,3;Grandes · estagnadas;1,3248;-1,1148;Não prioritário;1,4153;-1,2053;Não prioritário
+Cataguases;MG;66261;-0,43;2139615,681;32290,72;Grandes · estagnadas;1,3902;-1,8202;Não prioritário;1,4954;-1,9254;Não prioritário
+Cláudio;MG;30159;1,32;1426309,747;47293,01;Pequenas · crescendo;1,5763;-0,2563;Não prioritário;1,7236;-0,4036;Não prioritário
+Congonhas;MG;52890;0,72;7693793,903;145467,84;Pequenas · crescendo;1,4435;-0,7235;Não prioritário;1,5608;-0,8408;Não prioritário
+Conselheiro Lafaiete;MG;131621;1,02;3482647,959;26459,67;Grandes · crescendo;1,2278;-0,2078;Não prioritário;1,2965;-0,2765;Não prioritário
+Contagem;MG;621863;0,26;45092392,887;72511,78;Grandes · estagnadas;0,8606;-0,6006;Não prioritário;0,8465;-0,5865;Não prioritário
+Coronel Fabriciano;MG;104736;0,08;2387845,824;22798,71;Grandes · estagnadas;1,2819;-1,2019;Não prioritário;1,3627;-1,2827;Não prioritário
+Curvelo;MG;80665;0,72;2706326,327;33550,19;Grandes · crescendo;1,3436;-0,6236;Não prioritário;1,4384;-0,7184;Não prioritário
+Diamantina;MG;47702;0,33;1201220,973;25181,77;Pequenas · estagnadas;1,4679;-1,1379;Não prioritário;1,5907;-1,2607;Não prioritário
+Divinópolis;MG;231091;0,68;9339332,264;40414,09;Grandes · crescendo;1,0947;-0,4147;Não prioritário;1,1334;-0,4534;Não prioritário
+Esmeraldas;MG;85598;3,05;1314690,511;15358,89;Grandes · crescendo;1,3296;1,7204;Prioritário;1,4212;1,6288;Prioritário
+Espinosa;MG;30443;-0,18;472196,909;15510,85;Pequenas · estagnadas;1,5741;-1,7541;Não prioritário;1,7208;-1,9008;Não prioritário
+Extrema;MG;53482;5,35;20204998,576;377790,63;Pequenas · crescendo;1,4408;3,9092;Prioritário;1,5575;3,7925;Prioritário
+Formiga;MG;68248;0,39;2969264,149;43506,98;Grandes · crescendo;1,3832;-0,9932;Não prioritário;1,4869;-1,0969;Não prioritário
+Frutal;MG;58588;0,76;4026768,689;68730,26;Pequenas · crescendo;1,4193;-0,6593;Não prioritário;1,5311;-0,7711;Não prioritário
+Governador Valadares;MG;257171;-0,21;8612265,515;33488,48;Grandes · estagnadas;1,0694;-1,2794;Não prioritário;1,1024;-1,3124;Não prioritário
+Guanhães;MG;32244;0,26;1284431,621;39834,75;Pequenas · estagnadas;1,5605;-1,3005;Não prioritário;1,7042;-1,4442;Não prioritário
+Guaxupé;MG;50911;0,25;2431559,589;47760,99;Pequenas · estagnadas;1,4525;-1,2025;Não prioritário;1,5718;-1,3218;Não prioritário
+Ibirité;MG;170537;0,63;3235632,471;18973,2;Grandes · crescendo;1,1666;-0,5366;Não prioritário;1,2215;-0,5915;Não prioritário
+Igarapé;MG;45847;2,31;1401823,85;30576,13;Pequenas · crescendo;1,4773;0,8327;Prioritário;1,6022;0,7078;Prioritário
+Ipatinga;MG;227731;-0,42;16870238,851;74079,68;Grandes · estagnadas;1,0982;-1,5182;Não prioritário;1,1376;-1,5576;Não prioritário
+Itabira;MG;113343;0,27;7434200,081;65590,29;Grandes · estagnadas;1,2632;-0,9932;Não prioritário;1,3399;-1,0699;Não prioritário
+Itabirito;MG;53365;1,35;7160444,102;134178,66;Pequenas · crescendo;1,4414;-0,0914;Não prioritário;1,5582;-0,2082;Não prioritário
+Itajubá;MG;93073;0,22;4497959,389;48327,22;Grandes · estagnadas;1,3098;-1,0898;Não prioritário;1,397;-1,177;Não prioritário
+Itamarandiba;MG;32948;0,2;669899,563;20332,03;Pequenas · estagnadas;1,5554;-1,3554;Não prioritário;1,6979;-1,4979;Não prioritário
+Itaúna;MG;97669;1,12;4975969,03;50947,27;Grandes · crescendo;1,2984;-0,1784;Não prioritário;1,383;-0,263;Não prioritário
+Ituiutaba;MG;102217;0,42;4975265,394;48673,56;Grandes · crescendo;1,2876;-0,8676;Não prioritário;1,3698;-0,9498;Não prioritário
+Iturama;MG;38295;0,88;2864935,043;74812,25;Pequenas · crescendo;1,5198;-0,6398;Não prioritário;1,6543;-0,7743;Não prioritário
+Janaúba;MG;70699;0,47;1965161,025;27796,16;Grandes · crescendo;1,3748;-0,9048;Não prioritário;1,4767;-1,0067;Não prioritário
+Januária;MG;65150;-0,04;1040488,653;15970,66;Grandes · estagnadas;1,3942;-1,4342;Não prioritário;1,5003;-1,5403;Não prioritário
+Jaíba;MG;37660;0,95;969913,796;25754,48;Pequenas · crescendo;1,5238;-0,5738;Não prioritário;1,6592;-0,7092;Não prioritário
+João Monlevade;MG;80187;0,72;4286349,25;53454,42;Grandes · crescendo;1,345;-0,625;Não prioritário;1,4402;-0,7202;Não prioritário
+João Pinheiro;MG;46801;0,52;2562731,629;54758,05;Pequenas · crescendo;1,4724;-0,9524;Não prioritário;1,5962;-1,0762;Não prioritário
+Juatuba;MG;30716;2,75;2124349,302;69161;Pequenas · crescendo;1,572;1,178;Prioritário;1,7183;1,0317;Prioritário
+Juiz de Fora;MG;540756;0,39;23271627,261;43035,36;Grandes · crescendo;0,8936;-0,5036;Não prioritário;0,887;-0,497;Não prioritário
+Lagoa Santa;MG;75145;3,03;2825380,37;37599,05;Grandes · crescendo;1,3604;1,6696;Prioritário;1,459;1,571;Prioritário
+Lagoa da Prata;MG;51412;0,93;2471545,415;48073,32;Pequenas · crescendo;1,4502;-0,5202;Não prioritário;1,569;-0,639;Não prioritário
+Lavras;MG;104761;1,07;3916681,627;37386,83;Grandes · crescendo;1,2818;-0,2118;Não prioritário;1,3627;-0,2927;Não prioritário
+Leopoldina;MG;51145;0;1344583,254;26289,63;Pequenas · estagnadas;1,4514;-1,4514;Não prioritário;1,5705;-1,5705;Não prioritário
+Machado;MG;37684;-0,22;1406358,331;37319,77;Pequenas · estagnadas;1,5236;-1,7436;Não prioritário;1,659;-1,879;Não prioritário
+Manhuaçu;MG;91886;1,21;3710638,12;40383,06;Grandes · crescendo;1,3128;-0,1028;Não prioritário;1,4007;-0,1907;Não prioritário
+Mariana;MG;61387;1,04;4656946,097;75862,09;Grandes · crescendo;1,4082;-0,3682;Não prioritário;1,5176;-0,4776;Não prioritário
+Mateus Leme;MG;37841;2,59;1095993,715;28963,13;Pequenas · crescendo;1,5227;1,0673;Prioritário;1,6578;0,9322;Prioritário
+Matozinhos;MG;37618;0,86;1895425,771;50386,14;Pequenas · crescendo;1,5241;-0,6641;Não prioritário;1,6595;-0,7995;Não prioritário
+Monte Carmelo;MG;47692;0,34;1957160,563;41037,5;Pequenas · estagnadas;1,4679;-1,1279;Não prioritário;1,5907;-1,2507;Não prioritário
+Montes Claros;MG;414240;1,13;13326238,602;32170,33;Grandes · crescendo;0,9567;0,1733;Prioritário;0,9642;0,1658;Prioritário
+Muriaé;MG;104108;0,27;3211391,402;30846,73;Grandes · estagnadas;1,2833;-1,0133;Não prioritário;1,3645;-1,0945;Não prioritário
+Nanuque;MG;35038;-1,27;1074888,835;30677,8;Pequenas · estagnadas;1,5409;-2,8109;Não prioritário;1,6801;-2,9501;Não prioritário
+Nova Lima;MG;111697;2,71;12447551,06;111440,33;Grandes · crescendo;1,2667;1,4433;Prioritário;1,3441;1,3659;Prioritário
+Nova Serrana;MG;105552;3,04;3936357,77;37293,07;Grandes · crescendo;1,28;1,76;Prioritário;1,3605;1,6795;Prioritário
+Oliveira;MG;39262;-0,04;1463236,82;37268,52;Pequenas · estagnadas;1,5139;-1,5539;Não prioritário;1,6471;-1,6871;Não prioritário
+Ouro Branco;MG;38724;0,78;4310767,094;111320,29;Pequenas · crescendo;1,5172;-0,7372;Não prioritário;1,6511;-0,8711;Não prioritário
+Ouro Fino;MG;32094;0,14;1223791,087;38131,46;Pequenas · estagnadas;1,5616;-1,4216;Não prioritário;1,7055;-1,5655;Não prioritário
+Ouro Preto;MG;74821;0,52;6765810,317;90426,62;Grandes · crescendo;1,3614;-0,8414;Não prioritário;1,4602;-0,9402;Não prioritário
+Paracatu;MG;94023;0,87;6798922,469;72311,27;Grandes · crescendo;1,3074;-0,4374;Não prioritário;1,394;-0,524;Não prioritário
+Pará de Minas;MG;97139;1,2;5161430,074;53134,48;Grandes · crescendo;1,2997;-0,0997;Não prioritário;1,3846;-0,1846;Não prioritário
+Passos;MG;111939;0,43;4080105,786;36449,37;Grandes · crescendo;1,2661;-0,8361;Não prioritário;1,3435;-0,9135;Não prioritário
+Patos de Minas;MG;159235;1,13;8151368,621;51190,81;Grandes · crescendo;1,1828;-0,0528;Não prioritário;1,2413;-0,1113;Não prioritário
+Patrocínio;MG;89826;0,71;4895785,022;54502,98;Grandes · crescendo;1,3182;-0,6082;Não prioritário;1,4073;-0,6973;Não prioritário
+Pedro Leopoldo;MG;62580;0,53;2514376,518;40178,6;Grandes · crescendo;1,4037;-0,8737;Não prioritário;1,512;-0,982;Não prioritário
+Pirapora;MG;55606;0,34;3361259,131;60447,78;Pequenas · estagnadas;1,4316;-1,0916;Não prioritário;1,5462;-1,2062;Não prioritário
+Piumhi;MG;36062;1,03;1568574,297;43496,6;Pequenas · crescendo;1,534;-0,504;Não prioritário;1,6718;-0,6418;Não prioritário
+Pompéu;MG;31047;0,54;1229908,179;39614,4;Pequenas · crescendo;1,5695;-1,0295;Não prioritário;1,7152;-1,1752;Não prioritário
+Ponte Nova;MG;57776;0,06;2594058,94;44898,56;Pequenas · estagnadas;1,4226;-1,3626;Não prioritário;1,5352;-1,4752;Não prioritário
+Porteirinha;MG;37438;-0,04;625525,222;16708,3;Pequenas · estagnadas;1,5252;-1,5652;Não prioritário;1,6609;-1,7009;Não prioritário
+Pouso Alegre;MG;152217;1,28;14201205,978;93295,79;Grandes · crescendo;1,1934;0,0866;Prioritário;1,2544;0,0256;Prioritário
+Poços de Caldas;MG;163742;0,6;10732908,121;65547,68;Grandes · crescendo;1,1762;-0,5762;Não prioritário;1,2332;-0,6332;Não prioritário
+Ribeirão das Neves;MG;329794;0,88;6336695,364;19214,1;Grandes · crescendo;1,0106;-0,1306;Não prioritário;1,0303;-0,1503;Não prioritário
+Sabará;MG;129380;0,2;3837192,206;29658,31;Grandes · estagnadas;1,2319;-1,0319;Não prioritário;1,3015;-1,1015;Não prioritário
+Salinas;MG;40178;0,22;903694,482;22492,27;Pequenas · estagnadas;1,5085;-1,2885;Não prioritário;1,6404;-1,4204;Não prioritário
+Santa Bárbara;MG;30466;0,68;1019088,443;33450,02;Pequenas · crescendo;1,5739;-0,8939;Não prioritário;1,7206;-1,0406;Não prioritário
+Santa Luzia;MG;219132;0,66;6608096,77;30155,78;Grandes · crescendo;1,1073;-0,4473;Não prioritário;1,1488;-0,4888;Não prioritário
+Santa Rita do Sapucaí;MG;40635;0,61;2514297,658;61875,17;Pequenas · crescendo;1,5058;-0,8958;Não prioritário;1,6372;-1,0272;Não prioritário
+Santana do Paraíso;MG;44800;4,23;1250977,727;27923,61;Pequenas · crescendo;1,4827;2,7473;Prioritário;1,6089;2,6211;Prioritário
+Santos Dumont;MG;42406;-0,73;1259405,745;29698,76;Pequenas · estagnadas;1,4957;-2,2257;Não prioritário;1,6248;-2,3548;Não prioritário
+Sarzedo;MG;36844;3,01;1642521,872;44580,44;Pequenas · crescendo;1,529;1,481;Prioritário;1,6655;1,3445;Prioritário
+Sete Lagoas;MG;227397;0,5;14904465,169;65543,81;Grandes · crescendo;1,0985;-0,5985;Não prioritário;1,1381;-0,6381;Não prioritário
+São Francisco;MG;52762;-0,17;859288,93;16286,13;Pequenas · estagnadas;1,444;-1,614;Não prioritário;1,5615;-1,7315;Não prioritário
+São Gotardo;MG;40910;2,12;1555360,957;38019,09;Pequenas · crescendo;1,5042;0,6158;Prioritário;1,6352;0,4848;Prioritário
+São Joaquim de Bicas;MG;34348;2,5;1065143,955;31010,36;Pequenas · crescendo;1,5456;0,9544;Prioritário;1,6859;0,8141;Prioritário
+São João del Rei;MG;90225;0,55;3505345,575;38851,16;Grandes · crescendo;1,3171;-0,7671;Não prioritário;1,406;-0,856;Não prioritário
+São Lourenço;MG;44798;0,61;1412019,982;31519,71;Pequenas · crescendo;1,4827;-0,8727;Não prioritário;1,6089;-0,9989;Não prioritário
+São Sebastião do Paraíso;MG;71796;0,83;2834250,036;39476,43;Grandes · crescendo;1,3712;-0,5412;Não prioritário;1,4722;-0,6422;Não prioritário
+Taiobeiras;MG;33050;0,54;705372,64;21342,59;Pequenas · crescendo;1,5547;-1,0147;Não prioritário;1,697;-1,157;Não prioritário
+Teófilo Otoni;MG;137418;0,16;3540247,727;25762,62;Grandes · estagnadas;1,2176;-1,0576;Não prioritário;1,284;-1,124;Não prioritário
+Timóteo;MG;81579;0,03;4648991,987;56987,61;Grandes · estagnadas;1,341;-1,311;Não prioritário;1,4352;-1,4052;Não prioritário
+Três Corações;MG;75485;0,31;3568709,809;47277,07;Grandes · estagnadas;1,3593;-1,0493;Não prioritário;1,4577;-1,1477;Não prioritário
+Três Pontas;MG;55255;0,21;2288500,376;41417,07;Pequenas · estagnadas;1,4331;-1,2231;Não prioritário;1,5481;-1,3381;Não prioritário
+Uberaba;MG;337836;1,11;23689376,514;70120,94;Grandes · crescendo;1,0049;0,1051;Prioritário;1,0233;0,0867;Prioritário
+Uberlândia;MG;713224;1,39;51065684,136;71598,38;Grandes · crescendo;0,8281;0,5619;Prioritário;0,8068;0,5832;Prioritário
+Ubá;MG;103365;0,15;4462211,846;43169,47;Grandes · estagnadas;1,285;-1,135;Não prioritário;1,3666;-1,2166;Não prioritário
+Unaí;MG;86619;0,93;5221529,413;60281,57;Grandes · crescendo;1,3268;-0,3968;Não prioritário;1,4178;-0,4878;Não prioritário
+Varginha;MG;136467;0,86;10068568,198;73780,24;Grandes · crescendo;1,2193;-0,3593;Não prioritário;1,2861;-0,4261;Não prioritário
+Vespasiano;MG;129246;1,79;3619030,727;28049,94;Grandes · crescendo;1,2321;0,5579;Prioritário;1,3018;0,4882;Prioritário
+Visconde do Rio Branco;MG;39160;0,26;2052277,555;52407,5;Pequenas · estagnadas;1,5146;-1,2546;Não prioritário;1,6479;-1,3879;Não prioritário
+Viçosa;MG;76430;0,47;2234763,919;29239,36;Grandes · crescendo;1,3564;-0,8864;Não prioritário;1,4541;-0,9841;Não prioritário
+Várzea da Palma;MG;33744;-0,49;1351753,57;40059,08;Pequenas · estagnadas;1,5498;-2,0398;Não prioritário;1,691;-2,181;Não prioritário
+Alta Floresta;MT;58613;1,48;3034592,885;51773,38;Pequenas · crescendo;1,4192;0,0608;Prioritário;1,531;-0,051;Não prioritário
+Barra do Garças;MT;69210;1,73;3537695,616;51115,38;Grandes · crescendo;1,3799;0,3501;Prioritário;1,4828;0,2472;Prioritário
+Campo Novo do Parecis;MT;45899;4,34;7917232,816;172492,49;Pequenas · crescendo;1,477;2,863;Prioritário;1,6018;2,7382;Prioritário
+Campo Verde;MT;44585;2,98;5099105,108;114368,18;Pequenas · crescendo;1,4839;1,4961;Prioritário;1,6103;1,3697;Prioritário
+Colíder;MT;31370;0,15;1958222,209;62423,4;Pequenas · estagnadas;1,567;-1,417;Não prioritário;1,7122;-1,5622;Não prioritário
+Confresa;MT;35075;2,82;1967776,07;56101,95;Pequenas · crescendo;1,5406;1,2794;Prioritário;1,6798;1,1402;Prioritário
+Cuiabá;MT;650877;1,36;39050753,124;59997,13;Grandes · crescendo;0,8498;0,5102;Prioritário;0,8333;0,5267;Prioritário
+Cáceres;MT;89681;0,17;2795729,007;31174,15;Grandes · estagnadas;1,3186;-1,1486;Não prioritário;1,4077;-1,2377;Não prioritário
+Guarantã do Norte;MT;31024;-0,31;1286329,067;41462,39;Pequenas · estagnadas;1,5696;-1,8796;Não prioritário;1,7154;-2,0254;Não prioritário
+Jaciara;MT;28569;0,83;1711568,286;59909,98;Pequenas · crescendo;1,5891;-0,7591;Não prioritário;1,7393;-0,9093;Não prioritário
+Juara;MT;34906;0,52;1859025,469;53258,05;Pequenas · crescendo;1,5418;-1,0218;Não prioritário;1,6812;-1,1612;Não prioritário
+Juína;MT;45869;1,3;1845535,594;40234,92;Pequenas · crescendo;1,4772;-0,1772;Não prioritário;1,602;-0,302;Não prioritário
+Lucas do Rio Verde;MT;83798;5,21;8238966,09;98319,36;Grandes · crescendo;1,3346;3,8754;Prioritário;1,4274;3,7826;Prioritário
+Nova Mutum;MT;55839;4,85;7647129,14;136949,61;Pequenas · crescendo;1,4306;3,4194;Prioritário;1,545;3,305;Prioritário
+Peixoto de Azevedo;MT;32714;0,46;1146389,168;35042,77;Pequenas · crescendo;1,5571;-1,0971;Não prioritário;1,7;-1,24;Não prioritário
+Poconé;MT;31217;-0,17;861874,49;27609,14;Pequenas · estagnadas;1,5682;-1,7382;Não prioritário;1,7136;-1,8836;Não prioritário
+Pontes e Lacerda;MT;52018;1,92;2856804,986;54919,55;Pequenas · crescendo;1,4474;0,4726;Prioritário;1,5656;0,3544;Prioritário
+Primavera do Leste;MT;85146;4,19;8571209,082;100664,85;Grandes · crescendo;1,3308;2,8592;Prioritário;1,4228;2,7672;Prioritário
+Querência;MT;26769;6,18;3771292,384;140882,83;Pequenas · crescendo;1,6045;4,5755;Prioritário;1,7581;4,4219;Prioritário
+Rondonópolis;MT;244911;1,89;16568249,913;67650,08;Grandes · crescendo;1,081;0,809;Prioritário;1,1166;0,7734;Prioritário
+Sapezal;MT;28944;3,99;6410246,748;221470,66;Pequenas · crescendo;1,5861;2,4039;Prioritário;1,7355;2,2545;Prioritário
+Sinop;MT;196312;4,7;11736046,947;59782,63;Grandes · crescendo;1,1333;3,5667;Prioritário;1,1807;3,5193;Prioritário
+Sorriso;MT;110635;4,35;13748756,925;124271,31;Grandes · crescendo;1,2689;3,0811;Prioritário;1,3469;3,0031;Prioritário
+Tangará da Serra;MT;106434;1,98;5602199,726;52635,43;Grandes · crescendo;1,2781;0,7019;Prioritário;1,3581;0,6219;Prioritário
+Várzea Grande;MT;300078;1,45;13984217,795;46601,94;Grandes · crescendo;1,0329;0,4171;Prioritário;1,0577;0,3923;Prioritário
+Água Boa;MT;29219;2,85;2479715,078;84866,53;Pequenas · crescendo;1,5838;1,2662;Prioritário;1,7327;1,1173;Prioritário
+Almirante Tamandaré;PR;119825;1,25;2242619,546;18715,79;Grandes · crescendo;1,25;0;Não prioritário;1,3237;-0,0737;Não prioritário
+Apucarana;PR;130134;0,61;4834012,856;37146,42;Grandes · crescendo;1,2305;-0,6205;Não prioritário;1,2998;-0,6898;Não prioritário
+Arapongas;PR;119138;1,13;5715471,043;47973,54;Grandes · crescendo;1,2514;-0,1214;Não prioritário;1,3254;-0,1954;Não prioritário
+Araucária;PR;151666;2,03;34075051,609;224671,66;Grandes · crescendo;1,1943;0,8357;Prioritário;1,2554;0,7746;Prioritário
+Assis Chateaubriand;PR;36808;0,9;2033730,672;55252,41;Pequenas · crescendo;1,5292;-0,6292;Não prioritário;1,6658;-0,7658;Não prioritário
+Bandeirantes;PR;31273;-0,24;1362233,291;43559,41;Pequenas · estagnadas;1,5677;-1,8077;Não prioritário;1,713;-1,953;Não prioritário
+Cambé;PR;107208;0,84;6771172,732;63159,21;Grandes · crescendo;1,2764;-0,4364;Não prioritário;1,356;-0,516;Não prioritário
+Campina Grande do Sul;PR;47825;1,76;2871767,402;60047,41;Pequenas · crescendo;1,4673;0,2927;Prioritário;1,5899;0,1701;Prioritário
+Campo Largo;PR;136327;1,64;7070392,747;51863,48;Grandes · crescendo;1,2195;0,4205;Prioritário;1,2863;0,3537;Prioritário
+Campo Magro;PR;30160;1,63;700582,723;23228,87;Pequenas · crescendo;1,5763;0,0537;Prioritário;1,7236;-0,0936;Não prioritário
+Campo Mourão;PR;99432;1,1;5991907,747;60261,36;Grandes · crescendo;1,2942;-0,1942;Não prioritário;1,3778;-0,2778;Não prioritário
+Cascavel;PR;348051;1,64;19204178,185;55176,33;Grandes · crescendo;0,9978;0,6422;Prioritário;1,0147;0,6253;Prioritário
+Castro;PR;73075;0,72;4517500,842;61820,06;Grandes · crescendo;1,367;-0,647;Não prioritário;1,4671;-0,7471;Não prioritário
+Cianorte;PR;79527;1,07;3986696,636;50130,1;Grandes · crescendo;1,347;-0,277;Não prioritário;1,4425;-0,3725;Não prioritário
+Colombo;PR;232212;0,72;7628974,586;32853,49;Grandes · crescendo;1,0936;-0,3736;Não prioritário;1,132;-0,412;Não prioritário
+Cornélio Procópio;PR;45206;-0,31;2382241,244;52697,46;Pequenas · estagnadas;1,4806;-1,7906;Não prioritário;1,6063;-1,9163;Não prioritário
+Curitiba;PR;1773718;0,1;120065276,017;67691,3;Grandes · estagnadas;0,6127;-0,5127;Não prioritário;0,5427;-0,4427;Não prioritário
+Dois Vizinhos;PR;44869;1,81;2609172,747;58150,9;Pequenas · crescendo;1,4824;0,3276;Prioritário;1,6084;0,2016;Prioritário
+Fazenda Rio Grande;PR;148873;5,13;4139460,922;27805,32;Grandes · crescendo;1,1987;3,9313;Prioritário;1,2608;3,8692;Prioritário
+Foz do Iguaçu;PR;285415;0,91;16973250,994;59468,67;Grandes · crescendo;1,0448;-0,1348;Não prioritário;1,0722;-0,1622;Não prioritário
+Francisco Beltrão;PR;96666;1,7;4525403,384;46814,84;Grandes · crescendo;1,3008;0,3992;Prioritário;1,386;0,314;Prioritário
+Guarapuava;PR;182093;0,7;9864113,348;54170,74;Grandes · crescendo;1,1511;-0,4511;Não prioritário;1,2025;-0,5025;Não prioritário
+Guaratuba;PR;42062;2,28;1220949,312;29027,37;Pequenas · crescendo;1,4976;0,7824;Prioritário;1,6271;0,6529;Prioritário
+Guaíra;PR;32097;0,37;1438846,331;44828,06;Pequenas · crescendo;1,5616;-1,1916;Não prioritário;1,7055;-1,3355;Não prioritário
+Ibiporã;PR;51603;0,57;4037854,555;78248,45;Pequenas · crescendo;1,4493;-0,8793;Não prioritário;1,5679;-0,9979;Não prioritário
+Irati;PR;59250;0,44;2816144,413;47529,86;Pequenas · crescendo;1,4166;-0,9766;Não prioritário;1,5279;-1,0879;Não prioritário
+Itaperuçu;PR;31217;2,2;799717,726;25618,02;Pequenas · crescendo;1,5682;0,6318;Prioritário;1,7136;0,4864;Prioritário
+Ivaiporã;PR;32720;0,22;1142266,373;34910,34;Pequenas · estagnadas;1,557;-1,337;Não prioritário;1,6999;-1,4799;Não prioritário
+Jacarezinho;PR;40375;0,26;1956993,425;48470,43;Pequenas · estagnadas;1,5073;-1,2473;Não prioritário;1,639;-1,379;Não prioritário
+Jaguariaíva;PR;35141;0,63;2062534,661;58693,11;Pequenas · crescendo;1,5402;-0,9102;Não prioritário;1,6793;-1,0493;Não prioritário
+Lapa;PR;45003;0,01;2647565,699;58830,87;Pequenas · estagnadas;1,4817;-1,4717;Não prioritário;1,6076;-1,5976;Não prioritário
+Laranjeiras do Sul;PR;32227;0,38;1230923,929;38195,42;Pequenas · crescendo;1,5606;-1,1806;Não prioritário;1,7043;-1,3243;Não prioritário
+Londrina;PR;555965;0,78;27999537,379;50362,05;Grandes · crescendo;0,8871;-0,1071;Não prioritário;0,879;-0,099;Não prioritário
+Mandaguari;PR;36716;0,98;2916499,996;79434,03;Pequenas · crescendo;1,5298;-0,5498;Não prioritário;1,6665;-0,6865;Não prioritário
+Mandaguaçu;PR;31457;3,94;995409,852;31643,51;Pequenas · crescendo;1,5664;2,3736;Prioritário;1,7113;2,2287;Prioritário
+Marechal Cândido Rondon;PR;55836;1,48;3919007,285;70187,82;Pequenas · crescendo;1,4306;0,0494;Prioritário;1,5451;-0,0651;Não prioritário
+Marialva;PR;41851;2,27;2964620,45;70837,51;Pequenas · crescendo;1,4988;0,7712;Prioritário;1,6286;0,6414;Prioritário
+Maringá;PR;409657;1,19;27817345,988;67903,99;Grandes · crescendo;0,9593;0,2307;Prioritário;0,9675;0,2225;Prioritário
+Matinhos;PR;39259;2,43;1148204,622;29246,91;Pequenas · crescendo;1,514;0,916;Prioritário;1,6471;0,7829;Prioritário
+Medianeira;PR;54369;2,21;3007596,291;55318,22;Pequenas · crescendo;1,4369;0,7731;Prioritário;1,5528;0,6572;Prioritário
+Paiçandu;PR;45962;2,07;1342361,599;29205,9;Pequenas · crescendo;1,4767;0,5933;Prioritário;1,6015;0,4685;Prioritário
+Palmas;PR;48247;0,99;1728162,368;35819,06;Pequenas · crescendo;1,4652;-0,4752;Não prioritário;1,5874;-0,5974;Não prioritário
+Palmeira;PR;33855;0,44;2220002,904;65573,86;Pequenas · crescendo;1,549;-1,109;Não prioritário;1,6901;-1,2501;Não prioritário
+Palotina;PR;35011;1,68;3698095,404;105626,67;Pequenas · crescendo;1,541;0,139;Prioritário;1,6803;-0,0003;Não prioritário
+Paranaguá;PR;145829;0,31;15291702,668;104860,51;Grandes · estagnadas;1,2036;-0,8936;Não prioritário;1,2668;-0,9568;Não prioritário
+Paranavaí;PR;92001;1,01;4189765,044;45540,43;Grandes · crescendo;1,3125;-0,3025;Não prioritário;1,4003;-0,3903;Não prioritário
+Pato Branco;PR;91836;2;5817896,335;63350,93;Grandes · crescendo;1,313;0,687;Prioritário;1,4008;0,5992;Prioritário
+Pinhais;PR;127019;0,67;9852601,347;77567,93;Grandes · crescendo;1,2362;-0,5662;Não prioritário;1,3068;-0,6368;Não prioritário
+Piraquara;PR;118730;2,06;1901529,26;16015,58;Grandes · crescendo;1,2522;0,8078;Prioritário;1,3264;0,7336;Prioritário
+Pitanga;PR;33567;0,23;1448744,092;43017,52;Pequenas · estagnadas;1,551;-1,321;Não prioritário;1,6925;-1,4625;Não prioritário
+Ponta Grossa;PR;358371;1,17;25583325,309;71387,82;Grandes · crescendo;0,9909;0,1791;Prioritário;1,0062;0,1638;Prioritário
+Pontal do Paraná;PR;30425;3,17;809708,324;26613,26;Pequenas · crescendo;1,5742;1,5958;Prioritário;1,721;1,449;Prioritário
+Prudentópolis;PR;49393;0,12;1905943,321;38587,32;Pequenas · estagnadas;1,4596;-1,3396;Não prioritário;1,5806;-1,4606;Não prioritário
+Quedas do Iguaçu;PR;30738;0,04;1927945,223;62721,88;Pequenas · estagnadas;1,5718;-1,5318;Não prioritário;1,718;-1,678;Não prioritário
+Rio Branco do Sul;PR;37558;1,72;1850825,583;49279,13;Pequenas · crescendo;1,5244;0,1956;Prioritário;1,66;0,06;Prioritário
+Rio Negro;PR;31324;0,01;1456164,794;46487,19;Pequenas · estagnadas;1,5674;-1,5574;Não prioritário;1,7126;-1,7026;Não prioritário
+Rolândia;PR;71670;1,8;4602703,668;64220,79;Grandes · crescendo;1,3716;0,4284;Prioritário;1,4727;0,3273;Prioritário
+Santo Antônio da Platina;PR;44369;0,32;1837883,729;41422,7;Pequenas · estagnadas;1,485;-1,165;Não prioritário;1,6117;-1,2917;Não prioritário
+Sarandi;PR;118455;2,86;2398689,677;20249,8;Grandes · crescendo;1,2528;1,6072;Prioritário;1,3271;1,5329;Prioritário
+São José dos Pinhais;PR;329628;1,86;33957963,934;103019,05;Grandes · crescendo;1,0107;0,8493;Prioritário;1,0305;0,8295;Prioritário
+São Mateus do Sul;PR;42366;0,22;1934142,346;45653,17;Pequenas · estagnadas;1,4959;-1,2759;Não prioritário;1,6251;-1,4051;Não prioritário
+Telêmaco Borba;PR;75042;0,6;6409425,43;85411,18;Grandes · crescendo;1,3607;-0,7607;Não prioritário;1,4594;-0,8594;Não prioritário
+Toledo;PR;150470;1,95;9508571,518;63192,47;Grandes · crescendo;1,1962;0,7538;Prioritário;1,2577;0,6923;Prioritário
+Umuarama;PR;117095;1,27;5096996,048;43528,72;Grandes · crescendo;1,2555;0,0145;Prioritário;1,3304;-0,0604;Não prioritário
+União da Vitória;PR;55033;0,36;2223372,504;40400,71;Pequenas · crescendo;1,4341;-1,0741;Não prioritário;1,5492;-1,1892;Não prioritário
+Angra dos Reis;RJ;167434;-0,1;11900498,299;71075,76;Grandes · estagnadas;1,1709;-1,2709;Não prioritário;1,2268;-1,3268;Não prioritário
+Araruama;RJ;129671;1,21;13156181,005;101458,16;Grandes · crescendo;1,2314;-0,0214;Não prioritário;1,3009;-0,0909;Não prioritário
+Armação dos Búzios;RJ;40006;3,15;5019621,154;125471,71;Pequenas · crescendo;1,5095;1,6405;Prioritário;1,6417;1,5083;Prioritário
+Arraial do Cabo;RJ;30986;1;9335373,871;301277,15;Pequenas · crescendo;1,5699;-0,5699;Não prioritário;1,7157;-0,7157;Não prioritário
+Barra Mansa;RJ;169894;-0,34;6831114,616;40208,1;Grandes · estagnadas;1,1675;-1,5075;Não prioritário;1,2226;-1,5626;Não prioritário
+Barra do Piraí;RJ;92883;-0,17;3225723,098;34728,89;Grandes · estagnadas;1,3103;-1,4803;Não prioritário;1,3976;-1,5676;Não prioritário
+Belford Roxo;RJ;483087;0,04;9686338,741;20050,92;Grandes · estagnadas;0,9203;-0,8803;Não prioritário;0,9197;-0,8797;Não prioritário
+Bom Jesus do Itabapoana;RJ;35173;-0,05;1207610,759;34333,46;Pequenas · estagnadas;1,54;-1,59;Não prioritário;1,679;-1,729;Não prioritário
+Cabo Frio;RJ;222161;1,48;16964471,592;76361,16;Grandes · crescendo;1,104;0,376;Prioritário;1,1448;0,3352;Prioritário
+Cachoeiras de Macacu;RJ;56943;0,38;1702401,841;29896,6;Pequenas · crescendo;1,426;-1,046;Não prioritário;1,5394;-1,1594;Não prioritário
+Campos dos Goytacazes;RJ;483540;0,34;42953468,722;88831,26;Grandes · estagnadas;0,9201;-0,5801;Não prioritário;0,9194;-0,5794;Não prioritário
+Casimiro de Abreu;RJ;46110;2,24;3363238,534;72939,46;Pequenas · crescendo;1,4759;0,7641;Prioritário;1,6005;0,6395;Prioritário
+Duque de Caxias;RJ;808161;-0,47;70068006,833;86700,55;Grandes · estagnadas;0,7986;-1,2686;Não prioritário;0,7706;-1,2406;Não prioritário
+Guapimirim;RJ;51696;0,07;1589983,141;30756,41;Pequenas · estagnadas;1,4489;-1,3789;Não prioritário;1,5674;-1,4974;Não prioritário
+Itaboraí;RJ;224267;0,24;6278393,127;27995,17;Grandes · estagnadas;1,1018;-0,8618;Não prioritário;1,1421;-0,9021;Não prioritário
+Itaguaí;RJ;116841;0,23;11383961,888;97431,23;Grandes · estagnadas;1,256;-1,026;Não prioritário;1,3311;-1,1011;Não prioritário
+Itaperuna;RJ;101041;0,44;4067636,895;40257,29;Grandes · crescendo;1,2904;-0,8504;Não prioritário;1,3732;-0,9332;Não prioritário
+Itatiaia;RJ;30908;0,6;6988685,307;226112,51;Pequenas · crescendo;1,5705;-0,9705;Não prioritário;1,7165;-1,1165;Não prioritário
+Japeri;RJ;96289;0,07;1874798,222;19470,53;Grandes · estagnadas;1,3018;-1,2318;Não prioritário;1,3871;-1,3171;Não prioritário
+Macaé;RJ;246391;1,47;22394859,906;90891,55;Grandes · crescendo;1,0795;0,3905;Prioritário;1,1148;0,3552;Prioritário
+Magé;RJ;228127;0,02;5301410,766;23238,86;Grandes · estagnadas;1,0978;-1,0778;Não prioritário;1,1371;-1,1171;Não prioritário
+Mangaratiba;RJ;41220;0,99;3443660,051;83543,43;Pequenas · crescendo;1,5024;-0,5124;Não prioritário;1,633;-0,643;Não prioritário
+Maricá;RJ;197277;3,71;134092033,649;679714,48;Grandes · crescendo;1,1321;2,5779;Prioritário;1,1792;2,5308;Prioritário
+Mesquita;RJ;167127;-0,06;3029006,761;18123,98;Grandes · estagnadas;1,1713;-1,2313;Não prioritário;1,2273;-1,2873;Não prioritário
+Nilópolis;RJ;146774;-0,58;3339768,896;22754,5;Grandes · estagnadas;1,2021;-1,7821;Não prioritário;1,2649;-1,8449;Não prioritário
+Niterói;RJ;481749;-0,1;76268004,731;158314,82;Grandes · estagnadas;0,9209;-1,0209;Não prioritário;0,9205;-1,0205;Não prioritário
+Nova Friburgo;RJ;189939;0,35;7367566,824;38789,12;Grandes · estagnadas;1,1411;-0,7911;Não prioritário;1,1902;-0,8402;Não prioritário
+Nova Iguaçu;RJ;785867;0,01;20518623,982;26109,54;Grandes · estagnadas;0,8052;-0,7952;Não prioritário;0,7787;-0,7687;Não prioritário
+Paracambi;RJ;41375;-1,11;1085488,613;26235,37;Pequenas · estagnadas;1,5015;-2,6115;Não prioritário;1,6319;-2,7419;Não prioritário
+Paraty;RJ;45243;1,57;6324392,329;139787,2;Pequenas · crescendo;1,4804;0,0896;Prioritário;1,606;-0,036;Não prioritário
+Paraíba do Sul;RJ;42063;0,16;1399156,766;33263,36;Pequenas · estagnadas;1,4976;-1,3376;Não prioritário;1,6271;-1,4671;Não prioritário
+Petrópolis;RJ;278881;-0,49;19907334,726;71382,9;Grandes · estagnadas;1,0502;-1,5402;Não prioritário;1,0789;-1,5689;Não prioritário
+Queimados;RJ;140523;0,15;4938811,914;35145,93;Grandes · estagnadas;1,2124;-1,0624;Não prioritário;1,2776;-1,1276;Não prioritário
+Resende;RJ;129612;0,66;12267696,488;94649,39;Grandes · crescendo;1,2315;-0,5715;Não prioritário;1,301;-0,641;Não prioritário
+Rio Bonito;RJ;56276;0,1;2038466,081;36222,65;Pequenas · estagnadas;1,4288;-1,3288;Não prioritário;1,5428;-1,4428;Não prioritário
+Rio das Ostras;RJ;156491;3,33;10599897,907;67734,87;Grandes · crescendo;1,1869;2,1431;Prioritário;1,2464;2,0836;Prioritário
+Rio de Janeiro;RJ;6211223;-0,15;418462360,308;67371,97;Grandes · estagnadas;0,3162;-0,4662;Não prioritário;0,1795;-0,3295;Não prioritário
+Santo Antônio de Pádua;RJ;41325;0,15;1686337,288;40806,71;Pequenas · estagnadas;1,5018;-1,3518;Não prioritário;1,6323;-1,4823;Não prioritário
+Saquarema;RJ;89559;1,57;64701140,278;722441,52;Grandes · crescendo;1,3189;0,2511;Prioritário;1,4081;0,1619;Prioritário
+Seropédica;RJ;80596;0,78;3760076,051;46653,38;Grandes · crescendo;1,3438;-0,5638;Não prioritário;1,4387;-0,6587;Não prioritário
+São Fidélis;RJ;38961;0,31;985937,952;25305,77;Pequenas · estagnadas;1,5158;-1,2058;Não prioritário;1,6493;-1,3393;Não prioritário
+São Francisco de Itabapoana;RJ;45059;0,72;1481367,364;32876,17;Pequenas · crescendo;1,4814;-0,7614;Não prioritário;1,6072;-0,8872;Não prioritário
+São Gonçalo;RJ;896744;-0,9;23063688,967;25719,37;Grandes · estagnadas;0,774;-1,674;Não prioritário;0,7404;-1,6404;Não prioritário
+São João da Barra;RJ;36573;1,01;13986152,276;382417,42;Pequenas · crescendo;1,5307;-0,5207;Não prioritário;1,6677;-0,6577;Não prioritário
+São João de Meriti;RJ;440962;-0,33;11534047,295;26156,56;Grandes · estagnadas;0,9419;-1,2719;Não prioritário;0,9461;-1,2761;Não prioritário
+São Pedro da Aldeia;RJ;104029;1,42;3359011,214;32289,18;Grandes · crescendo;1,2835;0,1365;Prioritário;1,3647;0,0553;Prioritário
+Tanguá;RJ;31086;0,06;858814,524;27627,05;Pequenas · estagnadas;1,5692;-1,5092;Não prioritário;1,7148;-1,6548;Não prioritário
+Teresópolis;RJ;165123;0,07;7104545,886;43025,78;Grandes · estagnadas;1,1742;-1,1042;Não prioritário;1,2308;-1,1608;Não prioritário
+Três Rios;RJ;78346;0,14;6017636,329;76808,47;Grandes · estagnadas;1,3505;-1,2105;Não prioritário;1,4469;-1,3069;Não prioritário
+Valença;RJ;68088;-0,44;3104488,799;45595,24;Grandes · estagnadas;1,3837;-1,8237;Não prioritário;1,4876;-1,9276;Não prioritário
+Vassouras;RJ;33976;-0,11;1472879,543;43350,59;Pequenas · estagnadas;1,5481;-1,6581;Não prioritário;1,689;-1,799;Não prioritário
+Volta Redonda;RJ;261563;0,09;15307614,873;58523,62;Grandes · estagnadas;1,0654;-0,9754;Não prioritário;1,0975;-1,0075;Não prioritário
+Araquari;SC;45283;5,14;9900039,604;218625,97;Pequenas · crescendo;1,4802;3,6598;Prioritário;1,6058;3,5342;Prioritário
+Araranguá;SC;71922;1,34;3023099,859;42033,03;Grandes · crescendo;1,3708;-0,0308;Não prioritário;1,4717;-0,1317;Não prioritário
+Balneário Camboriú;SC;139155;2,13;9004372,567;64707,5;Grandes · crescendo;1,2147;0,9153;Prioritário;1,2804;0,8496;Prioritário
+Balneário Piçarras;SC;27127;3,93;2097521,043;77322,26;Pequenas · crescendo;1,6014;2,3286;Prioritário;1,7543;2,1757;Prioritário
+Barra Velha;SC;45369;6,06;2468504,623;54409,5;Pequenas · crescendo;1,4797;4,5803;Prioritário;1,6052;4,4548;Prioritário
+Biguaçu;SC;76773;2,33;3523317,578;45892,67;Grandes · crescendo;1,3553;0,9747;Prioritário;1,4528;0,8772;Prioritário
+Blumenau;SC;361261;1,31;24871919,56;68847,51;Grandes · crescendo;0,989;0,321;Prioritário;1,0039;0,3061;Prioritário
+Bombinhas;SC;25058;4,79;1178867,901;47045,57;Pequenas · crescendo;1,6202;3,1698;Prioritário;1,7773;3,0127;Prioritário
+Braço do Norte;SC;33773;1,27;2195934,726;65020,42;Pequenas · crescendo;1,5496;-0,2796;Não prioritário;1,6908;-0,4208;Não prioritário
+Brusque;SC;141385;2,47;11071535,293;78307,71;Grandes · crescendo;1,2109;1,2591;Prioritário;1,2758;1,1942;Prioritário
+Camboriú;SC;103074;4,28;2703377,996;26227,55;Grandes · crescendo;1,2857;2,9943;Prioritário;1,3674;2,9126;Prioritário
+Campos Novos;SC;36932;0,99;3456853,516;93600,5;Pequenas · crescendo;1,5284;-0,5384;Não prioritário;1,6648;-0,6748;Não prioritário
+Canoinhas;SC;55016;0,35;2759647,733;50160,82;Pequenas · estagnadas;1,4341;-1,0841;Não prioritário;1,5493;-1,1993;Não prioritário
+Caçador;SC;73720;0,34;5375160,552;72913,19;Grandes · estagnadas;1,3649;-1,0249;Não prioritário;1,4645;-1,1245;Não prioritário
+Chapecó;SC;254785;2,77;17619284,312;69153,54;Grandes · crescendo;1,0716;1,6984;Prioritário;1,1051;1,6649;Prioritário
+Concórdia;SC;81646;1,46;5510391,821;67491,26;Grandes · crescendo;1,3408;0,1192;Prioritário;1,4349;0,0251;Prioritário
+Criciúma;SC;214493;0,91;12339547,621;57528,91;Grandes · crescendo;1,1123;-0,2023;Não prioritário;1,155;-0,245;Não prioritário
+Curitibanos;SC;40045;0,49;2003887,722;50040,9;Pequenas · crescendo;1,5093;-1,0193;Não prioritário;1,6414;-1,1514;Não prioritário
+Florianópolis;SC;537211;2,05;31190132,216;58059,37;Grandes · crescendo;0,8952;1,1548;Prioritário;0,8889;1,1611;Prioritário
+Forquilhinha;SC;31431;2,81;1525924,405;48548,39;Pequenas · crescendo;1,5666;1,2434;Prioritário;1,7116;1,0984;Prioritário
+Fraiburgo;SC;33481;-0,26;1596213,305;47675,2;Pequenas · estagnadas;1,5516;-1,8116;Não prioritário;1,6933;-1,9533;Não prioritário
+Garopaba;SC;29959;4,27;1005307,519;33556,11;Pequenas · crescendo;1,5779;2,6921;Prioritário;1,7255;2,5445;Prioritário
+Gaspar;SC;72570;1,89;5058949,212;69711,3;Grandes · crescendo;1,3686;0,5214;Prioritário;1,4691;0,4209;Prioritário
+Guaramirim;SC;46711;2,39;3136749,682;67152,27;Pequenas · crescendo;1,4729;0,9171;Prioritário;1,5968;0,7932;Prioritário
+Imbituba;SC;52579;2,27;3250687,753;61824,83;Pequenas · crescendo;1,4449;0,8251;Prioritário;1,5625;0,7075;Prioritário
+Indaial;SC;71549;2,24;4484717,577;62680,37;Grandes · crescendo;1,372;0,868;Prioritário;1,4732;0,7668;Prioritário
+Itajaí;SC;264054;3,09;48195908,536;182522,93;Grandes · crescendo;1,0632;2,0268;Prioritário;1,0948;1,9952;Prioritário
+Itapema;SC;75940;4,3;3799730,364;50035,95;Grandes · crescendo;1,3579;2,9421;Prioritário;1,4559;2,8441;Prioritário
+Itapoá;SC;30750;6,31;1990651,159;64736,62;Pequenas · crescendo;1,5717;4,7383;Prioritário;1,7179;4,5921;Prioritário
+Içara;SC;59035;1,74;4878273,748;82633,59;Pequenas · crescendo;1,4175;0,3225;Prioritário;1,5289;0,2111;Prioritário
+Jaraguá do Sul;SC;182660;2,05;15509262,572;84907,82;Grandes · crescendo;1,1503;0,8997;Prioritário;1,2016;0,8484;Prioritário
+Joaçaba;SC;30146;0,92;2754514,296;91372,46;Pequenas · crescendo;1,5764;-0,6564;Não prioritário;1,7237;-0,8037;Não prioritário
+Joinville;SC;616317;1,5;49815876,84;80828,33;Grandes · crescendo;0,8627;0,6373;Prioritário;0,8491;0,6509;Prioritário
+Lages;SC;164981;0,43;8341649,834;50561,28;Grandes · crescendo;1,1744;-0,7444;Não prioritário;1,2311;-0,8011;Não prioritário
+Laguna;SC;42785;0,1;1404149,986;32818,74;Pequenas · estagnadas;1,4936;-1,3936;Não prioritário;1,6222;-1,5222;Não prioritário
+Mafra;SC;55286;0,37;3296811,911;59631,95;Pequenas · crescendo;1,433;-1,063;Não prioritário;1,5479;-1,1779;Não prioritário
+Maravilha;SC;28251;2,06;2499222,596;88464,92;Pequenas · crescendo;1,5918;0,4682;Prioritário;1,7425;0,3175;Prioritário
+Navegantes;SC;86401;3,01;7939673,784;91893,31;Grandes · crescendo;1,3274;1,6826;Prioritário;1,4185;1,5915;Prioritário
+Palhoça;SC;222598;4,11;10294550,237;46247,27;Grandes · crescendo;1,1036;3,0064;Prioritário;1,1442;2,9658;Prioritário
+Penha;SC;33663;2,46;1340663,262;39826,02;Pequenas · crescendo;1,5503;0,9097;Prioritário;1,6917;0,7683;Prioritário
+Pomerode;SC;34289;1,77;3184672,108;92877,37;Pequenas · crescendo;1,546;0,224;Prioritário;1,6864;0,0836;Prioritário
+Porto Belo;SC;27688;4,63;2090678,166;75508,46;Pequenas · crescendo;1,5965;3,0335;Prioritário;1,7483;2,8817;Prioritário
+Porto União;SC;32970;-0,13;1314938,113;39882,87;Pequenas · estagnadas;1,5552;-1,6852;Não prioritário;1,6977;-1,8277;Não prioritário
+Rio Negrinho;SC;39261;-0,12;1731868,057;44111,66;Pequenas · estagnadas;1,5139;-1,6339;Não prioritário;1,6471;-1,7671;Não prioritário
+Rio do Sul;SC;72587;1,42;4621903,114;63673,98;Grandes · crescendo;1,3686;0,0514;Prioritário;1,469;-0,049;Não prioritário
+Santo Amaro da Imperatriz;SC;27272;2,69;1749916,489;64165,32;Pequenas · crescendo;1,6001;1,0899;Prioritário;1,7527;0,9373;Prioritário
+Sombrio;SC;29991;1;1304359,187;43491,69;Pequenas · crescendo;1,5776;-0,5776;Não prioritário;1,7252;-0,7252;Não prioritário
+São Bento do Sul;SC;83277;0,9;5038223,34;60499,58;Grandes · crescendo;1,3361;-0,4361;Não prioritário;1,4292;-0,5292;Não prioritário
+São Francisco do Sul;SC;52674;1,8;7396331,907;140417,13;Pequenas · crescendo;1,4444;0,3556;Prioritário;1,5619;0,2381;Prioritário
+São José;SC;270299;2,13;15575672,162;57623,86;Grandes · crescendo;1,0576;1,0724;Prioritário;1,088;1,042;Prioritário
+São João Batista;SC;32687;1,84;1303724,455;39885,11;Pequenas · crescendo;1,5573;0,2827;Prioritário;1,7002;0,1398;Prioritário
+São Miguel do Oeste;SC;44330;1,68;3105097,849;70045,07;Pequenas · crescendo;1,4852;0,1948;Prioritário;1,6119;0,0681;Prioritário
+Tijucas;SC;51592;4,35;3687049,288;71465,52;Pequenas · crescendo;1,4493;2,9007;Prioritário;1,568;2,782;Prioritário
+Timbó;SC;46099;1,9;2737816,587;59389,93;Pequenas · crescendo;1,476;0,424;Prioritário;1,6006;0,2994;Prioritário
+Tubarão;SC;110088;1,04;6007107,895;54566,42;Grandes · crescendo;1,2701;-0,2301;Não prioritário;1,3483;-0,3083;Não prioritário
+Videira;SC;55466;1,35;4129522,675;74451,42;Pequenas · crescendo;1,4322;-0,0822;Não prioritário;1,547;-0,197;Não prioritário
+Xanxerê;SC;51607;1,31;3145564,606;60952,29;Pequenas · crescendo;1,4493;-0,1393;Não prioritário;1,5679;-0,2579;Não prioritário
+Xaxim;SC;31918;1,82;1737477,331;54435,66;Pequenas · crescendo;1,5629;0,2571;Prioritário;1,7071;0,1129;Prioritário
+Adamantina;SP;34687;0,22;1705894,987;49179,66;Pequenas · estagnadas;1,5432;-1,3232;Não prioritário;1,683;-1,463;Não prioritário
+Aguaí;SP;32072;-0,02;1773842,732;55308,14;Pequenas · estagnadas;1,5618;-1,5818;Não prioritário;1,7057;-1,7257;Não prioritário
+Agudos;SP;37680;0,73;3415808,553;90653,09;Pequenas · crescendo;1,5237;-0,7937;Não prioritário;1,659;-0,929;Não prioritário
+Americana;SP;237240;1;17600565,714;74188,86;Grandes · crescendo;1,0885;-0,0885;Não prioritário;1,1258;-0,1258;Não prioritário
+Amparo;SP;68008;0,27;6698468,843;98495,31;Grandes · estagnadas;1,384;-1,114;Não prioritário;1,4879;-1,2179;Não prioritário
+Américo Brasiliense;SP;33019;-0,36;1504961,923;45578,66;Pequenas · estagnadas;1,5549;-1,9149;Não prioritário;1,6973;-2,0573;Não prioritário
+Andradina;SP;59783;0,65;4464940,278;74685,78;Pequenas · crescendo;1,4145;-0,7645;Não prioritário;1,5253;-0,8753;Não prioritário
+Aparecida;SP;32569;-0,6;1369698,939;42055,3;Pequenas · estagnadas;1,5581;-2,1581;Não prioritário;1,7013;-2,3013;Não prioritário
+Araraquara;SP;242228;1,25;14689500,266;60643,28;Grandes · crescendo;1,0836;0,1664;Prioritário;1,1198;0,1302;Prioritário
+Araras;SP;130866;0,81;10022873,262;76588,83;Grandes · crescendo;1,2292;-0,4192;Não prioritário;1,2982;-0,4882;Não prioritário
+Araçatuba;SP;200124;0,81;11457739,505;57253,2;Grandes · crescendo;1,1287;-0,3187;Não prioritário;1,1751;-0,3651;Não prioritário
+Araçoiaba da Serra;SP;32443;1,45;1523193,918;46949,85;Pequenas · crescendo;1,5591;-0,1091;Não prioritário;1,7024;-0,2524;Não prioritário
+Artur Nogueira;SP;51456;1,28;2162832,741;42032,66;Pequenas · crescendo;1,45;-0,17;Não prioritário;1,5687;-0,2887;Não prioritário
+Arujá;SP;86678;1,22;10426127,299;120285,74;Grandes · crescendo;1,3266;-0,1066;Não prioritário;1,4176;-0,1976;Não prioritário
+Assis;SP;101409;0,53;4682609,402;46175,48;Grandes · crescendo;1,2895;-0,7595;Não prioritário;1,3721;-0,8421;Não prioritário
+Atibaia;SP;158647;1,9;9426583,645;59418,61;Grandes · crescendo;1,1837;0,7163;Prioritário;1,2424;0,6576;Prioritário
+Avaré;SP;92805;0,94;4408538,237;47503,24;Grandes · crescendo;1,3105;-0,3705;Não prioritário;1,3978;-0,4578;Não prioritário
+Bady Bassitt;SP;27260;5,34;762195,13;27960,2;Pequenas · crescendo;1,6002;3,7398;Prioritário;1,7529;3,5871;Prioritário
+Bariri;SP;31595;0;1863763,724;58989,2;Pequenas · estagnadas;1,5653;-1,5653;Não prioritário;1,7101;-1,7101;Não prioritário
+Barra Bonita;SP;34346;-0,22;2077900,588;60499,06;Pequenas · estagnadas;1,5456;-1,7656;Não prioritário;1,6859;-1,9059;Não prioritário
+Barretos;SP;122485;0,74;6715414,139;54826,42;Grandes · crescendo;1,2448;-0,5048;Não prioritário;1,3174;-0,5774;Não prioritário
+Barrinha;SP;32092;1;737580,107;22983,3;Pequenas · crescendo;1,5616;-0,5616;Não prioritário;1,7056;-0,7056;Não prioritário
+Barueri;SP;316473;2,31;71646709,835;226391,22;Grandes · crescendo;1,0203;1,2897;Prioritário;1,0423;1,2677;Prioritário
+Batatais;SP;58402;0,28;3328690,303;56996,17;Pequenas · estagnadas;1,42;-1,14;Não prioritário;1,532;-1,252;Não prioritário
+Bauru;SP;379146;0,82;20654759,202;54477,06;Grandes · crescendo;0,9776;-0,1576;Não prioritário;0,9899;-0,1699;Não prioritário
+Bebedouro;SP;76373;0,15;5343661,449;69967,94;Grandes · estagnadas;1,3566;-1,2066;Não prioritário;1,4543;-1,3043;Não prioritário
+Bertioga;SP;64188;2,51;2663550,123;41496,08;Grandes · crescendo;1,3977;1,1123;Prioritário;1,5047;1,0053;Prioritário
+Birigui;SP;118979;0,75;4866489,546;40902,09;Grandes · crescendo;1,2517;-0,5017;Não prioritário;1,3258;-0,5758;Não prioritário
+Biritiba Mirim;SP;29683;0,32;1111541,124;37447,06;Pequenas · estagnadas;1,5801;-1,2601;Não prioritário;1,7282;-1,4082;Não prioritário
+Boituva;SP;61081;1,97;4474129,933;73249,13;Grandes · crescendo;1,4094;0,5606;Prioritário;1,519;0,451;Prioritário
+Botucatu;SP;145155;1,1;7992147,651;55059,4;Grandes · crescendo;1,2047;-0,1047;Não prioritário;1,2682;-0,1682;Não prioritário
+Bragança Paulista;SP;176811;1,57;10443287,83;59064,7;Grandes · crescendo;1,158;0,412;Prioritário;1,211;0,359;Prioritário
+Brodowski;SP;25201;1,49;667524,66;28185;Pequenas · crescendo;1,6188;-0,1288;Não prioritário;1,7756;-0,2856;Não prioritário
+Cabreúva;SP;47011;1,02;7240981,438;154027,39;Pequenas · crescendo;1,4713;-0,4513;Não prioritário;1,5949;-0,5749;Não prioritário
+Cachoeira Paulista;SP;31564;0,4;847786,431;26859,28;Pequenas · crescendo;1,5656;-1,1656;Não prioritário;1,7104;-1,3104;Não prioritário
+Caieiras;SP;95032;0,78;5507619,475;57955,42;Grandes · crescendo;1,3049;-0,5249;Não prioritário;1,3909;-0,6109;Não prioritário
+Cajamar;SP;92689;3,12;28984601,766;312708,11;Grandes · crescendo;1,3108;1,8092;Prioritário;1,3982;1,7218;Prioritário
+Campinas;SP;1139047;0,43;91968328,317;80741,47;Grandes · crescendo;0,7174;-0,2874;Não prioritário;0,6711;-0,2411;Não prioritário
+Campo Limpo Paulista;SP;77632;0,39;3233934,762;41657,24;Grandes · crescendo;1,3527;-0,9627;Não prioritário;1,4495;-1,0595;Não prioritário
+Campos do Jordão;SP;46974;-0,14;1946799,338;41444,19;Pequenas · estagnadas;1,4715;-1,6115;Não prioritário;1,5951;-1,7351;Não prioritário
+Capivari;SP;50068;0,25;3824460,124;76385,32;Pequenas · estagnadas;1,4564;-1,2064;Não prioritário;1,5767;-1,3267;Não prioritário
+Capão Bonito;SP;46337;0,03;1668881,584;36016,18;Pequenas · estagnadas;1,4748;-1,4448;Não prioritário;1,5991;-1,5691;Não prioritário
+Caraguatatuba;SP;134873;2,45;5822814,916;43172,58;Grandes · crescendo;1,2221;1,2279;Prioritário;1,2895;1,1605;Prioritário
+Carapicuíba;SP;386984;0,38;8436817,19;21801,46;Grandes · crescendo;0,9728;-0,5928;Não prioritário;0,984;-0,604;Não prioritário
+Catanduva;SP;115791;0,22;7029953,383;60712,43;Grandes · estagnadas;1,2581;-1,0381;Não prioritário;1,3337;-1,1137;Não prioritário
+Caçapava;SP;96202;1,06;6516271,282;67735,3;Grandes · crescendo;1,302;-0,242;Não prioritário;1,3874;-0,3274;Não prioritário
+Cerquilho;SP;44695;1,01;2891327,658;64690,18;Pequenas · crescendo;1,4833;-0,4733;Não prioritário;1,6096;-0,5996;Não prioritário
+Cosmópolis;SP;59773;0,13;2313364,052;38702,49;Pequenas · estagnadas;1,4145;-1,2845;Não prioritário;1,5253;-1,3953;Não prioritário
+Cotia;SP;274413;2,62;19060773,462;69460,17;Grandes · crescendo;1,0541;1,5659;Prioritário;1,0836;1,5364;Prioritário
+Cravinhos;SP;33281;0,41;2357353,267;70831,8;Pequenas · crescendo;1,553;-1,143;Não prioritário;1,695;-1,285;Não prioritário
+Cruzeiro;SP;74961;-0,23;4281961,617;57122,53;Grandes · estagnadas;1,361;-1,591;Não prioritário;1,4597;-1,6897;Não prioritário
+Cubatão;SP;112476;-0,45;27813387,639;247282,87;Grandes · estagnadas;1,265;-1,715;Não prioritário;1,3421;-1,7921;Não prioritário
+Cândido Mota;SP;29449;-0,12;2482755,063;84306,94;Pequenas · estagnadas;1,582;-1,702;Não prioritário;1,7305;-1,8505;Não prioritário
+Descalvado;SP;31756;0,19;2584483,423;81385,67;Pequenas · estagnadas;1,5641;-1,3741;Não prioritário;1,7086;-1,5186;Não prioritário
+Diadema;SP;393237;0,15;21229085,409;53985,47;Grandes · estagnadas;0,969;-0,819;Não prioritário;0,9793;-0,8293;Não prioritário
+Dracena;SP;45474;0,42;1855223,877;40797,46;Pequenas · crescendo;1,4792;-1,0592;Não prioritário;1,6045;-1,1845;Não prioritário
+Embu das Artes;SP;250691;0,36;17290649,652;68971,96;Grandes · crescendo;1,0754;-0,7154;Não prioritário;1,1098;-0,7498;Não prioritário
+Embu-Guaçu;SP;66970;0,54;1742920,008;26025,38;Grandes · crescendo;1,3876;-0,8476;Não prioritário;1,4924;-0,9524;Não prioritário
+Espírito Santo do Pinhal;SP;39816;-0,43;2715247,127;68194,87;Pequenas · estagnadas;1,5106;-1,9406;Não prioritário;1,6431;-2,0731;Não prioritário
+Fernandópolis;SP;71186;0,8;2790708,1;39203,05;Grandes · crescendo;1,3732;-0,5732;Não prioritário;1,4747;-0,6747;Não prioritário
+Ferraz de Vasconcelos;SP;179198;0,52;5523980,573;30826,13;Grandes · crescendo;1,1548;-0,6348;Não prioritário;1,2071;-0,6871;Não prioritário
+Franca;SP;352536;0,85;14375667,458;40777,87;Grandes · crescendo;0,9948;-0,1448;Não prioritário;1,011;-0,161;Não prioritário
+Francisco Morato;SP;165139;0,56;2237469,166;13549,01;Grandes · crescendo;1,1742;-0,6142;Não prioritário;1,2308;-0,6708;Não prioritário
+Franco da Rocha;SP;144849;0,8;5438088,812;37543,16;Grandes · crescendo;1,2052;-0,4052;Não prioritário;1,2688;-0,4688;Não prioritário
+Garça;SP;42110;-0,2;1893765,629;44971,87;Pequenas · estagnadas;1,4974;-1,6974;Não prioritário;1,6268;-1,8268;Não prioritário
+Guararapes;SP;31043;0,12;1718487,879;55358,31;Pequenas · estagnadas;1,5695;-1,4495;Não prioritário;1,7152;-1,5952;Não prioritário
+Guararema;SP;31236;1,59;2034662,745;65138,39;Pequenas · crescendo;1,568;0,022;Prioritário;1,7134;-0,1234;Não prioritário
+Guaratinguetá;SP;118044;0,43;8369820,871;70904,25;Grandes · crescendo;1,2536;-0,8236;Não prioritário;1,3281;-0,8981;Não prioritário
+Guariba;SP;37498;0,46;1517993,918;40482;Pequenas · crescendo;1,5248;-1,0648;Não prioritário;1,6604;-1,2004;Não prioritário
+Guarujá;SP;287634;-0,09;11536359,008;40107,77;Grandes · estagnadas;1,0429;-1,1329;Não prioritário;1,07;-1,16;Não prioritário
+Guarulhos;SP;1291771;0,46;97557673,612;75522,42;Grandes · crescendo;0,6877;-0,2277;Não prioritário;0,6346;-0,1746;Não prioritário
+Guaíra;SP;39279;0,41;3233958,32;82333,01;Pequenas · crescendo;1,5138;-1,1038;Não prioritário;1,647;-1,237;Não prioritário
+Hortolândia;SP;236641;1,73;22163924,356;93660,54;Grandes · crescendo;1,0891;0,6409;Prioritário;1,1265;0,6035;Prioritário
+Ibaté;SP;32178;0,38;1516837,474;47138,96;Pequenas · crescendo;1,561;-1,181;Não prioritário;1,7048;-1,3248;Não prioritário
+Ibitinga;SP;60033;1,02;2528835,327;42124,09;Grandes · crescendo;1,4135;-0,3935;Não prioritário;1,524;-0,504;Não prioritário
+Ibiúna;SP;75605;0,5;3023500,924;39990,75;Grandes · crescendo;1,359;-0,859;Não prioritário;1,4572;-0,9572;Não prioritário
+Iguape;SP;29115;0,08;1896850,188;65150,27;Pequenas · estagnadas;1,5847;-1,5047;Não prioritário;1,7338;-1,6538;Não prioritário
+Ilhabela;SP;34934;1,8;14830714,927;424535,26;Pequenas · crescendo;1,5416;0,2584;Prioritário;1,681;0,119;Prioritário
+Indaiatuba;SP;255748;2;28264863,052;110518,41;Grandes · crescendo;1,0707;0,9293;Prioritário;1,104;0,896;Prioritário
+Iperó;SP;36459;2,13;1291002,665;35409,71;Pequenas · crescendo;1,5315;0,5985;Prioritário;1,6686;0,4614;Prioritário
+Itanhaém;SP;112476;2,16;2956406,115;26284,77;Grandes · crescendo;1,265;0,895;Prioritário;1,3421;0,8179;Prioritário
+Itapecerica da Serra;SP;158522;0,32;6215133,643;39206,76;Grandes · estagnadas;1,1838;-0,8638;Não prioritário;1,2426;-0,9226;Não prioritário
+Itapetininga;SP;157790;0,74;7962801,863;50464,55;Grandes · crescendo;1,1849;-0,4449;Não prioritário;1,244;-0,504;Não prioritário
+Itapeva;SP;89728;0,19;4558511,821;50803,67;Grandes · estagnadas;1,3185;-1,1285;Não prioritário;1,4076;-1,2176;Não prioritário
+Itapevi;SP;232297;1,22;15615097,192;67220,4;Grandes · crescendo;1,0935;0,1265;Prioritário;1,1319;0,0881;Prioritário
+Itapira;SP;72022;0,41;6365973,525;88389,29;Grandes · crescendo;1,3704;-0,9604;Não prioritário;1,4713;-1,0613;Não prioritário
+Itaquaquecetuba;SP;369275;1,15;11979259,765;32439,94;Grandes · crescendo;0,9838;0,1662;Prioritário;0,9975;0,1525;Prioritário
+Itararé;SP;44438;-0,63;1406445,26;31649,61;Pequenas · estagnadas;1,4846;-2,1146;Não prioritário;1,6112;-2,2412;Não prioritário
+Itatiba;SP;121590;1,52;10327467,002;84936,81;Grandes · crescendo;1,2466;0,2734;Prioritário;1,3195;0,2005;Prioritário
+Itu;SP;168240;0,73;14012530,257;83288,93;Grandes · crescendo;1,1698;-0,4398;Não prioritário;1,2254;-0,4954;Não prioritário
+Itupeva;SP;70616;3,85;10529260,248;149105,87;Grandes · crescendo;1,3751;2,4749;Prioritário;1,477;2,373;Prioritário
+Ituverava;SP;37571;-0,25;2218625,13;59051,53;Pequenas · estagnadas;1,5244;-1,7744;Não prioritário;1,6599;-1,9099;Não prioritário
+Itápolis;SP;39493;-0,12;2524858,407;63931,8;Pequenas · estagnadas;1,5126;-1,6326;Não prioritário;1,6454;-1,7654;Não prioritário
+Jaboticabal;SP;71821;0,02;4156253,295;57869,61;Grandes · estagnadas;1,3711;-1,3511;Não prioritário;1,4721;-1,4521;Não prioritário
+Jacareí;SP;240275;1,08;19692996,445;81960,24;Grandes · crescendo;1,0855;-0,0055;Não prioritário;1,1221;-0,0421;Não prioritário
+Jaguariúna;SP;59347;2,46;14680877,677;247373,54;Pequenas · crescendo;1,4162;1,0438;Prioritário;1,5274;0,9326;Prioritário
+Jales;SP;48776;0,31;2590208,251;53104,15;Pequenas · estagnadas;1,4626;-1,1526;Não prioritário;1,5842;-1,2742;Não prioritário
+Jandira;SP;118045;0,72;5547106,684;46991,46;Grandes · crescendo;1,2536;-0,5336;Não prioritário;1,3281;-0,6081;Não prioritário
+Jardinópolis;SP;45282;1,55;2398612,345;52970,55;Pequenas · crescendo;1,4802;0,0698;Prioritário;1,6058;-0,0558;Não prioritário
+Jarinu;SP;37535;3,85;3546443,823;94483,65;Pequenas · crescendo;1,5246;2,3254;Prioritário;1,6602;2,1898;Prioritário
+Jaú;SP;133497;0,15;6542932,931;49011,83;Grandes · estagnadas;1,2245;-1,0745;Não prioritário;1,2924;-1,1424;Não prioritário
+José Bonifácio;SP;36633;0,93;1940540,325;52972,47;Pequenas · crescendo;1,5303;-0,6003;Não prioritário;1,6672;-0,7372;Não prioritário
+Jundiaí;SP;443221;1,51;65418378,096;147597,65;Grandes · crescendo;0,9407;0,5693;Prioritário;0,9446;0,5654;Prioritário
+Leme;SP;98161;0,56;4938511,737;50310,32;Grandes · crescendo;1,2972;-0,7372;Não prioritário;1,3815;-0,8215;Não prioritário
+Lençóis Paulista;SP;66505;0,66;6564647,742;98709,09;Grandes · crescendo;1,3893;-0,7293;Não prioritário;1,4944;-0,8344;Não prioritário
+Limeira;SP;291869;0,47;20876940,083;71528,46;Grandes · crescendo;1,0395;-0,5695;Não prioritário;1,0657;-0,5957;Não prioritário
+Lins;SP;74779;0,38;8610362,609;115144,13;Grandes · crescendo;1,3616;-0,9816;Não prioritário;1,4604;-1,0804;Não prioritário
+Lorena;SP;84855;0,23;4501317,953;53047,17;Grandes · estagnadas;1,3317;-1,1017;Não prioritário;1,4238;-1,1938;Não prioritário
+Louveira;SP;51847;2,83;20154612,051;388732,46;Pequenas · crescendo;1,4482;1,3818;Prioritário;1,5665;1,2635;Prioritário
+Mairinque;SP;50027;1,23;2923463,212;58437,71;Pequenas · crescendo;1,4566;-0,2266;Não prioritário;1,5769;-0,3469;Não prioritário
+Mairiporã;SP;93853;1,24;2767181,265;29484,21;Grandes · crescendo;1,3078;-0,0678;Não prioritário;1,3945;-0,1545;Não prioritário
+Marília;SP;237627;0,77;12507570,77;52635,31;Grandes · crescendo;1,0881;-0,3181;Não prioritário;1,1253;-0,3553;Não prioritário
+Matão;SP;79033;0,24;7646780,494;96754,27;Grandes · estagnadas;1,3485;-1,1085;Não prioritário;1,4444;-1,2044;Não prioritário
+Mauá;SP;418261;0,03;25000732,02;59773,04;Grandes · estagnadas;0,9544;-0,9244;Não prioritário;0,9614;-0,9314;Não prioritário
+Mirassol;SP;63337;1,37;3345887,627;52826,75;Grandes · crescendo;1,4008;-0,0308;Não prioritário;1,5085;-0,1385;Não prioritário
+Mococa;SP;67681;0,17;4014553,266;59315,81;Grandes · estagnadas;1,3851;-1,2151;Não prioritário;1,4893;-1,3193;Não prioritário
+Mogi Guaçu;SP;153658;0,95;9433837,649;61395,03;Grandes · crescendo;1,1912;-0,2412;Não prioritário;1,2517;-0,3017;Não prioritário
+Mogi Mirim;SP;92558;0,57;8092719,13;87434,03;Grandes · crescendo;1,3111;-0,7411;Não prioritário;1,3986;-0,8286;Não prioritário
+Mogi das Cruzes;SP;451505;1,28;26072522,197;57745,81;Grandes · crescendo;0,9363;0,3437;Prioritário;0,9393;0,3407;Prioritário
+Mongaguá;SP;61951;2,46;1535905,805;24792,27;Grandes · crescendo;1,4061;1,0539;Prioritário;1,5149;0,9451;Prioritário
+Monte Alto;SP;47574;0,17;3062782,095;64379,33;Pequenas · estagnadas;1,4685;-1,2985;Não prioritário;1,5915;-1,4215;Não prioritário
+Monte Mor;SP;64662;2,35;6049397,718;93554,14;Grandes · crescendo;1,3959;0,9541;Prioritário;1,5025;0,8475;Prioritário
+Nova Odessa;SP;62019;1,6;5613296,888;90509,31;Grandes · crescendo;1,4058;0,1942;Prioritário;1,5146;0,0854;Prioritário
+Novo Horizonte;SP;38324;0,39;2313783,253;60374,26;Pequenas · crescendo;1,5197;-1,1297;Não prioritário;1,6541;-1,2641;Não prioritário
+Olímpia;SP;55074;0,8;3569675,501;64815,98;Pequenas · crescendo;1,4339;-0,6339;Não prioritário;1,549;-0,749;Não prioritário
+Orlândia;SP;38319;-0,31;3247647,904;84752,94;Pequenas · estagnadas;1,5197;-1,8297;Não prioritário;1,6542;-1,9642;Não prioritário
+Osasco;SP;728615;0,74;119404052,763;163878,12;Grandes · crescendo;0,8231;-0,0831;Não prioritário;0,8006;-0,0606;Não prioritário
+Osvaldo Cruz;SP;31272;0,1;1615247,661;51651,56;Pequenas · estagnadas;1,5678;-1,4678;Não prioritário;1,7131;-1,6131;Não prioritário
+Ourinhos;SP;103970;0,08;4902761,91;47155,54;Grandes · estagnadas;1,2836;-1,2036;Não prioritário;1,3649;-1,2849;Não prioritário
+Paraguaçu Paulista;SP;41120;-0,23;3133901,5;76213,56;Pequenas · estagnadas;1,503;-1,733;Não prioritário;1,6337;-1,8637;Não prioritário
+Paulínia;SP;110537;2,5;67067300,461;606740,73;Grandes · crescendo;1,2691;1,2309;Prioritário;1,3471;1,1529;Prioritário
+Pederneiras;SP;44827;0,65;3840420,972;85672,05;Pequenas · crescendo;1,4826;-0,8326;Não prioritário;1,6087;-0,9587;Não prioritário
+Pedreira;SP;43112;0,31;1817291,527;42152,8;Pequenas · estagnadas;1,4918;-1,1818;Não prioritário;1,62;-1,31;Não prioritário
+Penápolis;SP;61679;0,44;2743179,555;44475,1;Grandes · crescendo;1,4071;-0,9671;Não prioritário;1,5162;-1,0762;Não prioritário
+Peruíbe;SP;68352;1,12;2366996,023;34629,51;Grandes · crescendo;1,3828;-0,2628;Não prioritário;1,4864;-0,3664;Não prioritário
+Piedade;SP;52970;0,13;1839652,07;34730,07;Pequenas · estagnadas;1,4431;-1,3131;Não prioritário;1,5603;-1,4303;Não prioritário
+Pindamonhangaba;SP;165428;0,99;13674680,185;82662,43;Grandes · crescendo;1,1738;-0,1838;Não prioritário;1,2303;-0,2403;Não prioritário
+Piracicaba;SP;423323;1,25;44351587,75;104770,09;Grandes · crescendo;0,9515;0,2985;Prioritário;0,958;0,292;Prioritário
+Piraju;SP;29436;0,28;1088629,415;36982,93;Pequenas · estagnadas;1,5821;-1,3021;Não prioritário;1,7306;-1,4506;Não prioritário
+Pirassununga;SP;73545;0,4;4304413,432;58527,61;Grandes · crescendo;1,3655;-0,9655;Não prioritário;1,4652;-1,0652;Não prioritário
+Pitangueiras;SP;33674;-0,39;1830159,52;54349,34;Pequenas · estagnadas;1,5503;-1,9403;Não prioritário;1,6916;-2,0816;Não prioritário
+Pontal;SP;37607;-0,56;2153953,579;57275,34;Pequenas · estagnadas;1,5241;-2,0841;Não prioritário;1,6596;-2,2196;Não prioritário
+Porto Feliz;SP;56497;1,21;5067048,835;89687,04;Pequenas · crescendo;1,4279;-0,2179;Não prioritário;1,5416;-0,3316;Não prioritário
+Porto Ferreira;SP;52649;0,2;3069355,36;58298,46;Pequenas · estagnadas;1,4445;-1,2445;Não prioritário;1,5621;-1,3621;Não prioritário
+Poá;SP;103765;-0,18;4610760,103;44434,64;Grandes · estagnadas;1,2841;-1,4641;Não prioritário;1,3654;-1,5454;Não prioritário
+Praia Grande;SP;349935;2,44;11396645,549;32567,89;Grandes · crescendo;0,9966;1,4434;Prioritário;1,0131;1,4269;Prioritário
+Presidente Epitácio;SP;39505;-0,37;1521762,21;38520,75;Pequenas · estagnadas;1,5125;-1,8825;Não prioritário;1,6453;-2,0153;Não prioritário
+Presidente Prudente;SP;225668;0,7;11617598,706;51480,93;Grandes · crescendo;1,1003;-0,4003;Não prioritário;1,1403;-0,4403;Não prioritário
+Presidente Venceslau;SP;35201;-0,62;1096298,255;31143,95;Pequenas · estagnadas;1,5398;-2,1598;Não prioritário;1,6788;-2,2988;Não prioritário
+Promissão;SP;35131;-0,13;3349680,915;95348,29;Pequenas · estagnadas;1,5402;-1,6702;Não prioritário;1,6793;-1,8093;Não prioritário
+Registro;SP;59947;0,83;2931914,98;48908,45;Pequenas · crescendo;1,4138;-0,5838;Não prioritário;1,5245;-0,6945;Não prioritário
+Ribeirão Pires;SP;115559;0,16;4853228,612;41997,84;Grandes · estagnadas;1,2586;-1,0986;Não prioritário;1,3342;-1,1742;Não prioritário
+Ribeirão Preto;SP;698642;1,21;52306819,755;74869,27;Grandes · crescendo;0,833;0,377;Prioritário;0,8128;0,3972;Prioritário
+Rio Claro;SP;201418;0,65;15427116,506;76592,54;Grandes · crescendo;1,1272;-0,4772;Não prioritário;1,1732;-0,5232;Não prioritário
+Rio Grande da Serra;SP;44170;0,04;1166050,396;26399,15;Pequenas · estagnadas;1,4861;-1,4461;Não prioritário;1,613;-1,573;Não prioritário
+Rio das Pedras;SP;31328;0,5;2037525,868;65038,49;Pequenas · crescendo;1,5673;-1,0673;Não prioritário;1,7125;-1,2125;Não prioritário
+Salto;SP;134319;2,03;11498958,795;85609,32;Grandes · crescendo;1,223;0,807;Prioritário;1,2906;0,7394;Prioritário
+Salto de Pirapora;SP;43748;0,72;2856415,228;65292,48;Pequenas · crescendo;1,4884;-0,7684;Não prioritário;1,6158;-0,8958;Não prioritário
+Santa Bárbara d'Oeste;SP;183347;0,15;10803991,725;58926,47;Grandes · estagnadas;1,1494;-0,9994;Não prioritário;1,2005;-1,0505;Não prioritário
+Santa Cruz do Rio Pardo;SP;46442;0,47;4319822,468;93015,43;Pequenas · crescendo;1,4742;-1,0042;Não prioritário;1,5984;-1,1284;Não prioritário
+Santa Fé do Sul;SP;34794;1,46;1988880,172;57161,58;Pequenas · crescendo;1,5425;-0,0825;Não prioritário;1,6821;-0,2221;Não prioritário
+Santa Isabel;SP;53174;0,44;2298061,229;43217,76;Pequenas · crescendo;1,4422;-1,0022;Não prioritário;1,5592;-1,1192;Não prioritário
+Santana de Parnaíba;SP;154105;2,94;14328397,388;92978,15;Grandes · crescendo;1,1905;1,7495;Prioritário;1,2508;1,6892;Prioritário
+Santo André;SP;748919;0,85;36931350,665;49312,88;Grandes · crescendo;0,8166;0,0334;Prioritário;0,7926;0,0574;Prioritário
+Santos;SP;418608;-0,02;30961718,45;73963,51;Grandes · estagnadas;0,9542;-0,9742;Não prioritário;0,9612;-0,9812;Não prioritário
+Serra Negra;SP;29894;1,05;1025007,433;34288,07;Pequenas · crescendo;1,5784;-0,5284;Não prioritário;1,7261;-0,6761;Não prioritário
+Serrana;SP;43909;1,02;1454534,798;33126,12;Pequenas · crescendo;1,4875;-0,4675;Não prioritário;1,6147;-0,5947;Não prioritário
+Sertãozinho;SP;126887;1,19;9075017,911;71520,47;Grandes · crescendo;1,2365;-0,0465;Não prioritário;1,3071;-0,1171;Não prioritário
+Socorro;SP;40122;0,75;1449300,539;36122,34;Pequenas · crescendo;1,5088;-0,7588;Não prioritário;1,6408;-0,8908;Não prioritário
+Sorocaba;SP;723682;1,76;58816286,432;81273,66;Grandes · crescendo;0,8247;0,9353;Prioritário;0,8026;0,9574;Prioritário
+Sumaré;SP;279545;1,29;19026093,466;68060,93;Grandes · crescendo;1,0497;0,2403;Prioritário;1,0782;0,2118;Prioritário
+Suzano;SP;307429;1,33;18618697,595;60562,59;Grandes · crescendo;1,0272;0,3028;Prioritário;1,0507;0,2793;Prioritário
+São Bernardo do Campo;SP;810729;0,48;71965791,185;88766,77;Grandes · crescendo;0,7978;-0,3178;Não prioritário;0,7696;-0,2896;Não prioritário
+São Caetano do Sul;SP;165655;0,87;22553448,009;136147,1;Grandes · crescendo;1,1734;-0,3034;Não prioritário;1,2299;-0,3599;Não prioritário
+São Carlos;SP;254857;1,16;18386920,167;72146,03;Grandes · crescendo;1,0715;0,0885;Prioritário;1,105;0,055;Prioritário
+São Joaquim da Barra;SP;48558;0,36;2733786,441;56299,4;Pequenas · crescendo;1,4637;-1,1037;Não prioritário;1,5855;-1,2255;Não prioritário
+São José do Rio Pardo;SP;52205;0,05;2876972,561;55109,14;Pequenas · estagnadas;1,4466;-1,3966;Não prioritário;1,5645;-1,5145;Não prioritário
+São José do Rio Preto;SP;480393;1,37;26390120,821;54934,44;Grandes · crescendo;0,9216;0,4484;Prioritário;0,9213;0,4487;Prioritário
+São José dos Campos;SP;697054;0,85;61394524,128;88077,14;Grandes · crescendo;0,8336;0,0164;Prioritário;0,8134;0,0366;Prioritário
+São João da Boa Vista;SP;92547;0,85;5011180,867;54147,42;Grandes · crescendo;1,3111;-0,4611;Não prioritário;1,3986;-0,5486;Não prioritário
+São Manuel;SP;37289;-0,23;1889877,382;50681,9;Pequenas · estagnadas;1,5261;-1,7561;Não prioritário;1,6621;-1,8921;Não prioritário
+São Miguel Arcanjo;SP;32039;0,15;1157726,376;36134,91;Pequenas · estagnadas;1,562;-1,412;Não prioritário;1,706;-1,556;Não prioritário
+São Paulo;SP;11451999;0,15;1066825104,983;93156,23;Grandes · estagnadas;0,1715;-0,0215;Não prioritário;0,0022;0,1478;Prioritário
+São Pedro;SP;38256;1,59;1243177,03;32496,26;Pequenas · crescendo;1,5201;0,0699;Prioritário;1,6546;-0,0646;Não prioritário
+São Roque;SP;79484;0,07;4532567,306;57024,9;Grandes · estagnadas;1,3471;-1,2771;Não prioritário;1,4427;-1,3727;Não prioritário
+São Sebastião;SP;81595;0,82;17400619,207;213255,95;Grandes · crescendo;1,3409;-0,5209;Não prioritário;1,4351;-0,6151;Não prioritário
+São Vicente;SP;329911;-0,06;7414656,3;22474,72;Grandes · estagnadas;1,0105;-1,0705;Não prioritário;1,0302;-1,0902;Não prioritário
+Taboão da Serra;SP;273542;0,94;12084179,332;44176,69;Grandes · crescendo;1,0548;-0,1148;Não prioritário;1,0845;-0,1445;Não prioritário
+Taquaritinga;SP;52260;-0,27;2307144,805;44147,43;Pequenas · estagnadas;1,4463;-1,7163;Não prioritário;1,5642;-1,8342;Não prioritário
+Tatuí;SP;123942;1,21;6784534,581;54739,59;Grandes · crescendo;1,242;-0,032;Não prioritário;1,314;-0,104;Não prioritário
+Taubaté;SP;310739;0,91;22607800,468;72754,95;Grandes · crescendo;1,0247;-0,1147;Não prioritário;1,0476;-0,1376;Não prioritário
+Tietê;SP;37663;0,19;2954947,719;78457,58;Pequenas · estagnadas;1,5238;-1,3338;Não prioritário;1,6592;-1,4692;Não prioritário
+Tremembé;SP;51173;1,87;1091770,581;21334,89;Pequenas · crescendo;1,4513;0,4187;Prioritário;1,5703;0,2997;Prioritário
+Tupã;SP;63928;0,06;3128301,71;48934,77;Grandes · estagnadas;1,3986;-1,3386;Não prioritário;1,5058;-1,4458;Não prioritário
+Ubatuba;SP;92981;1,39;3506919,269;37716,51;Grandes · crescendo;1,31;0,08;Prioritário;1,3973;-0,0073;Não prioritário
+Valinhos;SP;126373;1,41;10200700,888;80718,99;Grandes · crescendo;1,2375;0,1725;Prioritário;1,3083;0,1017;Prioritário
+Vargem Grande Paulista;SP;50415;1,34;3524292,853;69905,64;Pequenas · crescendo;1,4548;-0,1148;Não prioritário;1,5747;-0,2347;Não prioritário
+Vargem Grande do Sul;SP;40133;0,18;1431641,524;35672,43;Pequenas · estagnadas;1,5087;-1,3287;Não prioritário;1,6408;-1,4608;Não prioritário
+Vinhedo;SP;76540;1,55;14699664,334;192052,06;Grandes · crescendo;1,3561;0,1939;Prioritário;1,4536;0,0964;Prioritário
+Votorantim;SP;127923;1,37;5209654,121;40724,92;Grandes · crescendo;1,2346;0,1354;Prioritário;1,3048;0,0652;Prioritário
+Votuporanga;SP;96634;1,11;4582202,643;47418,12;Grandes · crescendo;1,3009;-0,1909;Não prioritário;1,3861;-0,2761;Não prioritário
+Várzea Paulista;SP;115771;0,65;4736061,572;40908,88;Grandes · crescendo;1,2582;-0,6082;Não prioritário;1,3337;-0,6837;Não prioritário

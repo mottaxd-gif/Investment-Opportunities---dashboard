@@ -159,6 +159,50 @@ footer b{color:var(--ink-2);font-weight:600}
   border-radius:8px;padding:11px 14px;margin-top:14px;font-size:13px;color:var(--ink-2)}
 .warn b{color:var(--ink)}
 @media (max-width:640px){.wrap{padding:20px 12px 44px}header h1{font-size:21px}}
+
+/* Impressao / PDF: sem controles, as tres visoes visiveis, sempre em tema claro.
+   O leitor de PDF nao executa script, entao o que for para o papel precisa ja
+   estar desenhado — por isso render() desenha as tres visoes. */
+@media print{
+  :root, :root[data-theme="dark"]{
+    color-scheme: light;
+    --plane:#fff; --surface:#fff;
+    --ink:#0b0b0b; --ink-2:#52514e; --muted:#6f6d68;
+    --grid:#e1e0d9; --axis:#b5b4ac; --hair:rgba(11,11,11,.16);
+    --s1:#2a78d6; --s1-fill:rgba(42,120,214,.34); --s1-soft:rgba(42,120,214,.10);
+    --s2:#eb6834; --s2-fill:rgba(235,104,52,.32);
+    --q-hi:rgba(11,11,11,.016); --q-lo:rgba(11,11,11,.038);
+    --chip:#f0efec; --chip-on:#2a78d6; --dim:#b9b8b1; --dim-fill:rgba(137,135,129,.16);
+  }
+  @page{ size:A4 landscape; margin:12mm; }
+  body{background:#fff}
+  .wrap{max-width:none;padding:0}
+  .controls, #tip{display:none !important}
+  .hidden{display:block !important}
+  /* reordena o documento impresso: capa com resumo e metodologia, depois os graficos */
+  .wrap{display:flex;flex-direction:column}
+  header{order:1} .tiles{order:2} #methodbox{order:3} .warn{order:4}
+  #view-chart{order:5} #view-sm{order:6} footer{order:7}
+  #sharebox{display:none !important}   /* instrução de envio não cabe num PDF */
+  .card{border:0;padding:0;margin-bottom:5mm;break-inside:auto}
+  /* a tabela de 677 linhas sairia em 33 paginas de corpo 10: vai como CSV */
+  #view-tab{display:none !important}
+  #view-chart, #view-sm{break-before:page;page-break-before:always}
+  #methodbox{margin-top:6mm}
+  footer{margin-top:5mm;font-size:10px}
+  /* altura fixa faz o grafico caber numa pagina junto com a legenda */
+  #chart{height:132mm;width:100%}
+  .tile, .smcell, .legend, .serieskey, .sizekey{break-inside:avoid;page-break-inside:avoid}
+  .note, .warn, .mtable tr{break-inside:avoid;page-break-inside:avoid}
+  .tiles{grid-template-columns:repeat(5,1fr)}
+  .sm{grid-template-columns:repeat(3,1fr);gap:8px}
+  .smcell svg{height:52mm;width:100%}
+  header h1{font-size:19px}
+  header p.sub{font-size:11.5px;max-width:none}
+  .card h2{font-size:13px} .card p.cap{font-size:11px}
+  table{font-size:10px} th,td{padding:3.5px 6px}
+  .tag{border-width:1px;padding:1px 6px;font-size:10px}
+}
 </style>
 
 <div class="wrap">
@@ -258,6 +302,16 @@ footer b{color:var(--ink-2);font-weight:600}
 
 <div class="note" id="methodbox"></div>
 <div class="warn" id="warnbox"></div>
+
+<div class="note" id="sharebox">
+  <b>Para enviar esta página a alguém.</b> Todo o gráfico é desenhado por JavaScript, então
+  <b>pré-visualizações não mostram nada</b> — anexo do Gmail, Google Drive, SharePoint e Slack exibem a página em branco
+  porque não executam script. Quem receber precisa <b>baixar o arquivo e abrir no navegador</b>.
+  Para mandar algo que abre em qualquer lugar, use <b>Ctrl+P → Salvar como PDF</b> nesta página, com a opção
+  “Gráficos de fundo” marcada: o PDF sai com o gráfico, os painéis por estado e as notas, no estado de filtro que
+  estiver na tela. A tabela fica de fora do PDF de propósito — 677 linhas viram 33 páginas ilegíveis; para os dados,
+  use o arquivo <b>.csv</b> que acompanha esta página.
+</div>
 
 <footer>
   <b>Fonte:</b> planilha TGCA_Municipios_Total (abas por UF), consolidada em 677 municípios de 9 estados —
@@ -543,7 +597,6 @@ function drawChart(){
     (state.scale==='log' ? 'logarítmica' : 'linear') +
     (fora ? ' · '+fora+(fora===1?' município acima de ':' municípios acima de ')+fpop(state.range)+' hab. fora da faixa (use “Toda a base” para incluí-los)' : ' · faixa completa') +
     ' · passe o mouse sobre uma bolha para os valores.';
-  drawTiles(data);
 }
 
 /* ---------- hover: camada de ponto mais próximo ---------- */
@@ -787,9 +840,12 @@ var qEl=document.getElementById('q'), qt;
 qEl.addEventListener('input', function(){ clearTimeout(qt); qt=setTimeout(function(){ state.q=qEl.value; render(); },140); });
 
 function render(){
-  if(state.view==='chart') drawChart();
-  else if(state.view==='sm'){ drawSmall(); drawTiles(visible()); }
-  else { drawTable(); drawTiles(visible()); }
+  /* as tres visoes sao desenhadas sempre: as ocultas por CSS reaparecem na
+     impressao, entao o PDF sai completo em vez de so com a aba ativa */
+  drawChart();
+  drawSmall();
+  drawTable();
+  drawTiles(visible());
 }
 
 /* ---------- nota metodologica da tendencia ---------- */
