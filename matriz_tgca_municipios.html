@@ -9,8 +9,9 @@
   --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
   --grid:#e1e0d9; --axis:#c3c2b7; --hair:rgba(11,11,11,.10);
   --s1:#2a78d6; --s1-fill:rgba(42,120,214,.34); --s1-soft:rgba(42,120,214,.10);
+  --s2:#eb6834; --s2-fill:rgba(235,104,52,.32);
   --dim:#b9b8b1; --dim-fill:rgba(137,135,129,.16);
-  --q-hi:rgba(42,120,214,.045); --q-lo:rgba(11,11,11,.030);
+  --q-hi:rgba(11,11,11,.016); --q-lo:rgba(11,11,11,.038);
   --chip:#f0efec; --chip-on:#2a78d6;
   --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -22,8 +23,9 @@
     --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
     --grid:#2c2c2a; --axis:#383835; --hair:rgba(255,255,255,.10);
     --s1:#3987e5; --s1-fill:rgba(57,135,229,.34); --s1-soft:rgba(57,135,229,.12);
+    --s2:#d95926; --s2-fill:rgba(217,89,38,.34);
     --dim:#55544f; --dim-fill:rgba(137,135,129,.14);
-    --q-hi:rgba(57,135,229,.07); --q-lo:rgba(255,255,255,.030);
+    --q-hi:rgba(255,255,255,.022); --q-lo:rgba(255,255,255,.050);
     --chip:#262624; --chip-on:#3987e5;
   }
 }
@@ -34,7 +36,7 @@
   --grid:#2c2c2a; --axis:#383835; --hair:rgba(255,255,255,.10);
   --s1:#3987e5; --s1-fill:rgba(57,135,229,.34); --s1-soft:rgba(57,135,229,.12);
   --dim:#55544f; --dim-fill:rgba(137,135,129,.14);
-  --q-hi:rgba(57,135,229,.07); --q-lo:rgba(255,255,255,.030);
+  --q-hi:rgba(255,255,255,.022); --q-lo:rgba(255,255,255,.050);
   --chip:#262624; --chip-on:#3987e5;
 }
 *{box-sizing:border-box}
@@ -72,16 +74,19 @@ input[type=search]:focus{outline:2px solid var(--s1);outline-offset:1px}
 svg{display:block;width:100%;height:auto;overflow:visible}
 .gridline{stroke:var(--grid);stroke-width:1}
 .axisline{stroke:var(--axis);stroke-width:1}
-.reflines{stroke:var(--s1);stroke-width:1.5;opacity:.55}
+.reflines{stroke:var(--axis);stroke-width:1.5}
+.trend{stroke:var(--ink-2);stroke-width:2;fill:none;stroke-linecap:round}
 .tick{fill:var(--muted);font-size:11px;font-family:var(--mono);letter-spacing:-.02em}
 .axtitle{fill:var(--ink-2);font-size:12.5px;font-weight:500}
 .qlab{fill:var(--muted);font-size:11.5px;font-weight:600;letter-spacing:.01em;paint-order:stroke;stroke:var(--surface);stroke-width:3.5px;stroke-linejoin:round}
 .qcount{fill:var(--muted);font-size:11px;paint-order:stroke;stroke:var(--surface);stroke-width:3.5px;stroke-linejoin:round}
 .dot{fill:var(--s1-fill);stroke:var(--s1);stroke-width:1.25;vector-effect:non-scaling-stroke}
-.dot.off{fill:var(--dim-fill);stroke:var(--dim);stroke-width:1}
+.dot.npri{fill:var(--s2-fill);stroke:var(--s2)}
+.dot.off{fill:var(--dim-fill) !important;stroke:var(--dim) !important;stroke-width:1}
 .dot.hit{stroke-width:2.25}
 .dlabel{fill:var(--ink-2);font-size:11.5px;font-weight:500;paint-order:stroke;stroke:var(--surface);stroke-width:3.5px;stroke-linejoin:round}
-.refnote{fill:var(--s1);font-size:11px;font-weight:500;font-family:var(--mono)}
+.refnote{fill:var(--muted);font-size:11px;font-weight:500;font-family:var(--mono)}
+.trendnote{fill:var(--ink-2);font-size:11.5px;font-weight:600;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
 #tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;z-index:5;
   background:var(--surface);border:1px solid var(--hair);border-radius:9px;padding:9px 11px;
   box-shadow:0 6px 22px rgba(0,0,0,.14);font-size:12.5px;min-width:190px}
@@ -89,9 +94,17 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 #tip .r{display:flex;justify-content:space-between;gap:16px;color:var(--ink-2);line-height:1.7}
 #tip .r b{color:var(--ink);font-weight:500;font-family:var(--mono);font-size:12px}
 #tip .q{margin-top:6px;padding-top:6px;border-top:1px solid var(--hair);color:var(--s1);font-weight:600;font-size:12px}
-.legend{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;padding:12px 2px 6px;border-top:1px solid var(--hair);margin-top:8px}
+#tip .q.n{color:var(--s2)}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px 32px;align-items:start;
+  padding:14px 2px 6px;border-top:1px solid var(--hair);margin-top:8px}
+
+.serieskey{display:flex;flex-direction:column;gap:8px}
+.serieskey .it{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-2)}
+.serieskey i{width:13px;height:13px;border-radius:50%;display:inline-block;border:1.25px solid var(--s1);background:var(--s1-fill)}
+.serieskey .it.n i{border-color:var(--s2);background:var(--s2-fill)}
+.serieskey .it.l i{width:20px;height:0;border-radius:0;border:0;border-top:2px solid var(--ink-2);background:none}
 .legend .lt{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-weight:500}
-.sizekey{display:flex;align-items:flex-end;gap:12px}
+.sizekey{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
 .sizekey .item{display:flex;flex-direction:column;align-items:center;gap:4px}
 .sizekey svg{width:auto}
 .sizekey span{font-size:11px;color:var(--ink-2);font-family:var(--mono)}
@@ -104,7 +117,11 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{text-align:right;padding:7px 9px;border-bottom:1px solid var(--hair)}
 td:not(:first-child):not(:nth-child(2)):not(:last-child){font-family:var(--mono);font-size:12.5px}
-th:first-child,td:first-child,th:nth-child(2),td:nth-child(2),th:last-child,td:last-child{text-align:left}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2),th:last-child,td:last-child,
+th:nth-last-child(2),td:nth-last-child(2){text-align:left}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11.5px;font-weight:500;
+  background:var(--s1-fill);color:var(--ink);border:1px solid var(--s1);white-space:nowrap}
+.tag.n{background:var(--s2-fill);border-color:var(--s2)}
 th{position:sticky;top:0;background:var(--surface);cursor:pointer;font-size:10.5px;text-transform:uppercase;
   letter-spacing:.07em;color:var(--muted);font-weight:500;white-space:nowrap;z-index:2}
 th:hover{color:var(--ink)}
@@ -116,6 +133,10 @@ tbody tr:hover{background:var(--s1-soft)}
 .sronly{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 footer{margin-top:22px;font-size:12.5px;color:var(--muted);line-height:1.65}
 footer b{color:var(--ink-2);font-weight:600}
+.note{background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--ink-2);
+  border-radius:8px;padding:12px 15px;margin-top:14px;font-size:13px;color:var(--ink-2);line-height:1.65}
+.note b{color:var(--ink)}
+.note code{font-family:var(--mono);font-size:12.5px;color:var(--ink)}
 .warn{background:var(--surface);border:1px solid var(--hair);border-left:3px solid #fab219;
   border-radius:8px;padding:11px 14px;margin-top:14px;font-size:13px;color:var(--ink-2)}
 .warn b{color:var(--ink)}
@@ -142,6 +163,14 @@ footer b{color:var(--ink-2);font-weight:600}
     <div class="chips" id="rangechips"></div>
   </div>
   <div class="cgroup">
+    <span class="clab">Prioridade</span>
+    <div class="chips" id="prichips">
+      <button class="chip ghost" data-p="all" aria-pressed="true">Todos</button>
+      <button class="chip ghost" data-p="pri" aria-pressed="false">Prioritários</button>
+      <button class="chip ghost" data-p="npri" aria-pressed="false">Não prioritários</button>
+    </div>
+  </div>
+  <div class="cgroup">
     <span class="clab">Escala do eixo X</span>
     <div class="chips">
       <button class="chip ghost" id="sc-log" aria-pressed="true">Logarítmica</button>
@@ -163,12 +192,20 @@ footer b{color:var(--ink-2);font-weight:600}
 </div>
 
 <section class="card" id="view-chart">
-  <h2>População × TGCA, área da bolha ∝ PIB total</h2>
+  <h2>População × TGCA, área da bolha ∝ PIB total, cor por prioridade</h2>
   <p class="cap" id="cap-chart"></p>
   <svg id="chart" viewBox="0 0 1140 700" role="img" aria-describedby="chart-desc"></svg>
   <p id="chart-desc" class="sronly">Gráfico de dispersão: população no eixo X, TGCA no eixo Y, tamanho da bolha proporcional ao PIB total. Todos os valores estão disponíveis na aba Tabela.</p>
   <div id="tip" role="status" aria-live="polite"></div>
   <div class="legend">
+    <div>
+      <div class="lt">Classificação</div>
+      <div class="serieskey">
+        <span class="it"><i></i>Prioritário — acima da linha</span>
+        <span class="it n"><i></i>Não prioritário — abaixo da linha</span>
+        <span class="it l"><i></i>Tendência ponderada pelo PIB</span>
+      </div>
+    </div>
     <div>
       <div class="lt">PIB total (R$ mil) — área da bolha</div>
       <div class="sizekey" id="sizekey"></div>
@@ -193,6 +230,7 @@ footer b{color:var(--ink-2);font-weight:600}
   </div>
 </section>
 
+<div class="note" id="methodbox"></div>
 <div class="warn" id="warnbox"></div>
 
 <footer>
@@ -214,6 +252,23 @@ var REF = RAW.ref, ROWS = RAW.rows.map(function(r){
   return {mun:r[0], uf:r[1], pop:r[2], tgca:r[3], pib:r[4], pibpc:r[5]};
 });
 var UFS = Array.from(new Set(ROWS.map(function(d){return d.uf;}))).sort();
+
+/* Tendencia: minimos quadrados de TGCA sobre log10(populacao), ponderado pelo PIB total.
+   Ajustada UMA vez sobre a base inteira (677), para que "prioritario" seja um atributo
+   fixo de cada municipio e nao mude conforme os filtros da tela. */
+var TREND = (function(){
+  var sw=0, mx=0, my=0;
+  ROWS.forEach(function(d){ sw+=d.pib; });
+  ROWS.forEach(function(d){ mx += d.pib*Math.log10(d.pop)/sw; my += d.pib*d.tgca/sw; });
+  var sxx=0, sxy=0;
+  ROWS.forEach(function(d){ var dx=Math.log10(d.pop)-mx; sxx+=d.pib*dx*dx; sxy+=d.pib*dx*(d.tgca-my); });
+  var b=sxy/sxx, a=my-b*mx;
+  var ssr=0, sst=0;
+  ROWS.forEach(function(d){ var f=a+b*Math.log10(d.pop); ssr+=d.pib*(d.tgca-f)*(d.tgca-f); sst+=d.pib*(d.tgca-my)*(d.tgca-my); });
+  return {a:a, b:b, r2:1-ssr/sst};
+})();
+function trendAt(pop){ return TREND.a + TREND.b*Math.log10(pop); }
+ROWS.forEach(function(d){ d.gap = d.tgca - trendAt(d.pop); d.pri = d.gap > 0; });
 var PIBMAX = Math.max.apply(null, ROWS.map(function(d){return d.pib;}));
 
 /* ---------- formatação ---------- */
@@ -251,12 +306,14 @@ var RANGES = [
   {v:1000000, lab:'Até 1 milhão'},
   {v:Infinity,lab:'Toda a base'}
 ];
-var state = {ufs:new Set(UFS), scale:'log', q:'', view:'chart', range:500000, sort:{key:'pop', dir:-1}};
+var state = {ufs:new Set(UFS), scale:'log', q:'', view:'chart', range:500000, pri:'all', sort:{key:'pop', dir:-1}};
 function visible(){
   var term = state.q.trim().toLowerCase();
   return ROWS.filter(function(d){
     if(!state.ufs.has(d.uf)) return false;
     if(d.pop > state.range) return false;
+    if(state.pri==='pri' && !d.pri) return false;
+    if(state.pri==='npri' && d.pri) return false;
     if(term && d.mun.toLowerCase().indexOf(term) < 0) return false;
     return true;
   });
@@ -355,13 +412,30 @@ function drawChart(){
   s.push('<text class="refnote" x="'+(rx+6)+'" y="'+(M.t+PH+19)+'" text-anchor="start">60 mil</text>');
   s.push('<text class="refnote" x="'+(M.l-10)+'" y="'+(ry-6)+'" text-anchor="end">0,36%</text>');
 
+  /* linha de tendencia ponderada pelo PIB */
+  var D=xdom(), tpts=[];
+  for(var i=0;i<=80;i++){
+    var frac=i/80;
+    var popv = state.scale==='log'
+      ? Math.pow(10, Math.log10(D.min) + frac*(Math.log10(D.max)-Math.log10(D.min)))
+      : Math.max(D.min, frac*D.linmax);
+    var yv = trendAt(popv);
+    if(yv<YD.min || yv>YD.max) continue;
+    tpts.push(sx(popv).toFixed(1)+','+sy(yv).toFixed(1));
+  }
+  if(tpts.length>1){
+    s.push('<polyline class="trend" points="'+tpts.join(' ')+'"/>');
+    var first=tpts[0].split(','), lx0=+first[0], ly0=+first[1];
+    s.push('<text class="trendnote" x="'+(lx0+7)+'" y="'+(ly0-13)+'" text-anchor="start">Tendência ponderada pelo PIB</text>');
+  }
+
   /* bolhas: maiores primeiro, menores por cima */
   pts = [];
   var term = state.q.trim().toLowerCase();
   data.forEach(function(d){
     var x=sx(d.pop), y=sy(d.tgca), r=sr(d.pib);
     pts.push({d:d,x:x,y:y,r:r});
-    s.push('<circle class="dot" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'"/>');
+    s.push('<circle class="dot'+(d.pri?'':' npri')+'" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'"/>');
   });
 
   /* rótulos diretos, seletivos */
@@ -442,7 +516,9 @@ svg.addEventListener('pointermove', function(ev){
       '<div class="r"><span>TGCA</span><b>'+ftg(d.tgca)+'</b></div>'+
       '<div class="r"><span>PIB total</span><b>'+fpib(d.pib)+'</b></div>'+
       '<div class="r"><span>PIB per capita</span><b>R$ '+nf(d.pibpc,0)+'</b></div>'+
-      '<div class="q">'+esc(d.q.nome)+'</div>';
+      '<div class="r"><span>Linha nesta população</span><b>'+ftg(trendAt(d.pop))+'</b></div>'+
+      '<div class="r"><span>Distância da linha</span><b>'+(d.gap>0?'+':'')+nf(d.gap,2)+' p.p.</b></div>'+
+      '<div class="q'+(d.pri?'':' n')+'">'+(d.pri?'Prioritário':'Não prioritário')+' · '+esc(d.q.nome)+'</div>';
   }
   var cr = svg.parentNode.getBoundingClientRect();
   var tw = tip.offsetWidth || 210, th = tip.offsetHeight || 120;
@@ -460,16 +536,17 @@ svg.addEventListener('pointerleave', hideTip);
 
 /* ---------- tiles ---------- */
 function drawTiles(data){
-  var cnt={}; QDEF.forEach(function(q){cnt[q.id]=0;});
-  data.forEach(function(d){cnt[d.q.id]++;});
   var pibTot = data.reduce(function(a,d){return a+d.pib;},0);
-  var t=[];
+  var pri = data.filter(function(d){return d.pri;});
+  var pibPri = pri.reduce(function(a,d){return a+d.pib;},0);
+  var pctN = data.length ? Math.round(pri.length/data.length*100) : 0;
+  var pctP = pibTot ? Math.round(pibPri/pibTot*100) : 0;
   var nuf = UFS.filter(function(u){return state.ufs.has(u);}).length;
+  var t=[];
   t.push(tile('Municípios', nf(data.length), nuf===1 ? '1 estado selecionado' : nuf+' estados selecionados'));
-  QDEF.forEach(function(q){
-    var pct = data.length ? Math.round(cnt[q.id]/data.length*100) : 0;
-    t.push(tile(q.curto, nf(cnt[q.id]), pct+'% da seleção'));
-  });
+  t.push(tile('Prioritários', nf(pri.length), pctN+'% da seleção'));
+  t.push(tile('Não prioritários', nf(data.length-pri.length), (100-pctN)+'% da seleção'));
+  t.push(tile('PIB dos prioritários', fpib(pibPri), pctP+'% do PIB da seleção'));
   t.push(tile('PIB somado', fpib(pibTot), 'total da seleção'));
   document.getElementById('tiles').innerHTML = t.join('');
 }
@@ -512,13 +589,19 @@ function drawSmall(){
     [-2,0,2,4,6].forEach(function(t){s.push('<text class="tick" x="'+(m.l-6)+'" y="'+(py(t)+4)+'" text-anchor="end">'+t+'%</text>');});
     var smt = state.range===Infinity ? [50000,500000,5000000] : (state.range>=1000000 ? [50000,250000,1000000] : [50000,150000,state.range]);
     smt.forEach(function(t){s.push('<text class="tick" x="'+px(t)+'" y="'+(m.t+ph+16)+'" text-anchor="middle">'+fpop(t)+'</text>');});
+    var tp=[];
+    for(var k=0;k<=40;k++){
+      var pv=Math.pow(10, a + (k/40)*(b-a)), yv=trendAt(pv);
+      if(yv>=YD.min && yv<=YD.max) tp.push(px(pv).toFixed(1)+','+py(yv).toFixed(1));
+    }
+    if(tp.length>1) s.push('<polyline class="trend" points="'+tp.join(' ')+'" stroke-width="1.5"/>');
     ds.slice().sort(function(x,y){return y.pib-x.pib;}).forEach(function(d){
       var r=Math.max(1.8, sr(d.pib)*0.42);
-      s.push('<circle class="dot'+(dim?' off':'')+'" cx="'+px(d.pop).toFixed(1)+'" cy="'+py(d.tgca).toFixed(1)+'" r="'+r.toFixed(1)+'"><title>'+
-        esc(d.mun)+' — '+nf(d.pop)+' hab., TGCA '+ftg(d.tgca)+', PIB '+fpib(d.pib)+'</title></circle>');
+      s.push('<circle class="dot'+(d.pri?'':' npri')+(dim?' off':'')+'" cx="'+px(d.pop).toFixed(1)+'" cy="'+py(d.tgca).toFixed(1)+'" r="'+r.toFixed(1)+'"><title>'+
+        esc(d.mun)+' — '+nf(d.pop)+' hab., TGCA '+ftg(d.tgca)+', PIB '+fpib(d.pib)+(d.pri?' · prioritário':' · não prioritário')+'</title></circle>');
     });
-    var acima = ds.filter(function(d){return d.tgca>=REF.y;}).length;
-    out.push('<div class="smcell"><h3>'+uf+'</h3><p class="smn">'+ds.length+(ds.length===1?' município · ':' municípios · ')+acima+' acima de 0,36%</p>'+
+    var acima = ds.filter(function(d){return d.pri;}).length;
+    out.push('<div class="smcell"><h3>'+uf+'</h3><p class="smn">'+ds.length+(ds.length===1?' município · ':' municípios · ')+acima+' prioritários</p>'+
       '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+uf+': '+ds.length+' municípios">'+s.join('')+'</svg></div>');
   });
   document.getElementById('smgrid').innerHTML=out.join('');
@@ -532,13 +615,16 @@ var COLS=[
   {k:'tgca', t:'TGCA', f:function(d){return ftg(d.tgca);}},
   {k:'pib', t:'PIB total', f:function(d){return fpib(d.pib);}},
   {k:'pibpc', t:'PIB per capita', f:function(d){return 'R$ '+nf(d.pibpc,0);}},
+  {k:'gap', t:'Δ vs. linha', f:function(d){return (d.gap>0?'+':'')+nf(d.gap,2)+' p.p.';}},
+  {k:'pri', t:'Prioridade', f:function(d){return '<span class="tag'+(d.pri?'':' n')+'">'+(d.pri?'Prioritário':'Não prioritário')+'</span>';}},
   {k:'q', t:'Quadrante', f:function(d){return esc(d.q.curto);}}
 ];
 function drawTable(){
   var data=visible().slice();
   var k=state.sort.key, dir=state.sort.dir;
   data.sort(function(a,b){
-    var va = k==='q'? a.q.nome : a[k], vb = k==='q'? b.q.nome : b[k];
+    var va = k==='q'? a.q.nome : (k==='pri'? (a.pri?1:0) : a[k]);
+    var vb = k==='q'? b.q.nome : (k==='pri'? (b.pri?1:0) : b[k]);
     if(typeof va==='string') return va.localeCompare(vb,'pt-BR')*dir;
     return (va-vb)*dir;
   });
@@ -596,6 +682,17 @@ function buildRangeChips(){
     hideTip(); render();
   });
 }
+function buildPriChips(){
+  var c=document.getElementById('prichips');
+  c.addEventListener('click', function(ev){
+    var b=ev.target.closest('button[data-p]'); if(!b) return;
+    state.pri=b.dataset.p;
+    Array.prototype.forEach.call(c.querySelectorAll('button[data-p]'), function(x){
+      x.setAttribute('aria-pressed', x===b ? 'true':'false');
+    });
+    hideTip(); render();
+  });
+}
 function pair(aId,bId,onA,onB){
   var A=document.getElementById(aId), B=document.getElementById(bId);
   A.addEventListener('click',function(){A.setAttribute('aria-pressed','true');B.setAttribute('aria-pressed','false');onA();});
@@ -624,6 +721,28 @@ function render(){
   else { drawTable(); drawTiles(visible()); }
 }
 
+/* ---------- nota metodologica da tendencia ---------- */
+(function(){
+  var sw=0; ROWS.forEach(function(d){sw+=d.pib;});
+  var maior = ROWS.slice().sort(function(x,y){return y.pib-x.pib;})[0];
+  var peso = (maior.pib/sw*100).toFixed(1);
+  var npri = ROWS.filter(function(d){return d.pri;}).length;
+  var pibpri = ROWS.filter(function(d){return d.pri;}).reduce(function(a,d){return a+d.pib;},0);
+  document.getElementById('methodbox').innerHTML =
+    '<b>Como a linha é calculada.</b> Mínimos quadrados de TGCA sobre log10(população), com cada município ' +
+    'pesado pelo seu PIB total — é a média ponderada pedida, na forma de regressão. A reta ajustada é ' +
+    '<code>TGCA = ' + nf(TREND.a,3) + ' ' + (TREND.b<0?'−':'+') + ' ' + nf(Math.abs(TREND.b),3) + ' × log10(pop)</code>, ' +
+    'com R² ponderado de ' + nf(TREND.r2,3) + '. Ela é ajustada uma única vez sobre os 677 municípios da base, ' +
+    'e não sobre a seleção da tela: assim “prioritário” é um atributo fixo de cada município e não muda quando você ' +
+    'filtra. Resultado: <b>' + npri + ' prioritários</b>, que concentram ' + Math.round(pibpri/sw*100) + '% do PIB da base.' +
+    '<br><br><b>Onde ela é frágil.</b> Ponderar pelo PIB concentra o peso em pouquíssimos pontos: ' +
+    esc(maior.mun) + ' sozinho responde por ' + peso + '% do peso total, e os oito maiores PIBs somam 31%. ' +
+    'Sem os municípios acima de 1 milhão de habitantes a inclinação cai de −0,67 para −0,42 e o R² ponderado vai a 0,02. ' +
+    'Sem ponderação nenhuma a inclinação é praticamente zero (R² 0,000): a relação entre porte e crescimento que a linha ' +
+    'mostra vem do peso do PIB, não de uma tendência forte nos dados brutos. Use a linha como um corte de priorização ' +
+    'defensável, não como previsão.';
+})();
+
 /* ---------- nota de qualidade dos dados ---------- */
 (function(){
   var w=document.getElementById('warnbox');
@@ -636,6 +755,7 @@ function render(){
 
 buildChips();
 buildRangeChips();
+buildPriChips();
 drawSizeKey();
 render();
 })();
