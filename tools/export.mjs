@@ -47,12 +47,44 @@ await p.waitForTimeout(900);
 await p.click('#rangechips button:text-is("Toda a base")');
 await p.waitForTimeout(600);
 
-/* --------- PNG do gráfico em cada ponderação --------- */
-for (const [rotulo, arquivo] of [['Limitada', 'limitada'], ['Integral', 'integral']]) {
-  await p.click(`#wchips button:text-is("${rotulo}")`);
-  await p.waitForTimeout(500);
+/* --------- dois PDFs: com e sem os outliers de PIB ---------
+   A linha de tendência é a mesma nos dois: ajustada uma vez sobre os 677
+   municípios, na ponderação limitada. Tirar outlier é filtro de exibição,
+   nunca reajuste — o bloco abaixo confere isso lendo a equação na tela. */
+await p.click('#wchips button:text-is("Limitada")');
+await p.waitForTimeout(500);
+
+const equacoes = [];
+for (const [modo, arquivo, titulo] of [['com', 'com-outliers', 'com os outliers'],
+                                       ['sem', 'sem-outliers', 'sem os outliers']]) {
+  await p.click(`#outchips button:text-is("${modo === 'com' ? 'Com' : 'Sem'}")`);
+  await p.waitForTimeout(600);
+
+  equacoes.push(await p.$eval('#methodbox tr.on code', e => e.textContent.trim()));
+
+  // cada aba precisa estar ativa para ser fotografada; na impressao o CSS revela as duas
+  await p.click('#v-chart'); await p.waitForTimeout(450);
   await p.locator('#view-chart').screenshot({ path: join(DIST, `grafico-${arquivo}.png`) });
+  await p.click('#v-sm'); await p.waitForTimeout(550);
+  await p.locator('#view-sm').screenshot({ path: join(DIST, `por-estado-${arquivo}.png`) });
+  await p.click('#v-chart'); await p.waitForTimeout(400);
+
+  await p.emulateMedia({ media: 'print' });
+  await p.pdf({
+    path: join(DIST, `matriz_tgca_${arquivo}.pdf`), format: 'A4', landscape: true,
+    printBackground: true, margin: { top: '12mm', bottom: '12mm', left: '12mm', right: '12mm' },
+  });
+  await p.emulateMedia({ media: 'screen' });
+  console.log(`PDF ${titulo}: matriz_tgca_${arquivo}.pdf`);
 }
+
+if (equacoes[0] !== equacoes[1]) {
+  console.error(`abortado: a linha mudou entre os dois PDFs\n  com: ${equacoes[0]}\n  sem: ${equacoes[1]}`);
+  process.exit(1);
+}
+console.log(`linha idêntica nos dois PDFs: ${equacoes[0]}`);
+await p.click('#outchips button:text-is("Com")');
+await p.waitForTimeout(500);
 
 /* --------- confere o CSV contra o que a página renderiza --------- */
 await p.click('#v-tab');
@@ -71,15 +103,6 @@ for (const [rotulo, chave] of [['Limitada', 'capped'], ['Integral', 'full']]) {
 console.log(`verificação: ${conferidos} rótulos conferidos contra a página, ${divergencias} divergências`);
 if (divergencias) { console.error('abortado: o CSV não bate com a página'); process.exit(1); }
 
-/* --------- PDF --------- */
-await p.click('#v-chart');
-await p.click('#wchips button:text-is("Limitada")');
-await p.waitForTimeout(500);
-await p.emulateMedia({ media: 'print' });
-await p.pdf({
-  path: join(DIST, 'matriz_tgca_municipios.pdf'), format: 'A4', landscape: true,
-  printBackground: true, margin: { top: '12mm', bottom: '12mm', left: '12mm', right: '12mm' },
-});
 await navegador.close();
 
 /* --------- CSV: ; como separador e vírgula decimal, que é o que o Excel pt-BR abre --------- */
@@ -108,4 +131,4 @@ for (const d of ROWS) {
 writeFileSync(join(DIST, 'matriz_tgca_municipios.csv'), '﻿' + linhas.join('\r\n') + '\r\n', 'utf8');
 
 console.log(`erros de console: ${erros.length ? erros.join(' | ') : 'nenhum'}`);
-console.log(`gerados em dist/: PDF, CSV (${ROWS.length} linhas) e 2 PNGs`);
+console.log(`gerados em dist/: 2 PDFs, CSV (${ROWS.length} linhas) e 4 PNGs`);

@@ -181,13 +181,14 @@ footer b{color:var(--ink-2);font-weight:600}
   .hidden{display:block !important}
   /* reordena o documento impresso: capa com resumo e metodologia, depois os graficos */
   .wrap{display:flex;flex-direction:column}
-  header{order:1} .tiles{order:2} #methodbox{order:3} .warn{order:4}
-  #view-chart{order:5} #view-sm{order:6} footer{order:7}
+  header{order:1} .tiles{order:2} #methodbox{order:3}
+  #view-chart{order:4} #view-sm{order:5} .warn{order:6} footer{order:7}
   #sharebox{display:none !important}   /* instrução de envio não cabe num PDF */
   .card{border:0;padding:0;margin-bottom:5mm;break-inside:auto}
   /* a tabela de 677 linhas sairia em 33 paginas de corpo 10: vai como CSV */
   #view-tab{display:none !important}
   #view-chart, #view-sm{break-before:page;page-break-before:always}
+  .warn{margin-top:5mm}
   #methodbox{margin-top:6mm}
   footer{margin-top:5mm;font-size:10px}
   /* altura fixa faz o grafico caber numa pagina junto com a legenda */
@@ -223,6 +224,13 @@ footer b{color:var(--ink-2);font-weight:600}
   <div class="cgroup">
     <span class="clab">Faixa de população</span>
     <div class="chips" id="rangechips"></div>
+  </div>
+  <div class="cgroup">
+    <span class="clab">Outliers de PIB</span>
+    <div class="chips" id="outchips">
+      <button class="chip ghost" data-o="com" aria-pressed="true">Com</button>
+      <button class="chip ghost" data-o="sem" aria-pressed="false">Sem</button>
+    </div>
   </div>
   <div class="cgroup">
     <span class="clab">Ponderação da linha</span>
@@ -407,13 +415,14 @@ var RANGES = [
   {v:1000000, lab:'Até 1 milhão'},
   {v:Infinity,lab:'Toda a base'}
 ];
-var state = {ufs:new Set(UFS), scale:'log', q:'', view:'chart', range:500000, pri:'all', w:'capped', sort:{key:'pop', dir:-1}};
+var state = {ufs:new Set(UFS), scale:'log', q:'', view:'chart', range:500000, pri:'all', w:'capped', out:'com', sort:{key:'pop', dir:-1}};
 applyFit();
 function visible(){
   var term = state.q.trim().toLowerCase();
   return ROWS.filter(function(d){
     if(!state.ufs.has(d.uf)) return false;
     if(d.pop > state.range) return false;
+    if(state.out==='sem' && d.pib > PCAP) return false;
     if(state.pri==='pri' && !d.pri) return false;
     if(state.pri==='npri' && d.pri) return false;
     if(term && d.mun.toLowerCase().indexOf(term) < 0) return false;
@@ -425,9 +434,22 @@ function visible(){
 var W=1140, H=700, M={t:26, r:44, b:62, l:74};
 var PW = W-M.l-M.r, PH = H-M.t-M.b;
 var YD={min:-2.1,max:6.9};
+/* Com os outliers fora, a maior populacao cai de 11,4 mi para 897 mil: o eixo
+   acompanha, senao sobraria um terco do grafico vazio. Depende so da faixa e do
+   corte de outliers — nunca do filtro de UF, para que trocar de estado nao
+   reescale o eixo e as comparacoes continuem validas. */
+function topoPop(){
+  var mx=0;
+  ROWS.forEach(function(d){
+    if(state.out==='sem' && d.pib > PCAP) return;
+    if(d.pop > mx) mx = d.pop;
+  });
+  return mx || 1e6;
+}
 function xdom(){
-  var mx = state.range===Infinity ? 12500000 : state.range*1.06;
-  return {min:23000, max:mx, linmax: state.range===Infinity ? 11800000 : state.range*1.04};
+  if(state.range!==Infinity) return {min:23000, max:state.range*1.06, linmax:state.range*1.04};
+  var t=topoPop();
+  return {min:23000, max:t*1.09, linmax:t*1.04};
 }
 var XLOG={min:23000,max:12500000}, XLIN={min:0,max:11800000};
 function sx(v){
@@ -444,11 +466,15 @@ function sr(pib){ return 2.6 + 39*Math.sqrt(pib/PIBMAX); }
 var XT_BY_RANGE = {
   '250000':  [25000,50000,100000,150000,250000],
   '500000':  [25000,50000,100000,200000,350000,500000],
-  '1000000': [25000,50000,100000,250000,500000,1000000],
-  'Infinity':[25000,50000,100000,250000,500000,1000000,2500000,5000000,10000000]
+  '1000000': [25000,50000,100000,250000,500000,1000000]
 };
+var XT_ESCADA=[25000,50000,100000,250000,500000,1000000,2500000,5000000,10000000];
 function xticks(){
-  if(state.scale==='log') return XT_BY_RANGE[String(state.range)];
+  if(state.scale==='log'){
+    if(state.range!==Infinity) return XT_BY_RANGE[String(state.range)];
+    var mx=xdom().max;
+    return XT_ESCADA.filter(function(t){return t<=mx;});
+  }
   var mx=xdom().linmax, out=[], step=mx/5;
   var pow=Math.pow(10,Math.floor(Math.log10(step)));
   step=Math.ceil(step/pow)*pow;
@@ -588,14 +614,19 @@ function drawChart(){
 
   svg.innerHTML = s.join('');
 
-  var fora = ROWS.filter(function(d){
-    var term2=state.q.trim().toLowerCase();
-    return state.ufs.has(d.uf) && d.pop>state.range && (!term2 || d.mun.toLowerCase().indexOf(term2)>=0);
-  }).length;
+  var term2=state.q.trim().toLowerCase();
+  function contaFora(teste){
+    return ROWS.filter(function(d){
+      return state.ufs.has(d.uf) && teste(d) && (!term2 || d.mun.toLowerCase().indexOf(term2)>=0);
+    }).length;
+  }
+  var fora = contaFora(function(d){ return d.pop>state.range && !(state.out==='sem' && d.pib>PCAP); });
+  var foraOut = state.out==='sem' ? contaFora(function(d){ return d.pib>PCAP; }) : 0;
   document.getElementById('cap-chart').textContent =
     data.length + (data.length===1?' município · escala ':' municípios · escala ') +
     (state.scale==='log' ? 'logarítmica' : 'linear') +
-    (fora ? ' · '+fora+(fora===1?' município acima de ':' municípios acima de ')+fpop(state.range)+' hab. fora da faixa (use “Toda a base” para incluí-los)' : ' · faixa completa') +
+    (foraOut ? ' · sem os '+foraOut+' outliers de PIB (acima de '+fpib(PCAP)+')' : '') +
+    (fora ? ' · '+fora+(fora===1?' município acima de ':' municípios acima de ')+fpop(state.range)+' hab. fora da faixa' : '') +
     ' · passe o mouse sobre uma bolha para os valores.';
 }
 
@@ -667,7 +698,12 @@ function tile(k,v,n){ return '<div class="tile"><div class="k">'+esc(k)+'</div><
 
 /* ---------- legenda de tamanho ---------- */
 function drawSizeKey(){
-  var vals=[1000000, 10000000, 100000000];
+  var topo=0;
+  ROWS.forEach(function(d){ if(!(state.out==='sem' && d.pib>PCAP) && d.pib>topo) topo=d.pib; });
+  var maior=ROWS.reduce(function(x,y){ return (!(state.out==='sem'&&y.pib>PCAP) && y.pib>x.pib)?y:x; },
+                        {pib:0,mun:''});
+  var vals=[1000000, 10000000, 100000000].filter(function(v){ return v<=topo*1.2; });
+  if(vals.length<2) vals=[1000000, 10000000];
   var h=[];
   vals.forEach(function(v){
     var r=sr(v), d=Math.ceil(r*2)+4;
@@ -675,7 +711,8 @@ function drawSizeKey(){
       '<circle class="dot" cx="'+(d/2)+'" cy="'+(d/2)+'" r="'+r.toFixed(1)+'"/></svg>'+
       '<span>'+fpib(v)+'</span></div>');
   });
-  h.push('<div class="item note"><span>Escala fixa em todas as faixas. O maior é São Paulo, R$ 1,07 tri.</span></div>');
+  h.push('<div class="item note"><span>Escala fixa em todas as faixas. O maior aqui é '+
+    esc(maior.mun)+', '+fpib(maior.pib)+'.</span></div>');
   document.getElementById('sizekey').innerHTML=h.join('');
 }
 
@@ -690,7 +727,12 @@ function drawSmall(){
   var term=state.q.trim().toLowerCase();
   var out=[];
   UFS.forEach(function(uf){
-    var ds=ROWS.filter(function(d){return d.uf===uf && d.pop<=state.range && (!term || d.mun.toLowerCase().indexOf(term)>=0);});
+    var ds=ROWS.filter(function(d){
+      if(d.uf!==uf) return false;
+      if(d.pop>state.range) return false;
+      if(state.out==='sem' && d.pib>PCAP) return false;
+      return !term || d.mun.toLowerCase().indexOf(term)>=0;
+    });
     var dim = !state.ufs.has(uf);
     var rx=px(REF.x), ry=py(REF.y), s=[];
     s.push('<rect x="'+rx+'" y="'+m.t+'" width="'+(m.l+pw-rx)+'" height="'+(ry-m.t)+'" fill="var(--q-hi)"/>');
@@ -700,7 +742,8 @@ function drawSmall(){
     s.push('<line class="axisline" x1="'+m.l+'" y1="'+(m.t+ph)+'" x2="'+(m.l+pw)+'" y2="'+(m.t+ph)+'"/>');
     s.push('<line class="axisline" x1="'+m.l+'" y1="'+m.t+'" x2="'+m.l+'" y2="'+(m.t+ph)+'"/>');
     [-2,0,2,4,6].forEach(function(t){s.push('<text class="tick" x="'+(m.l-6)+'" y="'+(py(t)+4)+'" text-anchor="end">'+t+'%</text>');});
-    var smt = state.range===Infinity ? [50000,500000,5000000] : (state.range>=1000000 ? [50000,250000,1000000] : [50000,150000,state.range]);
+    var smt=[50000,250000,1000000,5000000].filter(function(t){return t<=D.max;});
+    if(smt.length<2) smt=[50000, D.max/2];
     smt.forEach(function(t){s.push('<text class="tick" x="'+px(t)+'" y="'+(m.t+ph+16)+'" text-anchor="middle">'+fpop(t)+'</text>');});
     var tp=[];
     for(var k=0;k<=40;k++){
@@ -795,6 +838,17 @@ function buildRangeChips(){
     hideTip(); render();
   });
 }
+function buildOutChips(){
+  var c=document.getElementById('outchips');
+  c.addEventListener('click', function(ev){
+    var b=ev.target.closest('button[data-o]'); if(!b) return;
+    state.out=b.dataset.o;
+    Array.prototype.forEach.call(c.querySelectorAll('button[data-o]'), function(x){
+      x.setAttribute('aria-pressed', x===b ? 'true':'false');
+    });
+    hideTip(); render();
+  });
+}
 function buildWChips(){
   var c=document.getElementById('wchips');
   c.addEventListener('click', function(ev){
@@ -846,6 +900,7 @@ function render(){
   drawSmall();
   drawTable();
   drawTiles(visible());
+  drawSizeKey();
 }
 
 /* ---------- nota metodologica da tendencia ---------- */
@@ -874,7 +929,9 @@ function drawMethod(){
   document.getElementById('methodbox').innerHTML =
     '<b>Duas versões da mesma linha.</b> Mínimos quadrados de TGCA sobre log10(população), com cada município ' +
     'pesado pelo seu PIB. As duas versões diferem apenas no peso, e ambas são ajustadas sobre os 677 municípios da base — ' +
-    'nunca sobre a seleção da tela — para que a classificação não mude quando você filtra.' +
+    'nunca sobre a seleção da tela — para que a classificação não mude quando você filtra. Tirar os outliers da ' +
+    'tela também não mexe na linha: ela continua sendo a mesma reta geral, ajustada sobre os 677, e é ela que ' +
+    'aparece tanto no gráfico geral quanto em cada painel por estado.' +
     '<div class="mtable"><table><thead><tr><th scope="col">Versão</th><th scope="col">Reta ajustada</th>' +
     '<th scope="col">R² pond.</th><th scope="col">Peso do maior</th><th scope="col">Prioritários</th><th scope="col">% do PIB</th></tr></thead><tbody>' +
     row('capped', A, 'peso = min(PIB, R$ '+nf(PCAP/1e6,1)+' bi), o percentil 95 — '+NCAP+' municípios chegam ao teto, nenhum é excluído') +
@@ -906,7 +963,7 @@ buildChips();
 buildRangeChips();
 buildPriChips();
 buildWChips();
-drawSizeKey();
+buildOutChips();
 render();
 })();
 </script>
