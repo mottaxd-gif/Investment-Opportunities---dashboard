@@ -1,0 +1,578 @@
+<title>Matriz TGCA × População</title>
+<style>
+:root{
+  color-scheme: light;
+  --plane:#f9f9f7; --surface:#fcfcfb;
+  --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --hair:rgba(11,11,11,.10);
+  --s1:#2a78d6; --s1-fill:rgba(42,120,214,.34); --s1-soft:rgba(42,120,214,.10);
+  --dim:#b9b8b1; --dim-fill:rgba(137,135,129,.16);
+  --q-hi:rgba(42,120,214,.045); --q-lo:rgba(11,11,11,.030);
+  --chip:#f0efec; --chip-on:#2a78d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --plane:#0d0d0d; --surface:#1a1a19;
+    --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --hair:rgba(255,255,255,.10);
+    --s1:#3987e5; --s1-fill:rgba(57,135,229,.34); --s1-soft:rgba(57,135,229,.12);
+    --dim:#55544f; --dim-fill:rgba(137,135,129,.14);
+    --q-hi:rgba(57,135,229,.07); --q-lo:rgba(255,255,255,.030);
+    --chip:#262624; --chip-on:#3987e5;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --plane:#0d0d0d; --surface:#1a1a19;
+  --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --axis:#383835; --hair:rgba(255,255,255,.10);
+  --s1:#3987e5; --s1-fill:rgba(57,135,229,.34); --s1-soft:rgba(57,135,229,.12);
+  --dim:#55544f; --dim-fill:rgba(137,135,129,.14);
+  --q-hi:rgba(57,135,229,.07); --q-lo:rgba(255,255,255,.030);
+  --chip:#262624; --chip-on:#3987e5;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--plane); color:var(--ink);
+  font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1240px;margin:0 auto;padding:32px 20px 64px}
+header h1{font-size:26px;line-height:1.25;margin:0 0 6px;letter-spacing:-.015em}
+header p.sub{margin:0;color:var(--ink-2);font-size:14.5px;max-width:76ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(166px,1fr));gap:10px;margin:24px 0 20px}
+.tile{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:13px 15px}
+.tile .k{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile .v{font-size:25px;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+.tile .n{font-size:12px;color:var(--ink-2);margin-top:2px}
+.controls{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 15px;margin-bottom:14px;
+  display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+.cgroup{display:flex;flex-direction:column;gap:7px;min-width:0}
+.clab{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--hair);
+  background:var(--chip);color:var(--ink-2);cursor:pointer;line-height:1.35}
+.chip:hover{border-color:var(--axis)}
+.chip[aria-pressed="true"]{background:var(--chip-on);border-color:var(--chip-on);color:#fff}
+.chip.ghost[aria-pressed="true"]{background:transparent;border-color:var(--chip-on);color:var(--s1)}
+input[type=search]{font:inherit;font-size:13.5px;padding:6px 10px;border-radius:8px;border:1px solid var(--hair);
+  background:var(--plane);color:var(--ink);min-width:190px}
+input[type=search]:focus{outline:2px solid var(--s1);outline-offset:1px}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:16px 16px 10px;position:relative}
+.card h2{font-size:15.5px;margin:0 0 2px;font-weight:600}
+.card p.cap{margin:0 0 10px;font-size:13px;color:var(--ink-2)}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.gridline{stroke:var(--grid);stroke-width:1}
+.axisline{stroke:var(--axis);stroke-width:1}
+.reflines{stroke:var(--s1);stroke-width:1.5;opacity:.55}
+.tick{fill:var(--muted);font-size:11.5px;font-variant-numeric:tabular-nums}
+.axtitle{fill:var(--ink-2);font-size:12.5px;font-weight:500}
+.qlab{fill:var(--muted);font-size:11.5px;font-weight:600;letter-spacing:.02em}
+.qcount{fill:var(--muted);font-size:11px}
+.dot{fill:var(--s1-fill);stroke:var(--s1);stroke-width:1.25;vector-effect:non-scaling-stroke}
+.dot.off{fill:var(--dim-fill);stroke:var(--dim);stroke-width:1}
+.dot.hit{stroke-width:2.25}
+.dlabel{fill:var(--ink-2);font-size:11.5px;paint-order:stroke;stroke:var(--surface);stroke-width:3.5px;stroke-linejoin:round}
+.refnote{fill:var(--s1);font-size:11.5px;font-weight:600}
+#tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;z-index:5;
+  background:var(--surface);border:1px solid var(--hair);border-radius:9px;padding:9px 11px;
+  box-shadow:0 6px 22px rgba(0,0,0,.14);font-size:12.5px;min-width:190px}
+#tip .t{font-weight:600;font-size:13.5px;margin-bottom:5px}
+#tip .r{display:flex;justify-content:space-between;gap:16px;color:var(--ink-2);line-height:1.7}
+#tip .r b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+#tip .q{margin-top:6px;padding-top:6px;border-top:1px solid var(--hair);color:var(--s1);font-weight:600;font-size:12px}
+.legend{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;padding:12px 2px 6px;border-top:1px solid var(--hair);margin-top:8px}
+.legend .lt{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.sizekey{display:flex;align-items:flex-end;gap:12px}
+.sizekey .item{display:flex;flex-direction:column;align-items:center;gap:4px}
+.sizekey svg{width:auto}
+.sizekey span{font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.sm{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.smcell{border:1px solid var(--hair);border-radius:9px;padding:9px 10px 4px}
+.smcell h3{margin:0 0 1px;font-size:13px;font-weight:600}
+.smcell .smn{margin:0 0 6px;font-size:11.5px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:right;padding:7px 9px;border-bottom:1px solid var(--hair);font-variant-numeric:tabular-nums}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2),th:last-child,td:last-child{text-align:left}
+th{position:sticky;top:0;background:var(--surface);cursor:pointer;font-size:11.5px;text-transform:uppercase;
+  letter-spacing:.04em;color:var(--muted);font-weight:600;white-space:nowrap;z-index:2}
+th:hover{color:var(--ink)}
+th[aria-sort]:after{content:" ↑";opacity:.9}
+th[aria-sort="descending"]:after{content:" ↓"}
+tbody tr:hover{background:var(--s1-soft)}
+.tscroll{max-height:620px;overflow:auto;border:1px solid var(--hair);border-radius:9px;margin-top:4px}
+.hidden{display:none !important}
+footer{margin-top:22px;font-size:12.5px;color:var(--muted);line-height:1.65}
+footer b{color:var(--ink-2);font-weight:600}
+.warn{background:var(--surface);border:1px solid var(--hair);border-left:3px solid #fab219;
+  border-radius:8px;padding:11px 14px;margin-top:14px;font-size:13px;color:var(--ink-2)}
+.warn b{color:var(--ink)}
+@media (max-width:640px){.wrap{padding:20px 12px 44px}header h1{font-size:21px}}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Matriz TGCA × População — 677 municípios</h1>
+  <p class="sub">Cada bolha é um município. Eixo horizontal: população residente (Censo 2022).
+  Eixo vertical: TGCA, a taxa geométrica de crescimento anual. O tamanho da bolha é proporcional ao PIB total.
+  As linhas de referência cruzam em <b>60.000 habitantes</b> e <b>0,36% de TGCA</b>, dividindo a base em quatro quadrantes.</p>
+</header>
+
+<div class="tiles" id="tiles"></div>
+
+<div class="controls">
+  <div class="cgroup">
+    <span class="clab">Estado</span>
+    <div class="chips" id="ufchips"></div>
+  </div>
+  <div class="cgroup">
+    <span class="clab">Escala do eixo X</span>
+    <div class="chips">
+      <button class="chip ghost" id="sc-log" aria-pressed="true">Logarítmica</button>
+      <button class="chip ghost" id="sc-lin" aria-pressed="false">Linear</button>
+    </div>
+  </div>
+  <div class="cgroup">
+    <span class="clab">Buscar município</span>
+    <input type="search" id="q" placeholder="ex.: Extrema" autocomplete="off">
+  </div>
+  <div class="cgroup" style="margin-left:auto">
+    <span class="clab">Visualização</span>
+    <div class="chips">
+      <button class="chip ghost" id="v-chart" aria-pressed="true">Gráfico</button>
+      <button class="chip ghost" id="v-sm" aria-pressed="false">Por estado</button>
+      <button class="chip ghost" id="v-tab" aria-pressed="false">Tabela</button>
+    </div>
+  </div>
+</div>
+
+<section class="card" id="view-chart">
+  <h2>População × TGCA, área da bolha ∝ PIB total</h2>
+  <p class="cap" id="cap-chart"></p>
+  <svg id="chart" viewBox="0 0 1140 700" role="img" aria-labelledby="chart-desc"></svg>
+  <desc id="chart-desc">Gráfico de dispersão de 677 municípios: população no eixo X, TGCA no eixo Y, tamanho da bolha proporcional ao PIB total. Os dados completos estão na aba Tabela.</desc>
+  <div id="tip" role="status" aria-live="polite"></div>
+  <div class="legend">
+    <div>
+      <div class="lt">PIB total (R$ mil) — área da bolha</div>
+      <div class="sizekey" id="sizekey"></div>
+    </div>
+  </div>
+</section>
+
+<section class="card hidden" id="view-sm">
+  <h2>Um painel por estado</h2>
+  <p class="cap">Mesmos eixos e mesmas linhas de referência em todos os painéis, para comparação direta entre estados.</p>
+  <div class="sm" id="smgrid"></div>
+</section>
+
+<section class="card hidden" id="view-tab">
+  <h2>Tabela completa</h2>
+  <p class="cap" id="cap-tab"></p>
+  <div class="tscroll">
+    <table>
+      <thead><tr id="thead"></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<div class="warn" id="warnbox"></div>
+
+<footer>
+  <b>Fonte:</b> planilha TGCA_Municipios_Total (abas por UF), consolidada em 677 municípios de 9 estados —
+  SP, MG, BA, PR, SC, RJ, GO, MT e ES.<br>
+  <b>Consolidação:</b> a aba “SP completo” está inteiramente contida nas abas “SP 1” a “SP 4”, que ainda trazem
+  7 municípios a mais; por isso as quatro foram usadas como fonte de São Paulo e a aba consolidada foi descartada,
+  sem nenhum município duplicado ou perdido.<br>
+  <b>TGCA:</b> taxa geométrica de crescimento anual, em % ao ano, entre os Censos de 2010 e 2022.
+</footer>
+</div>
+
+<script id="data" type="application/json">{"ref":{"x":60000,"y":0.36},"cols":["mun","uf","pop","tgca","pib","pibpc"],"rows":[["Alagoinhas","BA",151055,0.55,5705227.49,37769.21],["Amargosa","BA",36521,0.46,608765.198,16668.91],["Araci","BA",48294,-0.4,642812.114,13310.39],["Barra","BA",51092,0.3,558492.724,10931.12],["Barra do Choça","BA",36539,0.4,540749.955,14799.25],["Barreiras","BA",159734,1.26,9499498.974,59470.74],["Bom Jesus da Lapa","BA",65550,0.36,1554154.439,23709.45],["Brumado","BA",70510,0.75,1931839.323,27398.09],["Caetité","BA",52012,0.51,1216743.242,23393.51],["Camamu","BA",30469,-0.9,557661.535,18302.59],["Camaçari","BA",300372,1.78,27418877.532,91283.07],["Campo Alegre de Lourdes","BA",30671,0.76,383421.237,12501.1],["Campo Formoso","BA",71377,0.52,1617786.003,22665.37],["Canavieiras","BA",32683,0.08,510979.086,15634.4],["Candeias","BA",72382,-1.0,5750025.525,79439.99],["Cansanção","BA",37439,0.89,510493.321,13635.34],["Capim Grosso","BA",33235,1.41,801015.808,24101.57],["Casa Nova","BA",72086,0.87,1135275.591,15748.91],["Catu","BA",48148,-0.48,928641.003,19287.22],["Conceição do Coité","BA",67825,0.84,1122063.228,16543.51],["Conceição do Jacuípe","BA",35308,1.34,2634469.119,74613.94],["Correntina","BA",32457,0.39,3806363.285,117274.03],["Cruz das Almas","BA",60348,0.25,1279175.071,21196.64],["Curaçá","BA",34180,0.5,499931.719,14626.44],["Cícero Dantas","BA",30907,-0.1,503222.235,16365.48],["Dias d'Ávila","BA",71485,0.61,2377818.192,33263.18],["Entre Rios","BA",38098,-0.36,790786.138,20756.63],["Esplanada","BA",32554,-0.16,810979.757,24911.83],["Euclides da Cunha","BA",61456,0.67,959547.942,15613.58],["Eunápolis","BA",113710,0.97,4264492.925,37503.24],["Feira de Santana","BA",616272,0.85,21846454.667,35449.37],["Gandu","BA",32178,0.62,598642.986,18604.11],["Guanambi","BA",87817,0.94,2028013.245,23093.63],["Ilhéus","BA",178649,-0.17,7234380.827,40494.94],["Inhambupe","BA",33790,-0.33,728056.798,21546.52],["Ipiaú","BA",40706,-0.74,714937.605,17563.45],["Ipirá","BA",56876,-0.44,799164.101,14050.99],["Irecê","BA",74507,1.0,1963173.351,26348.84],["Itaberaba","BA",65073,0.45,1267186.907,19473.31],["Itabuna","BA",186708,-0.75,5152367.087,27595.86],["Itamaraju","BA",59605,-0.53,1395505.741,23412.56],["Itapetinga","BA",65897,-0.3,1938472.475,29416.7],["Itapicuru","BA",31679,-0.06,534862.537,16883.82],["Itiúba","BA",33872,-0.3,429677.861,12685.34],["Jacobina","BA",82590,0.5,2030142.295,24580.97],["Jaguaquara","BA",45964,-0.85,807068.769,17558.71],["Jaguarari","BA",32703,0.4,805703.944,24637.0],["Jequié","BA",158813,0.4,3882706.96,24448.29],["Jeremoabo","BA",37626,-0.04,623856.272,16580.46],["Juazeiro","BA",237821,1.53,6159603.827,25900.17],["Lauro de Freitas","BA",203331,1.84,8918479.61,43861.88],["Livramento de Nossa Senhora","BA",43903,0.45,705491.381,16069.32],["Luís Eduardo Magalhães","BA",107909,5.0,11559024.195,107118.26],["Macaúbas","BA",41859,-0.71,549585.766,13129.45],["Maragogipe","BA",35859,-1.44,479211.8,13363.78],["Mata de São João","BA",42566,0.44,1734856.86,40756.87],["Monte Santo","BA",47780,-0.34,590805.465,12365.12],["Morro do Chapéu","BA",33594,-0.21,1565321.407,46595.27],["Mucuri","BA",37977,0.44,3127407.236,82350.03],["Nova Viçosa","BA",39509,0.2,699743.948,17711.0],["Paulo Afonso","BA",112870,0.34,4258890.934,37732.71],["Pilão Arcado","BA",35357,0.55,367179.251,10384.91],["Pojuca","BA",32136,-0.55,3036558.676,94490.87],["Porto Seguro","BA",168326,2.4,5009893.696,29763.04],["Poções","BA",48293,0.43,681871.458,14119.47],["Prado","BA",35003,2.06,776982.13,22197.59],["Remanso","BA",40586,0.42,573383.292,14127.61],["Riacho de Santana","BA",30711,-0.61,406699.912,13242.81],["Riachão do Jacuípe","BA",33386,0.23,565913.377,16950.62],["Ribeira do Pombal","BA",54010,0.43,918879.756,17154.16],["Rio Real","BA",35362,-0.5,1275891.66,36080.87],["Salvador","BA",2417678,-0.84,76698777.218,31724.15],["Santa Maria da Vitória","BA",38604,-0.24,696761.133,18048.94],["Santaluz","BA",37834,0.69,678132.686,17923.9],["Santo Amaro","BA",56012,-0.33,1375771.156,24562.08],["Santo Antônio de Jesus","BA",103055,1.04,3028413.726,29386.38],["Santo Estêvão","BA",52276,0.76,1295366.193,24779.37],["Seabra","BA",46160,0.83,861824.933,18670.38],["Senhor do Bonfim","BA",74523,0.12,1260521.545,16914.53],["Sento Sé","BA",38154,0.28,1566194.071,41049.28],["Serra do Ramalho","BA",34222,0.72,521085.967,15226.64],["Serrinha","BA",80435,0.57,1420688.878,17662.57],["Simões Filho","BA",114559,-0.25,8508321.271,74270.21],["São Desidério","BA",32828,1.34,8525861.621,259713.1],["São Francisco do Conde","BA",38733,0.92,26505736.857,684319.23],["São Gonçalo dos Campos","BA",39513,1.51,1673385.933,42350.26],["São Sebastião do Passé","BA",40958,-0.24,957089.48,23367.58],["Teixeira de Freitas","BA",145216,0.4,3670771.175,25278.01],["Tucano","BA",48736,0.03,823511.194,16897.39],["Valença","BA",85655,-0.23,2194454.273,25619.69],["Vera Cruz","BA",42529,1.04,709330.481,16678.75],["Vitória da Conquista","BA",370879,1.61,12666570.589,34152.84],["Xique-Xique","BA",44757,-0.08,780079.645,17429.22],["Afonso Cláudio","ES",30684,-0.11,740219.596,24123.96],["Anchieta","ES",29984,1.91,2317578.734,77293.85],["Aracruz","ES",94765,1.23,7724839.436,81515.74],["Baixo Guandu","ES",30674,0.45,910611.357,29686.75],["Barra de São Francisco","ES",42498,0.37,1326676.964,31217.4],["Cachoeiro de Itapemirim","ES",185786,-0.17,7593554.334,40872.59],["Cariacica","ES",353491,0.11,19710842.61,55760.52],["Castelo","ES",36930,0.51,1395637.924,37791.44],["Colatina","ES",120033,0.61,5157944.636,42971.05],["Domingos Martins","ES",35416,0.89,1294973.94,36564.66],["Guarapari","ES",124656,1.42,3391094.556,27203.62],["Itapemirim","ES",39832,2.17,6134485.638,154008.98],["Linhares","ES",166786,1.4,10014356.32,60043.15],["Marataízes","ES",41929,1.73,7102417.666,169391.53],["Nova Venécia","ES",49065,0.53,1886120.51,38441.26],["Santa Maria de Jetibá","ES",41636,1.65,2592684.786,62270.27],["Serra","ES",520653,1.86,37649154.625,72311.41],["São Gabriel da Palha","ES",32252,0.1,988351.287,30644.65],["São Mateus","ES",123752,1.05,4355437.433,35194.89],["Viana","ES",73423,1.02,5957535.596,81139.91],["Vila Velha","ES",467722,1.01,19711327.558,42143.26],["Vitória","ES",322869,0.08,28257606.334,87520.35],["Anápolis","GO",398869,1.47,20432108.565,51225.11],["Aparecida de Goiânia","GO",527796,1.23,20888936.559,39577.67],["Bela Vista de Goiás","GO",34445,2.84,1983166.35,57574.87],["Caldas Novas","GO",98622,2.84,3782024.337,38348.69],["Catalão","GO",114427,2.34,10345992.501,90415.66],["Cidade Ocidental","GO",91767,4.21,1351012.615,14722.21],["Cristalina","GO",62337,2.46,5707718.214,91562.29],["Formosa","GO",115901,1.23,3918238.829,33806.77],["Goianira","GO",71916,6.43,1604686.6,22313.35],["Goianésia","GO",73707,1.79,2691742.145,36519.49],["Goiatuba","GO",35664,0.78,2725199.918,76413.19],["Goiânia","GO",1437366,0.83,75780845.992,52722.02],["Hidrolândia","GO",27742,3.96,1528148.591,55084.3],["Inhumas","GO",52204,0.66,1880643.106,36024.89],["Iporá","GO",35684,1.1,1227630.812,34402.84],["Itaberaí","GO",44734,1.98,2305609.003,51540.42],["Itumbiara","GO",107970,1.26,6555376.192,60714.79],["Jaraguá","GO",45223,0.64,1205295.699,26652.27],["Jataí","GO",105729,1.54,10026116.752,94828.45],["Luziânia","GO",209129,1.52,6264671.451,29956.01],["Mineiros","GO",70081,2.37,4536324.835,64729.74],["Morrinhos","GO",51351,1.8,2524023.048,49152.36],["Nerópolis","GO",31932,2.33,1548491.902,48493.42],["Niquelândia","GO",34964,-1.59,1516123.426,43362.41],["Novo Gama","GO",103804,0.74,1349983.116,13005.12],["Padre Bernardo","GO",34967,1.97,1036140.69,29631.96],["Palmeiras de Goiás","GO",31858,2.63,2083486.395,65399.16],["Pires do Rio","GO",32373,0.99,1928361.815,59566.98],["Planaltina","GO",105031,2.13,1939904.035,18469.82],["Porangatu","GO",44317,0.38,2072827.411,46772.74],["Posse","GO",34914,0.88,938125.116,26869.6],["Quirinópolis","GO",48447,0.96,3123504.061,64472.6],["Rio Verde","GO",225696,2.07,22310032.201,98849.92],["Santa Helena de Goiás","GO",38492,0.45,1995751.751,51848.48],["Santo Antônio do Descoberto","GO",72127,1.1,972898.933,13488.69],["Senador Canedo","GO",155635,5.23,5495055.229,35307.32],["São Luís de Montes Belos","GO",33852,1.0,2008425.161,59329.59],["Trindade","GO",142431,2.61,3631624.099,25497.43],["Uruaçu","GO",42546,1.19,1637351.708,38484.27],["Valparaíso de Goiás","GO",198861,3.53,3621839.692,18212.92],["Águas Lindas de Goiás","GO",225693,2.94,3062184.834,13567.92],["Alfenas","MG",78970,0.57,3669898.617,46472.06],["Almenara","MG",40364,0.34,813916.6,20164.42],["Além Paraíba","MG",30717,-0.93,1045758.927,34044.96],["Andradas","MG",40553,0.71,1483245.48,36575.48],["Araguari","MG",117808,0.59,6858533.812,58217.9],["Araxá","MG",111691,1.48,8847239.614,79211.75],["Araçuaí","MG",34297,-0.41,1081893.247,31544.84],["Arcos","MG",41416,1.04,3058033.013,73837.0],["Barbacena","MG",125317,-0.06,4108617.172,32785.79],["Barão de Cocais","MG",30778,0.72,1547169.755,50268.69],["Belo Horizonte","MG",2315560,-0.21,130197670.721,56227.29],["Betim","MG",411846,0.69,52614325.377,127752.43],["Boa Esperança","MG",39848,0.28,1413663.549,35476.4],["Bocaiúva","MG",48032,0.28,1435951.111,29895.72],["Bom Despacho","MG",51737,1.05,2193212.185,42391.56],["Brasília de Minas","MG",32025,0.21,510727.719,15947.78],["Brumadinho","MG",38915,1.14,2845329.902,73116.53],["Caeté","MG",38776,-0.41,1004130.96,25895.68],["Campo Belo","MG",52277,0.12,1458095.82,27891.73],["Capelinha","MG",39626,1.17,1111827.021,28058.02],["Carangola","MG",31240,-0.28,780302.918,24977.69],["Caratinga","MG",87360,0.21,2871549.04,32870.3],["Cataguases","MG",66261,-0.43,2139615.681,32290.72],["Cláudio","MG",30159,1.32,1426309.747,47293.01],["Congonhas","MG",52890,0.72,7693793.903,145467.84],["Conselheiro Lafaiete","MG",131621,1.02,3482647.959,26459.67],["Contagem","MG",621863,0.26,45092392.887,72511.78],["Coronel Fabriciano","MG",104736,0.08,2387845.824,22798.71],["Curvelo","MG",80665,0.72,2706326.327,33550.19],["Diamantina","MG",47702,0.33,1201220.973,25181.77],["Divinópolis","MG",231091,0.68,9339332.264,40414.09],["Esmeraldas","MG",85598,3.05,1314690.511,15358.89],["Espinosa","MG",30443,-0.18,472196.909,15510.85],["Extrema","MG",53482,5.35,20204998.576,377790.63],["Formiga","MG",68248,0.39,2969264.149,43506.98],["Frutal","MG",58588,0.76,4026768.689,68730.26],["Governador Valadares","MG",257171,-0.21,8612265.515,33488.48],["Guanhães","MG",32244,0.26,1284431.621,39834.75],["Guaxupé","MG",50911,0.25,2431559.589,47760.99],["Ibirité","MG",170537,0.63,3235632.471,18973.2],["Igarapé","MG",45847,2.31,1401823.85,30576.13],["Ipatinga","MG",227731,-0.42,16870238.851,74079.68],["Itabira","MG",113343,0.27,7434200.081,65590.29],["Itabirito","MG",53365,1.35,7160444.102,134178.66],["Itajubá","MG",93073,0.22,4497959.389,48327.22],["Itamarandiba","MG",32948,0.2,669899.563,20332.03],["Itaúna","MG",97669,1.12,4975969.03,50947.27],["Ituiutaba","MG",102217,0.42,4975265.394,48673.56],["Iturama","MG",38295,0.88,2864935.043,74812.25],["Janaúba","MG",70699,0.47,1965161.025,27796.16],["Januária","MG",65150,-0.04,1040488.653,15970.66],["Jaíba","MG",37660,0.95,969913.796,25754.48],["João Monlevade","MG",80187,0.72,4286349.25,53454.42],["João Pinheiro","MG",46801,0.52,2562731.629,54758.05],["Juatuba","MG",30716,2.75,2124349.302,69161.0],["Juiz de Fora","MG",540756,0.39,23271627.261,43035.36],["Lagoa Santa","MG",75145,3.03,2825380.37,37599.05],["Lagoa da Prata","MG",51412,0.93,2471545.415,48073.32],["Lavras","MG",104761,1.07,3916681.627,37386.83],["Leopoldina","MG",51145,0.0,1344583.254,26289.63],["Machado","MG",37684,-0.22,1406358.331,37319.77],["Manhuaçu","MG",91886,1.21,3710638.12,40383.06],["Mariana","MG",61387,1.04,4656946.097,75862.09],["Mateus Leme","MG",37841,2.59,1095993.715,28963.13],["Matozinhos","MG",37618,0.86,1895425.771,50386.14],["Monte Carmelo","MG",47692,0.34,1957160.563,41037.5],["Montes Claros","MG",414240,1.13,13326238.602,32170.33],["Muriaé","MG",104108,0.27,3211391.402,30846.73],["Nanuque","MG",35038,-1.27,1074888.835,30677.8],["Nova Lima","MG",111697,2.71,12447551.06,111440.33],["Nova Serrana","MG",105552,3.04,3936357.77,37293.07],["Oliveira","MG",39262,-0.04,1463236.82,37268.52],["Ouro Branco","MG",38724,0.78,4310767.094,111320.29],["Ouro Fino","MG",32094,0.14,1223791.087,38131.46],["Ouro Preto","MG",74821,0.52,6765810.317,90426.62],["Paracatu","MG",94023,0.87,6798922.469,72311.27],["Pará de Minas","MG",97139,1.2,5161430.074,53134.48],["Passos","MG",111939,0.43,4080105.786,36449.37],["Patos de Minas","MG",159235,1.13,8151368.621,51190.81],["Patrocínio","MG",89826,0.71,4895785.022,54502.98],["Pedro Leopoldo","MG",62580,0.53,2514376.518,40178.6],["Pirapora","MG",55606,0.34,3361259.131,60447.78],["Piumhi","MG",36062,1.03,1568574.297,43496.6],["Pompéu","MG",31047,0.54,1229908.179,39614.4],["Ponte Nova","MG",57776,0.06,2594058.94,44898.56],["Porteirinha","MG",37438,-0.04,625525.222,16708.3],["Pouso Alegre","MG",152217,1.28,14201205.978,93295.79],["Poços de Caldas","MG",163742,0.6,10732908.121,65547.68],["Ribeirão das Neves","MG",329794,0.88,6336695.364,19214.1],["Sabará","MG",129380,0.2,3837192.206,29658.31],["Salinas","MG",40178,0.22,903694.482,22492.27],["Santa Bárbara","MG",30466,0.68,1019088.443,33450.02],["Santa Luzia","MG",219132,0.66,6608096.77,30155.78],["Santa Rita do Sapucaí","MG",40635,0.61,2514297.658,61875.17],["Santana do Paraíso","MG",44800,4.23,1250977.727,27923.61],["Santos Dumont","MG",42406,-0.73,1259405.745,29698.76],["Sarzedo","MG",36844,3.01,1642521.872,44580.44],["Sete Lagoas","MG",227397,0.5,14904465.169,65543.81],["São Francisco","MG",52762,-0.17,859288.93,16286.13],["São Gotardo","MG",40910,2.12,1555360.957,38019.09],["São Joaquim de Bicas","MG",34348,2.5,1065143.955,31010.36],["São João del Rei","MG",90225,0.55,3505345.575,38851.16],["São Lourenço","MG",44798,0.61,1412019.982,31519.71],["São Sebastião do Paraíso","MG",71796,0.83,2834250.036,39476.43],["Taiobeiras","MG",33050,0.54,705372.64,21342.59],["Teófilo Otoni","MG",137418,0.16,3540247.727,25762.62],["Timóteo","MG",81579,0.03,4648991.987,56987.61],["Três Corações","MG",75485,0.31,3568709.809,47277.07],["Três Pontas","MG",55255,0.21,2288500.376,41417.07],["Uberaba","MG",337836,1.11,23689376.514,70120.94],["Uberlândia","MG",713224,1.39,51065684.136,71598.38],["Ubá","MG",103365,0.15,4462211.846,43169.47],["Unaí","MG",86619,0.93,5221529.413,60281.57],["Varginha","MG",136467,0.86,10068568.198,73780.24],["Vespasiano","MG",129246,1.79,3619030.727,28049.94],["Visconde do Rio Branco","MG",39160,0.26,2052277.555,52407.5],["Viçosa","MG",76430,0.47,2234763.919,29239.36],["Várzea da Palma","MG",33744,-0.49,1351753.57,40059.08],["Alta Floresta","MT",58613,1.48,3034592.885,51773.38],["Barra do Garças","MT",69210,1.73,3537695.616,51115.38],["Campo Novo do Parecis","MT",45899,4.34,7917232.816,172492.49],["Campo Verde","MT",44585,2.98,5099105.108,114368.18],["Colíder","MT",31370,0.15,1958222.209,62423.4],["Confresa","MT",35075,2.82,1967776.07,56101.95],["Cuiabá","MT",650877,1.36,39050753.124,59997.13],["Cáceres","MT",89681,0.17,2795729.007,31174.15],["Guarantã do Norte","MT",31024,-0.31,1286329.067,41462.39],["Jaciara","MT",28569,0.83,1711568.286,59909.98],["Juara","MT",34906,0.52,1859025.469,53258.05],["Juína","MT",45869,1.3,1845535.594,40234.92],["Lucas do Rio Verde","MT",83798,5.21,8238966.09,98319.36],["Nova Mutum","MT",55839,4.85,7647129.14,136949.61],["Peixoto de Azevedo","MT",32714,0.46,1146389.168,35042.77],["Poconé","MT",31217,-0.17,861874.49,27609.14],["Pontes e Lacerda","MT",52018,1.92,2856804.986,54919.55],["Primavera do Leste","MT",85146,4.19,8571209.082,100664.85],["Querência","MT",26769,6.18,3771292.384,140882.83],["Rondonópolis","MT",244911,1.89,16568249.913,67650.08],["Sapezal","MT",28944,3.99,6410246.748,221470.66],["Sinop","MT",196312,4.7,11736046.947,59782.63],["Sorriso","MT",110635,4.35,13748756.925,124271.31],["Tangará da Serra","MT",106434,1.98,5602199.726,52635.43],["Várzea Grande","MT",300078,1.45,13984217.795,46601.94],["Água Boa","MT",29219,2.85,2479715.078,84866.53],["Almirante Tamandaré","PR",119825,1.25,2242619.546,18715.79],["Apucarana","PR",130134,0.61,4834012.856,37146.42],["Arapongas","PR",119138,1.13,5715471.043,47973.54],["Araucária","PR",151666,2.03,34075051.609,224671.66],["Assis Chateaubriand","PR",36808,0.9,2033730.672,55252.41],["Bandeirantes","PR",31273,-0.24,1362233.291,43559.41],["Cambé","PR",107208,0.84,6771172.732,63159.21],["Campina Grande do Sul","PR",47825,1.76,2871767.402,60047.41],["Campo Largo","PR",136327,1.64,7070392.747,51863.48],["Campo Magro","PR",30160,1.63,700582.723,23228.87],["Campo Mourão","PR",99432,1.1,5991907.747,60261.36],["Cascavel","PR",348051,1.64,19204178.185,55176.33],["Castro","PR",73075,0.72,4517500.842,61820.06],["Cianorte","PR",79527,1.07,3986696.636,50130.1],["Colombo","PR",232212,0.72,7628974.586,32853.49],["Cornélio Procópio","PR",45206,-0.31,2382241.244,52697.46],["Curitiba","PR",1773718,0.1,120065276.017,67691.3],["Dois Vizinhos","PR",44869,1.81,2609172.747,58150.9],["Fazenda Rio Grande","PR",148873,5.13,4139460.922,27805.32],["Foz do Iguaçu","PR",285415,0.91,16973250.994,59468.67],["Francisco Beltrão","PR",96666,1.7,4525403.384,46814.84],["Guarapuava","PR",182093,0.7,9864113.348,54170.74],["Guaratuba","PR",42062,2.28,1220949.312,29027.37],["Guaíra","PR",32097,0.37,1438846.331,44828.06],["Ibiporã","PR",51603,0.57,4037854.555,78248.45],["Irati","PR",59250,0.44,2816144.413,47529.86],["Itaperuçu","PR",31217,2.2,799717.726,25618.02],["Ivaiporã","PR",32720,0.22,1142266.373,34910.34],["Jacarezinho","PR",40375,0.26,1956993.425,48470.43],["Jaguariaíva","PR",35141,0.63,2062534.661,58693.11],["Lapa","PR",45003,0.01,2647565.699,58830.87],["Laranjeiras do Sul","PR",32227,0.38,1230923.929,38195.42],["Londrina","PR",555965,0.78,27999537.379,50362.05],["Mandaguari","PR",36716,0.98,2916499.996,79434.03],["Mandaguaçu","PR",31457,3.94,995409.852,31643.51],["Marechal Cândido Rondon","PR",55836,1.48,3919007.285,70187.82],["Marialva","PR",41851,2.27,2964620.45,70837.51],["Maringá","PR",409657,1.19,27817345.988,67903.99],["Matinhos","PR",39259,2.43,1148204.622,29246.91],["Medianeira","PR",54369,2.21,3007596.291,55318.22],["Paiçandu","PR",45962,2.07,1342361.599,29205.9],["Palmas","PR",48247,0.99,1728162.368,35819.06],["Palmeira","PR",33855,0.44,2220002.904,65573.86],["Palotina","PR",35011,1.68,3698095.404,105626.67],["Paranaguá","PR",145829,0.31,15291702.668,104860.51],["Paranavaí","PR",92001,1.01,4189765.044,45540.43],["Pato Branco","PR",91836,2.0,5817896.335,63350.93],["Pinhais","PR",127019,0.67,9852601.347,77567.93],["Piraquara","PR",118730,2.06,1901529.26,16015.58],["Pitanga","PR",33567,0.23,1448744.092,43017.52],["Ponta Grossa","PR",358371,1.17,25583325.309,71387.82],["Pontal do Paraná","PR",30425,3.17,809708.324,26613.26],["Prudentópolis","PR",49393,0.12,1905943.321,38587.32],["Quedas do Iguaçu","PR",30738,0.04,1927945.223,62721.88],["Rio Branco do Sul","PR",37558,1.72,1850825.583,49279.13],["Rio Negro","PR",31324,0.01,1456164.794,46487.19],["Rolândia","PR",71670,1.8,4602703.668,64220.79],["Santo Antônio da Platina","PR",44369,0.32,1837883.729,41422.7],["Sarandi","PR",118455,2.86,2398689.677,20249.8],["São José dos Pinhais","PR",329628,1.86,33957963.934,103019.05],["São Mateus do Sul","PR",42366,0.22,1934142.346,45653.17],["Telêmaco Borba","PR",75042,0.6,6409425.43,85411.18],["Toledo","PR",150470,1.95,9508571.518,63192.47],["Umuarama","PR",117095,1.27,5096996.048,43528.72],["União da Vitória","PR",55033,0.36,2223372.504,40400.71],["Angra dos Reis","RJ",167434,-0.1,11900498.299,71075.76],["Araruama","RJ",129671,1.21,13156181.005,101458.16],["Armação dos Búzios","RJ",40006,3.15,5019621.154,125471.71],["Arraial do Cabo","RJ",30986,1.0,9335373.871,301277.15],["Barra Mansa","RJ",169894,-0.34,6831114.616,40208.1],["Barra do Piraí","RJ",92883,-0.17,3225723.098,34728.89],["Belford Roxo","RJ",483087,0.04,9686338.741,20050.92],["Bom Jesus do Itabapoana","RJ",35173,-0.05,1207610.759,34333.46],["Cabo Frio","RJ",222161,1.48,16964471.592,76361.16],["Cachoeiras de Macacu","RJ",56943,0.38,1702401.841,29896.6],["Campos dos Goytacazes","RJ",483540,0.34,42953468.722,88831.26],["Casimiro de Abreu","RJ",46110,2.24,3363238.534,72939.46],["Duque de Caxias","RJ",808161,-0.47,70068006.833,86700.55],["Guapimirim","RJ",51696,0.07,1589983.141,30756.41],["Itaboraí","RJ",224267,0.24,6278393.127,27995.17],["Itaguaí","RJ",116841,0.23,11383961.888,97431.23],["Itaperuna","RJ",101041,0.44,4067636.895,40257.29],["Itatiaia","RJ",30908,0.6,6988685.307,226112.51],["Japeri","RJ",96289,0.07,1874798.222,19470.53],["Macaé","RJ",246391,1.47,22394859.906,90891.55],["Magé","RJ",228127,0.02,5301410.766,23238.86],["Mangaratiba","RJ",41220,0.99,3443660.051,83543.43],["Maricá","RJ",197277,3.71,134092033.649,679714.48],["Mesquita","RJ",167127,-0.06,3029006.761,18123.98],["Nilópolis","RJ",146774,-0.58,3339768.896,22754.5],["Niterói","RJ",481749,-0.1,76268004.731,158314.82],["Nova Friburgo","RJ",189939,0.35,7367566.824,38789.12],["Nova Iguaçu","RJ",785867,0.01,20518623.982,26109.54],["Paracambi","RJ",41375,-1.11,1085488.613,26235.37],["Paraty","RJ",45243,1.57,6324392.329,139787.2],["Paraíba do Sul","RJ",42063,0.16,1399156.766,33263.36],["Petrópolis","RJ",278881,-0.49,19907334.726,71382.9],["Queimados","RJ",140523,0.15,4938811.914,35145.93],["Resende","RJ",129612,0.66,12267696.488,94649.39],["Rio Bonito","RJ",56276,0.1,2038466.081,36222.65],["Rio das Ostras","RJ",156491,3.33,10599897.907,67734.87],["Rio de Janeiro","RJ",6211223,-0.15,418462360.308,67371.97],["Santo Antônio de Pádua","RJ",41325,0.15,1686337.288,40806.71],["Saquarema","RJ",89559,1.57,64701140.278,722441.52],["Seropédica","RJ",80596,0.78,3760076.051,46653.38],["São Fidélis","RJ",38961,0.31,985937.952,25305.77],["São Francisco de Itabapoana","RJ",45059,0.72,1481367.364,32876.17],["São Gonçalo","RJ",896744,-0.9,23063688.967,25719.37],["São João da Barra","RJ",36573,1.01,13986152.276,382417.42],["São João de Meriti","RJ",440962,-0.33,11534047.295,26156.56],["São Pedro da Aldeia","RJ",104029,1.42,3359011.214,32289.18],["Tanguá","RJ",31086,0.06,858814.524,27627.05],["Teresópolis","RJ",165123,0.07,7104545.886,43025.78],["Três Rios","RJ",78346,0.14,6017636.329,76808.47],["Valença","RJ",68088,-0.44,3104488.799,45595.24],["Vassouras","RJ",33976,-0.11,1472879.543,43350.59],["Volta Redonda","RJ",261563,0.09,15307614.873,58523.62],["Araquari","SC",45283,5.14,9900039.604,218625.97],["Araranguá","SC",71922,1.34,3023099.859,42033.03],["Balneário Camboriú","SC",139155,2.13,9004372.567,64707.5],["Balneário Piçarras","SC",27127,3.93,2097521.043,77322.26],["Barra Velha","SC",45369,6.06,2468504.623,54409.5],["Biguaçu","SC",76773,2.33,3523317.578,45892.67],["Blumenau","SC",361261,1.31,24871919.56,68847.51],["Bombinhas","SC",25058,4.79,1178867.901,47045.57],["Braço do Norte","SC",33773,1.27,2195934.726,65020.42],["Brusque","SC",141385,2.47,11071535.293,78307.71],["Camboriú","SC",103074,4.28,2703377.996,26227.55],["Campos Novos","SC",36932,0.99,3456853.516,93600.5],["Canoinhas","SC",55016,0.35,2759647.733,50160.82],["Caçador","SC",73720,0.34,5375160.552,72913.19],["Chapecó","SC",254785,2.77,17619284.312,69153.54],["Concórdia","SC",81646,1.46,5510391.821,67491.26],["Criciúma","SC",214493,0.91,12339547.621,57528.91],["Curitibanos","SC",40045,0.49,2003887.722,50040.9],["Florianópolis","SC",537211,2.05,31190132.216,58059.37],["Forquilhinha","SC",31431,2.81,1525924.405,48548.39],["Fraiburgo","SC",33481,-0.26,1596213.305,47675.2],["Garopaba","SC",29959,4.27,1005307.519,33556.11],["Gaspar","SC",72570,1.89,5058949.212,69711.3],["Guaramirim","SC",46711,2.39,3136749.682,67152.27],["Imbituba","SC",52579,2.27,3250687.753,61824.83],["Indaial","SC",71549,2.24,4484717.577,62680.37],["Itajaí","SC",264054,3.09,48195908.536,182522.93],["Itapema","SC",75940,4.3,3799730.364,50035.95],["Itapoá","SC",30750,6.31,1990651.159,64736.62],["Içara","SC",59035,1.74,4878273.748,82633.59],["Jaraguá do Sul","SC",182660,2.05,15509262.572,84907.82],["Joaçaba","SC",30146,0.92,2754514.296,91372.46],["Joinville","SC",616317,1.5,49815876.84,80828.33],["Lages","SC",164981,0.43,8341649.834,50561.28],["Laguna","SC",42785,0.1,1404149.986,32818.74],["Mafra","SC",55286,0.37,3296811.911,59631.95],["Maravilha","SC",28251,2.06,2499222.596,88464.92],["Navegantes","SC",86401,3.01,7939673.784,91893.31],["Palhoça","SC",222598,4.11,10294550.237,46247.27],["Penha","SC",33663,2.46,1340663.262,39826.02],["Pomerode","SC",34289,1.77,3184672.108,92877.37],["Porto Belo","SC",27688,4.63,2090678.166,75508.46],["Porto União","SC",32970,-0.13,1314938.113,39882.87],["Rio Negrinho","SC",39261,-0.12,1731868.057,44111.66],["Rio do Sul","SC",72587,1.42,4621903.114,63673.98],["Santo Amaro da Imperatriz","SC",27272,2.69,1749916.489,64165.32],["Sombrio","SC",29991,1.0,1304359.187,43491.69],["São Bento do Sul","SC",83277,0.9,5038223.34,60499.58],["São Francisco do Sul","SC",52674,1.8,7396331.907,140417.13],["São José","SC",270299,2.13,15575672.162,57623.86],["São João Batista","SC",32687,1.84,1303724.455,39885.11],["São Miguel do Oeste","SC",44330,1.68,3105097.849,70045.07],["Tijucas","SC",51592,4.35,3687049.288,71465.52],["Timbó","SC",46099,1.9,2737816.587,59389.93],["Tubarão","SC",110088,1.04,6007107.895,54566.42],["Videira","SC",55466,1.35,4129522.675,74451.42],["Xanxerê","SC",51607,1.31,3145564.606,60952.29],["Xaxim","SC",31918,1.82,1737477.331,54435.66],["Adamantina","SP",34687,0.22,1705894.987,49179.66],["Aguaí","SP",32072,-0.02,1773842.732,55308.14],["Agudos","SP",37680,0.73,3415808.553,90653.09],["Americana","SP",237240,1.0,17600565.714,74188.86],["Amparo","SP",68008,0.27,6698468.843,98495.31],["Américo Brasiliense","SP",33019,-0.36,1504961.923,45578.66],["Andradina","SP",59783,0.65,4464940.278,74685.78],["Aparecida","SP",32569,-0.6,1369698.939,42055.3],["Araraquara","SP",242228,1.25,14689500.266,60643.28],["Araras","SP",130866,0.81,10022873.262,76588.83],["Araçatuba","SP",200124,0.81,11457739.505,57253.2],["Araçoiaba da Serra","SP",32443,1.45,1523193.918,46949.85],["Artur Nogueira","SP",51456,1.28,2162832.741,42032.66],["Arujá","SP",86678,1.22,10426127.299,120285.74],["Assis","SP",101409,0.53,4682609.402,46175.48],["Atibaia","SP",158647,1.9,9426583.645,59418.61],["Avaré","SP",92805,0.94,4408538.237,47503.24],["Bady Bassitt","SP",27260,5.34,762195.13,27960.2],["Bariri","SP",31595,0.0,1863763.724,58989.2],["Barra Bonita","SP",34346,-0.22,2077900.588,60499.06],["Barretos","SP",122485,0.74,6715414.139,54826.42],["Barrinha","SP",32092,1.0,737580.107,22983.3],["Barueri","SP",316473,2.31,71646709.835,226391.22],["Batatais","SP",58402,0.28,3328690.303,56996.17],["Bauru","SP",379146,0.82,20654759.202,54477.06],["Bebedouro","SP",76373,0.15,5343661.449,69967.94],["Bertioga","SP",64188,2.51,2663550.123,41496.08],["Birigui","SP",118979,0.75,4866489.546,40902.09],["Biritiba Mirim","SP",29683,0.32,1111541.124,37447.06],["Boituva","SP",61081,1.97,4474129.933,73249.13],["Botucatu","SP",145155,1.1,7992147.651,55059.4],["Bragança Paulista","SP",176811,1.57,10443287.83,59064.7],["Brodowski","SP",25201,1.49,667524.66,28185.0],["Cabreúva","SP",47011,1.02,7240981.438,154027.39],["Cachoeira Paulista","SP",31564,0.4,847786.431,26859.28],["Caieiras","SP",95032,0.78,5507619.475,57955.42],["Cajamar","SP",92689,3.12,28984601.766,312708.11],["Campinas","SP",1139047,0.43,91968328.317,80741.47],["Campo Limpo Paulista","SP",77632,0.39,3233934.762,41657.24],["Campos do Jordão","SP",46974,-0.14,1946799.338,41444.19],["Capivari","SP",50068,0.25,3824460.124,76385.32],["Capão Bonito","SP",46337,0.03,1668881.584,36016.18],["Caraguatatuba","SP",134873,2.45,5822814.916,43172.58],["Carapicuíba","SP",386984,0.38,8436817.19,21801.46],["Catanduva","SP",115791,0.22,7029953.383,60712.43],["Caçapava","SP",96202,1.06,6516271.282,67735.3],["Cerquilho","SP",44695,1.01,2891327.658,64690.18],["Cosmópolis","SP",59773,0.13,2313364.052,38702.49],["Cotia","SP",274413,2.62,19060773.462,69460.17],["Cravinhos","SP",33281,0.41,2357353.267,70831.8],["Cruzeiro","SP",74961,-0.23,4281961.617,57122.53],["Cubatão","SP",112476,-0.45,27813387.639,247282.87],["Cândido Mota","SP",29449,-0.12,2482755.063,84306.94],["Descalvado","SP",31756,0.19,2584483.423,81385.67],["Diadema","SP",393237,0.15,21229085.409,53985.47],["Dracena","SP",45474,0.42,1855223.877,40797.46],["Embu das Artes","SP",250691,0.36,17290649.652,68971.96],["Embu-Guaçu","SP",66970,0.54,1742920.008,26025.38],["Espírito Santo do Pinhal","SP",39816,-0.43,2715247.127,68194.87],["Fernandópolis","SP",71186,0.8,2790708.1,39203.05],["Ferraz de Vasconcelos","SP",179198,0.52,5523980.573,30826.13],["Franca","SP",352536,0.85,14375667.458,40777.87],["Francisco Morato","SP",165139,0.56,2237469.166,13549.01],["Franco da Rocha","SP",144849,0.8,5438088.812,37543.16],["Garça","SP",42110,-0.2,1893765.629,44971.87],["Guararapes","SP",31043,0.12,1718487.879,55358.31],["Guararema","SP",31236,1.59,2034662.745,65138.39],["Guaratinguetá","SP",118044,0.43,8369820.871,70904.25],["Guariba","SP",37498,0.46,1517993.918,40482.0],["Guarujá","SP",287634,-0.09,11536359.008,40107.77],["Guarulhos","SP",1291771,0.46,97557673.612,75522.42],["Guaíra","SP",39279,0.41,3233958.32,82333.01],["Hortolândia","SP",236641,1.73,22163924.356,93660.54],["Ibaté","SP",32178,0.38,1516837.474,47138.96],["Ibitinga","SP",60033,1.02,2528835.327,42124.09],["Ibiúna","SP",75605,0.5,3023500.924,39990.75],["Iguape","SP",29115,0.08,1896850.188,65150.27],["Ilhabela","SP",34934,1.8,14830714.927,424535.26],["Indaiatuba","SP",255748,2.0,28264863.052,110518.41],["Iperó","SP",36459,2.13,1291002.665,35409.71],["Itanhaém","SP",112476,2.16,2956406.115,26284.77],["Itapecerica da Serra","SP",158522,0.32,6215133.643,39206.76],["Itapetininga","SP",157790,0.74,7962801.863,50464.55],["Itapeva","SP",89728,0.19,4558511.821,50803.67],["Itapevi","SP",232297,1.22,15615097.192,67220.4],["Itapira","SP",72022,0.41,6365973.525,88389.29],["Itaquaquecetuba","SP",369275,1.15,11979259.765,32439.94],["Itararé","SP",44438,-0.63,1406445.26,31649.61],["Itatiba","SP",121590,1.52,10327467.002,84936.81],["Itu","SP",168240,0.73,14012530.257,83288.93],["Itupeva","SP",70616,3.85,10529260.248,149105.87],["Ituverava","SP",37571,-0.25,2218625.13,59051.53],["Itápolis","SP",39493,-0.12,2524858.407,63931.8],["Jaboticabal","SP",71821,0.02,4156253.295,57869.61],["Jacareí","SP",240275,1.08,19692996.445,81960.24],["Jaguariúna","SP",59347,2.46,14680877.677,247373.54],["Jales","SP",48776,0.31,2590208.251,53104.15],["Jandira","SP",118045,0.72,5547106.684,46991.46],["Jardinópolis","SP",45282,1.55,2398612.345,52970.55],["Jarinu","SP",37535,3.85,3546443.823,94483.65],["Jaú","SP",133497,0.15,6542932.931,49011.83],["José Bonifácio","SP",36633,0.93,1940540.325,52972.47],["Jundiaí","SP",443221,1.51,65418378.096,147597.65],["Leme","SP",98161,0.56,4938511.737,50310.32],["Lençóis Paulista","SP",66505,0.66,6564647.742,98709.09],["Limeira","SP",291869,0.47,20876940.083,71528.46],["Lins","SP",74779,0.38,8610362.609,115144.13],["Lorena","SP",84855,0.23,4501317.953,53047.17],["Louveira","SP",51847,2.83,20154612.051,388732.46],["Mairinque","SP",50027,1.23,2923463.212,58437.71],["Mairiporã","SP",93853,1.24,2767181.265,29484.21],["Marília","SP",237627,0.77,12507570.77,52635.31],["Matão","SP",79033,0.24,7646780.494,96754.27],["Mauá","SP",418261,0.03,25000732.02,59773.04],["Mirassol","SP",63337,1.37,3345887.627,52826.75],["Mococa","SP",67681,0.17,4014553.266,59315.81],["Mogi Guaçu","SP",153658,0.95,9433837.649,61395.03],["Mogi Mirim","SP",92558,0.57,8092719.13,87434.03],["Mogi das Cruzes","SP",451505,1.28,26072522.197,57745.81],["Mongaguá","SP",61951,2.46,1535905.805,24792.27],["Monte Alto","SP",47574,0.17,3062782.095,64379.33],["Monte Mor","SP",64662,2.35,6049397.718,93554.14],["Nova Odessa","SP",62019,1.6,5613296.888,90509.31],["Novo Horizonte","SP",38324,0.39,2313783.253,60374.26],["Olímpia","SP",55074,0.8,3569675.501,64815.98],["Orlândia","SP",38319,-0.31,3247647.904,84752.94],["Osasco","SP",728615,0.74,119404052.763,163878.12],["Osvaldo Cruz","SP",31272,0.1,1615247.661,51651.56],["Ourinhos","SP",103970,0.08,4902761.91,47155.54],["Paraguaçu Paulista","SP",41120,-0.23,3133901.5,76213.56],["Paulínia","SP",110537,2.5,67067300.461,606740.73],["Pederneiras","SP",44827,0.65,3840420.972,85672.05],["Pedreira","SP",43112,0.31,1817291.527,42152.8],["Penápolis","SP",61679,0.44,2743179.555,44475.1],["Peruíbe","SP",68352,1.12,2366996.023,34629.51],["Piedade","SP",52970,0.13,1839652.07,34730.07],["Pindamonhangaba","SP",165428,0.99,13674680.185,82662.43],["Piracicaba","SP",423323,1.25,44351587.75,104770.09],["Piraju","SP",29436,0.28,1088629.415,36982.93],["Pirassununga","SP",73545,0.4,4304413.432,58527.61],["Pitangueiras","SP",33674,-0.39,1830159.52,54349.34],["Pontal","SP",37607,-0.56,2153953.579,57275.34],["Porto Feliz","SP",56497,1.21,5067048.835,89687.04],["Porto Ferreira","SP",52649,0.2,3069355.36,58298.46],["Poá","SP",103765,-0.18,4610760.103,44434.64],["Praia Grande","SP",349935,2.44,11396645.549,32567.89],["Presidente Epitácio","SP",39505,-0.37,1521762.21,38520.75],["Presidente Prudente","SP",225668,0.7,11617598.706,51480.93],["Presidente Venceslau","SP",35201,-0.62,1096298.255,31143.95],["Promissão","SP",35131,-0.13,3349680.915,95348.29],["Registro","SP",59947,0.83,2931914.98,48908.45],["Ribeirão Pires","SP",115559,0.16,4853228.612,41997.84],["Ribeirão Preto","SP",698642,1.21,52306819.755,74869.27],["Rio Claro","SP",201418,0.65,15427116.506,76592.54],["Rio Grande da Serra","SP",44170,0.04,1166050.396,26399.15],["Rio das Pedras","SP",31328,0.5,2037525.868,65038.49],["Salto","SP",134319,2.03,11498958.795,85609.32],["Salto de Pirapora","SP",43748,0.72,2856415.228,65292.48],["Santa Bárbara d'Oeste","SP",183347,0.15,10803991.725,58926.47],["Santa Cruz do Rio Pardo","SP",46442,0.47,4319822.468,93015.43],["Santa Fé do Sul","SP",34794,1.46,1988880.172,57161.58],["Santa Isabel","SP",53174,0.44,2298061.229,43217.76],["Santana de Parnaíba","SP",154105,2.94,14328397.388,92978.15],["Santo André","SP",748919,0.85,36931350.665,49312.88],["Santos","SP",418608,-0.02,30961718.45,73963.51],["Serra Negra","SP",29894,1.05,1025007.433,34288.07],["Serrana","SP",43909,1.02,1454534.798,33126.12],["Sertãozinho","SP",126887,1.19,9075017.911,71520.47],["Socorro","SP",40122,0.75,1449300.539,36122.34],["Sorocaba","SP",723682,1.76,58816286.432,81273.66],["Sumaré","SP",279545,1.29,19026093.466,68060.93],["Suzano","SP",307429,1.33,18618697.595,60562.59],["São Bernardo do Campo","SP",810729,0.48,71965791.185,88766.77],["São Caetano do Sul","SP",165655,0.87,22553448.009,136147.1],["São Carlos","SP",254857,1.16,18386920.167,72146.03],["São Joaquim da Barra","SP",48558,0.36,2733786.441,56299.4],["São José do Rio Pardo","SP",52205,0.05,2876972.561,55109.14],["São José do Rio Preto","SP",480393,1.37,26390120.821,54934.44],["São José dos Campos","SP",697054,0.85,61394524.128,88077.14],["São João da Boa Vista","SP",92547,0.85,5011180.867,54147.42],["São Manuel","SP",37289,-0.23,1889877.382,50681.9],["São Miguel Arcanjo","SP",32039,0.15,1157726.376,36134.91],["São Paulo","SP",11451999,0.15,1066825104.983,93156.23],["São Pedro","SP",38256,1.59,1243177.03,32496.26],["São Roque","SP",79484,0.07,4532567.306,57024.9],["São Sebastião","SP",81595,0.82,17400619.207,213255.95],["São Vicente","SP",329911,-0.06,7414656.3,22474.72],["Taboão da Serra","SP",273542,0.94,12084179.332,44176.69],["Taquaritinga","SP",52260,-0.27,2307144.805,44147.43],["Tatuí","SP",123942,1.21,6784534.581,54739.59],["Taubaté","SP",310739,0.91,22607800.468,72754.95],["Tietê","SP",37663,0.19,2954947.719,78457.58],["Tremembé","SP",51173,1.87,1091770.581,21334.89],["Tupã","SP",63928,0.06,3128301.71,48934.77],["Ubatuba","SP",92981,1.39,3506919.269,37716.51],["Valinhos","SP",126373,1.41,10200700.888,80718.99],["Vargem Grande Paulista","SP",50415,1.34,3524292.853,69905.64],["Vargem Grande do Sul","SP",40133,0.18,1431641.524,35672.43],["Vinhedo","SP",76540,1.55,14699664.334,192052.06],["Votorantim","SP",127923,1.37,5209654.121,40724.92],["Votuporanga","SP",96634,1.11,4582202.643,47418.12],["Várzea Paulista","SP",115771,0.65,4736061.572,40908.88]],"fixed":["Brodowski"]}</script>
+<script>
+(function(){
+"use strict";
+var RAW = JSON.parse(document.getElementById('data').textContent);
+var REF = RAW.ref, ROWS = RAW.rows.map(function(r){
+  return {mun:r[0], uf:r[1], pop:r[2], tgca:r[3], pib:r[4], pibpc:r[5]};
+});
+var UFS = Array.from(new Set(ROWS.map(function(d){return d.uf;}))).sort();
+var PIBMAX = Math.max.apply(null, ROWS.map(function(d){return d.pib;}));
+
+/* ---------- formatação ---------- */
+function nf(v,d){return v.toLocaleString('pt-BR',{minimumFractionDigits:d===undefined?0:d,maximumFractionDigits:d===undefined?0:d});}
+function fpop(v){
+  if(v>=1e6) return nf(v/1e6,1)+' mi';
+  if(v>=1000) return nf(v/1000,0)+' mil';
+  return nf(v);
+}
+function fpib(v){ /* v em R$ mil */
+  if(v>=1e9) return 'R$ '+nf(v/1e9,2)+' tri';
+  if(v>=1e6) return 'R$ '+nf(v/1e6,1)+' bi';
+  if(v>=1e3) return 'R$ '+nf(v/1e3,1)+' mi';
+  return 'R$ '+nf(v,0)+' mil';
+}
+function ftg(v){return (v>0?'+':'')+nf(v,2)+'%';}
+
+/* ---------- quadrantes ---------- */
+var QDEF = [
+  {id:'q1', nome:'Grandes e em crescimento', curto:'Grandes · crescendo', big:true,  hi:true},
+  {id:'q2', nome:'Pequenas e em crescimento', curto:'Pequenas · crescendo', big:false, hi:true},
+  {id:'q3', nome:'Pequenas e estagnadas',     curto:'Pequenas · estagnadas', big:false, hi:false},
+  {id:'q4', nome:'Grandes e estagnadas',      curto:'Grandes · estagnadas', big:true,  hi:false}
+];
+function quad(d){
+  var big = d.pop >= REF.x, hi = d.tgca >= REF.y;
+  return big && hi ? QDEF[0] : (!big && hi ? QDEF[1] : (!big ? QDEF[2] : QDEF[3]));
+}
+ROWS.forEach(function(d){ d.q = quad(d); });
+
+/* ---------- estado da UI ---------- */
+var state = {ufs:new Set(UFS), scale:'log', q:'', view:'chart', sort:{key:'pop', dir:-1}};
+function visible(){
+  var term = state.q.trim().toLowerCase();
+  return ROWS.filter(function(d){
+    if(!state.ufs.has(d.uf)) return false;
+    if(term && d.mun.toLowerCase().indexOf(term) < 0) return false;
+    return true;
+  });
+}
+
+/* ---------- geometria ---------- */
+var W=1140, H=700, M={t:26, r:44, b:62, l:74};
+var PW = W-M.l-M.r, PH = H-M.t-M.b;
+var XLOG={min:23000,max:12500000}, XLIN={min:0,max:11800000}, YD={min:-2.1,max:6.9};
+function sx(v){
+  if(state.scale==='log'){
+    var a=Math.log10(XLOG.min), b=Math.log10(XLOG.max);
+    return M.l + (Math.log10(Math.max(v,XLOG.min))-a)/(b-a)*PW;
+  }
+  return M.l + (v-XLIN.min)/(XLIN.max-XLIN.min)*PW;
+}
+function sy(v){ return M.t + (YD.max-v)/(YD.max-YD.min)*PH; }
+function sr(pib){ return 2.6 + 39*Math.sqrt(pib/PIBMAX); }
+
+var XT_LOG=[25000,50000,100000,250000,500000,1000000,2500000,5000000,10000000];
+var XT_LIN=[0,2000000,4000000,6000000,8000000,10000000];
+var YT=[-2,-1,0,1,2,3,4,5,6];
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]);});}
+
+/* ---------- gráfico principal ---------- */
+var svg = document.getElementById('chart');
+var pts = [];
+
+function drawChart(){
+  var data = visible().slice().sort(function(a,b){return b.pib-a.pib;});
+  var xs = state.scale==='log' ? XT_LOG : XT_LIN;
+  var rx = sx(REF.x), ry = sy(REF.y);
+  var s = [];
+
+  /* faixas dos quadrantes — washes neutros, sem cor categórica */
+  s.push('<rect x="'+rx+'" y="'+M.t+'" width="'+(M.l+PW-rx)+'" height="'+(ry-M.t)+'" fill="var(--q-hi)"/>');
+  s.push('<rect x="'+M.l+'" y="'+ry+'" width="'+(rx-M.l)+'" height="'+(M.t+PH-ry)+'" fill="var(--q-lo)"/>');
+
+  /* grid */
+  YT.forEach(function(t){ s.push('<line class="gridline" x1="'+M.l+'" y1="'+sy(t)+'" x2="'+(M.l+PW)+'" y2="'+sy(t)+'"/>'); });
+  xs.forEach(function(t){ if(t<=0&&state.scale==='lin') return;
+    s.push('<line class="gridline" x1="'+sx(t)+'" y1="'+M.t+'" x2="'+sx(t)+'" y2="'+(M.t+PH)+'"/>'); });
+
+  /* linhas de referência (o "0,0" pedido) */
+  s.push('<line class="reflines" x1="'+rx+'" y1="'+M.t+'" x2="'+rx+'" y2="'+(M.t+PH)+'"/>');
+  s.push('<line class="reflines" x1="'+M.l+'" y1="'+ry+'" x2="'+(M.l+PW)+'" y2="'+ry+'"/>');
+
+  /* rótulos de quadrante */
+  var cnt={};
+  QDEF.forEach(function(q){ cnt[q.id]=0; });
+  data.forEach(function(d){ cnt[d.q.id]++; });
+  var labelBoxes=[];
+  function qlab(x,y,anchor,q){
+    s.push('<text class="qlab" x="'+x+'" y="'+y+'" text-anchor="'+anchor+'">'+esc(q.curto)+'</text>');
+    s.push('<text class="qcount" x="'+x+'" y="'+(y+14)+'" text-anchor="'+anchor+'">'+cnt[q.id]+(cnt[q.id]===1?' município':' municípios')+'</text>');
+    var w=Math.max(q.curto.length, 16)*6.6;
+    labelBoxes.push({x0: anchor==='end'? x-w : x, x1: anchor==='end'? x : x+w, y0:y-12, y1:y+19});
+  }
+  qlab(M.l+PW-4, M.t+15, 'end', QDEF[0]);
+  qlab(M.l+6,    M.t+15, 'start', QDEF[1]);
+  qlab(M.l+6,    M.t+PH-30, 'start', QDEF[2]);
+  qlab(M.l+PW-4, M.t+PH-30, 'end', QDEF[3]);
+
+  /* eixos */
+  s.push('<line class="axisline" x1="'+M.l+'" y1="'+(M.t+PH)+'" x2="'+(M.l+PW)+'" y2="'+(M.t+PH)+'"/>');
+  s.push('<line class="axisline" x1="'+M.l+'" y1="'+M.t+'" x2="'+M.l+'" y2="'+(M.t+PH)+'"/>');
+  xs.forEach(function(t){ if(t<=0&&state.scale==='lin'){ } 
+    s.push('<text class="tick" x="'+sx(t)+'" y="'+(M.t+PH+19)+'" text-anchor="middle">'+fpop(t)+'</text>'); });
+  YT.forEach(function(t){
+    s.push('<text class="tick" x="'+(M.l-10)+'" y="'+(sy(t)+4)+'" text-anchor="end">'+nf(t,0)+'%</text>'); });
+
+  s.push('<text class="axtitle" x="'+(M.l+PW/2)+'" y="'+(H-16)+'" text-anchor="middle">População residente (habitantes, Censo 2022)</text>');
+  s.push('<text class="axtitle" transform="translate(18,'+(M.t+PH/2)+') rotate(-90)" text-anchor="middle">TGCA — crescimento anual (% a.a.)</text>');
+
+  /* marcadores do ponto de cruzamento */
+  s.push('<text class="refnote" x="'+(rx+6)+'" y="'+(M.t+PH+19)+'" text-anchor="start">60 mil</text>');
+  s.push('<text class="refnote" x="'+(M.l-10)+'" y="'+(ry-6)+'" text-anchor="end">0,36%</text>');
+
+  /* bolhas: maiores primeiro, menores por cima */
+  pts = [];
+  var term = state.q.trim().toLowerCase();
+  data.forEach(function(d){
+    var x=sx(d.pop), y=sy(d.tgca), r=sr(d.pib);
+    pts.push({d:d,x:x,y:y,r:r});
+    s.push('<circle class="dot" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(1)+'"/>');
+  });
+
+  /* rótulos diretos, seletivos */
+  var byPib = data.slice(0,6);
+  var byT = data.slice().sort(function(a,b){return b.tgca-a.tgca;});
+  var picks = byPib.concat(byT.slice(0,2), byT.slice(-2));
+  if(term) picks = data.slice(0,14);
+  var seen={}, boxes=labelBoxes.slice();
+  function fits(bx){
+    if(bx.x0 < M.l+2 || bx.x1 > M.l+PW-2 || bx.y0 < M.t+2 || bx.y1 > M.t+PH-2) return false;
+    for(var i=0;i<boxes.length;i++){
+      var o=boxes[i];
+      if(bx.x0 < o.x1+4 && bx.x1+4 > o.x0 && bx.y0 < o.y1+3 && bx.y1+3 > o.y0) return false;
+    }
+    return true;
+  }
+  picks.forEach(function(d){
+    var key=d.mun+d.uf; if(seen[key]) return; seen[key]=1;
+    if(boxes.length>=12) return;
+    var x=sx(d.pop), y=sy(d.tgca), r=sr(d.pib);
+    var w=d.mun.length*6.3, big=r>18;
+    var cands = big
+      ? [{x:x, y:y-r-7, a:'middle'}, {x:x, y:y+r+15, a:'middle'}, {x:x-r-6, y:y+4, a:'end'}, {x:x+r+6, y:y+4, a:'start'}]
+      : [{x:x+r+5, y:y+4, a:'start'}, {x:x-r-5, y:y+4, a:'end'}, {x:x, y:y-r-7, a:'middle'}, {x:x, y:y+r+15, a:'middle'}];
+    for(var i=0;i<cands.length;i++){
+      var c=cands[i];
+      var x0 = c.a==='start' ? c.x : (c.a==='end' ? c.x-w : c.x-w/2);
+      var bx = {x0:x0, x1:x0+w, y0:c.y-10, y1:c.y+3};
+      if(fits(bx)){
+        boxes.push(bx);
+        s.push('<text class="dlabel" x="'+c.x.toFixed(1)+'" y="'+c.y.toFixed(1)+'" text-anchor="'+c.a+'">'+esc(d.mun)+'</text>');
+        break;
+      }
+    }
+  });
+
+  svg.innerHTML = s.join('');
+
+  document.getElementById('cap-chart').textContent =
+    data.length + (data.length===1?' município exibido · escala ':' municípios exibidos · escala ') +
+    (state.scale==='log' ? 'logarítmica (comprime a distância entre São Paulo e as cidades médias)' : 'linear (fiel às proporções, concentra as cidades médias à esquerda)') +
+    ' · passe o mouse sobre uma bolha para os valores.';
+  drawTiles(data);
+}
+
+/* ---------- hover: camada de ponto mais próximo ---------- */
+var tip = document.getElementById('tip'), lastHit=null;
+function findNear(px,py){
+  var best=null, bestScore=1e9;
+  for(var i=0;i<pts.length;i++){
+    var p=pts[i], dx=px-p.x, dy=py-p.y, dist=Math.sqrt(dx*dx+dy*dy);
+    var score = dist<=p.r ? p.r*0.01 : (dist-p.r);
+    if(score<bestScore){ bestScore=score; best=p; }
+  }
+  return bestScore<=20 ? best : null;
+}
+svg.addEventListener('pointermove', function(ev){
+  var rect = svg.getBoundingClientRect();
+  var px = (ev.clientX-rect.left)/rect.width*W, py = (ev.clientY-rect.top)/rect.height*H;
+  var hit = findNear(px,py);
+  if(!hit){ hideTip(); return; }
+  if(lastHit!==hit){
+    if(lastHit && lastHit.node) lastHit.node.classList.remove('hit');
+    var idx = pts.indexOf(hit);
+    var circles = svg.querySelectorAll('circle.dot');
+    hit.node = circles[idx];
+    if(hit.node) hit.node.classList.add('hit');
+    lastHit = hit;
+    var d = hit.d;
+    tip.innerHTML =
+      '<div class="t">'+esc(d.mun)+' <span style="color:var(--muted);font-weight:400">'+d.uf+'</span></div>'+
+      '<div class="r"><span>População</span><b>'+nf(d.pop)+'</b></div>'+
+      '<div class="r"><span>TGCA</span><b>'+ftg(d.tgca)+'</b></div>'+
+      '<div class="r"><span>PIB total</span><b>'+fpib(d.pib)+'</b></div>'+
+      '<div class="r"><span>PIB per capita</span><b>R$ '+nf(d.pibpc,0)+'</b></div>'+
+      '<div class="q">'+esc(d.q.nome)+'</div>';
+  }
+  var cr = svg.parentNode.getBoundingClientRect();
+  var tw = tip.offsetWidth || 210, th = tip.offsetHeight || 120;
+  var lx = ev.clientX-cr.left+16, ly = ev.clientY-cr.top-th-10;
+  if(lx+tw > cr.width-8) lx = ev.clientX-cr.left-tw-16;
+  if(ly < 4) ly = ev.clientY-cr.top+18;
+  tip.style.left=lx+'px'; tip.style.top=ly+'px'; tip.style.opacity=1;
+});
+function hideTip(){
+  tip.style.opacity=0;
+  if(lastHit && lastHit.node) lastHit.node.classList.remove('hit');
+  lastHit=null;
+}
+svg.addEventListener('pointerleave', hideTip);
+
+/* ---------- tiles ---------- */
+function drawTiles(data){
+  var cnt={}; QDEF.forEach(function(q){cnt[q.id]=0;});
+  data.forEach(function(d){cnt[d.q.id]++;});
+  var pibTot = data.reduce(function(a,d){return a+d.pib;},0);
+  var t=[];
+  var nuf = UFS.filter(function(u){return state.ufs.has(u);}).length;
+  t.push(tile('Municípios', nf(data.length), nuf===1 ? '1 estado selecionado' : nuf+' estados selecionados'));
+  QDEF.forEach(function(q){
+    var pct = data.length ? Math.round(cnt[q.id]/data.length*100) : 0;
+    t.push(tile(q.curto, nf(cnt[q.id]), pct+'% da seleção'));
+  });
+  t.push(tile('PIB somado', fpib(pibTot), 'total da seleção'));
+  document.getElementById('tiles').innerHTML = t.join('');
+}
+function tile(k,v,n){ return '<div class="tile"><div class="k">'+esc(k)+'</div><div class="v">'+v+'</div><div class="n">'+esc(n)+'</div></div>'; }
+
+/* ---------- legenda de tamanho ---------- */
+function drawSizeKey(){
+  var vals=[1000000, 10000000, 100000000, 1000000000];
+  var h=[];
+  vals.forEach(function(v){
+    var r=sr(v), d=Math.ceil(r*2)+4;
+    h.push('<div class="item"><svg viewBox="0 0 '+d+' '+d+'" width="'+d+'" height="'+d+'">'+
+      '<circle class="dot" cx="'+(d/2)+'" cy="'+(d/2)+'" r="'+r.toFixed(1)+'"/></svg>'+
+      '<span>'+fpib(v)+'</span></div>');
+  });
+  document.getElementById('sizekey').innerHTML=h.join('');
+}
+
+/* ---------- painéis por estado ---------- */
+function drawSmall(){
+  var w=340,h=250,m={t:14,r:12,b:30,l:38};
+  var pw=w-m.l-m.r, ph=h-m.t-m.b;
+  var a=Math.log10(XLOG.min), b=Math.log10(XLOG.max);
+  function px(v){return m.l+(Math.log10(Math.max(v,XLOG.min))-a)/(b-a)*pw;}
+  function py(v){return m.t+(YD.max-v)/(YD.max-YD.min)*ph;}
+  var term=state.q.trim().toLowerCase();
+  var out=[];
+  UFS.forEach(function(uf){
+    var ds=ROWS.filter(function(d){return d.uf===uf && (!term || d.mun.toLowerCase().indexOf(term)>=0);});
+    var dim = !state.ufs.has(uf);
+    var rx=px(REF.x), ry=py(REF.y), s=[];
+    s.push('<rect x="'+rx+'" y="'+m.t+'" width="'+(m.l+pw-rx)+'" height="'+(ry-m.t)+'" fill="var(--q-hi)"/>');
+    [-2,0,2,4,6].forEach(function(t){s.push('<line class="gridline" x1="'+m.l+'" y1="'+py(t)+'" x2="'+(m.l+pw)+'" y2="'+py(t)+'"/>');});
+    s.push('<line class="reflines" x1="'+rx+'" y1="'+m.t+'" x2="'+rx+'" y2="'+(m.t+ph)+'"/>');
+    s.push('<line class="reflines" x1="'+m.l+'" y1="'+ry+'" x2="'+(m.l+pw)+'" y2="'+ry+'"/>');
+    s.push('<line class="axisline" x1="'+m.l+'" y1="'+(m.t+ph)+'" x2="'+(m.l+pw)+'" y2="'+(m.t+ph)+'"/>');
+    s.push('<line class="axisline" x1="'+m.l+'" y1="'+m.t+'" x2="'+m.l+'" y2="'+(m.t+ph)+'"/>');
+    [-2,0,2,4,6].forEach(function(t){s.push('<text class="tick" x="'+(m.l-6)+'" y="'+(py(t)+4)+'" text-anchor="end">'+t+'%</text>');});
+    [50000,500000,5000000].forEach(function(t){s.push('<text class="tick" x="'+px(t)+'" y="'+(m.t+ph+16)+'" text-anchor="middle">'+fpop(t)+'</text>');});
+    ds.slice().sort(function(x,y){return y.pib-x.pib;}).forEach(function(d){
+      var r=Math.max(1.8, sr(d.pib)*0.42);
+      s.push('<circle class="dot'+(dim?' off':'')+'" cx="'+px(d.pop).toFixed(1)+'" cy="'+py(d.tgca).toFixed(1)+'" r="'+r.toFixed(1)+'"><title>'+
+        esc(d.mun)+' — '+nf(d.pop)+' hab., TGCA '+ftg(d.tgca)+', PIB '+fpib(d.pib)+'</title></circle>');
+    });
+    var acima = ds.filter(function(d){return d.tgca>=REF.y;}).length;
+    out.push('<div class="smcell"><h3>'+uf+'</h3><p class="smn">'+ds.length+(ds.length===1?' município · ':' municípios · ')+acima+' acima de 0,36%</p>'+
+      '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+uf+': '+ds.length+' municípios">'+s.join('')+'</svg></div>');
+  });
+  document.getElementById('smgrid').innerHTML=out.join('');
+}
+
+/* ---------- tabela ---------- */
+var COLS=[
+  {k:'mun', t:'Município', f:function(d){return esc(d.mun);}},
+  {k:'uf', t:'UF', f:function(d){return d.uf;}},
+  {k:'pop', t:'População', f:function(d){return nf(d.pop);}},
+  {k:'tgca', t:'TGCA', f:function(d){return ftg(d.tgca);}},
+  {k:'pib', t:'PIB total', f:function(d){return fpib(d.pib);}},
+  {k:'pibpc', t:'PIB per capita', f:function(d){return 'R$ '+nf(d.pibpc,0);}},
+  {k:'q', t:'Quadrante', f:function(d){return esc(d.q.curto);}}
+];
+function drawTable(){
+  var data=visible().slice();
+  var k=state.sort.key, dir=state.sort.dir;
+  data.sort(function(a,b){
+    var va = k==='q'? a.q.nome : a[k], vb = k==='q'? b.q.nome : b[k];
+    if(typeof va==='string') return va.localeCompare(vb,'pt-BR')*dir;
+    return (va-vb)*dir;
+  });
+  document.getElementById('thead').innerHTML = COLS.map(function(c){
+    var srt = c.k===k ? ' aria-sort="'+(dir===1?'ascending':'descending')+'"' : '';
+    return '<th data-k="'+c.k+'"'+srt+' scope="col">'+c.t+'</th>';
+  }).join('');
+  document.getElementById('tbody').innerHTML = data.map(function(d){
+    return '<tr>'+COLS.map(function(c){return '<td>'+c.f(d)+'</td>';}).join('')+'</tr>';
+  }).join('');
+  document.getElementById('cap-tab').textContent = data.length+' linhas · clique no cabeçalho para ordenar.';
+  Array.prototype.forEach.call(document.querySelectorAll('#thead th'), function(th){
+    th.addEventListener('click', function(){
+      var kk=th.dataset.k;
+      if(state.sort.key===kk) state.sort.dir*=-1;
+      else state.sort={key:kk, dir: (kk==='mun'||kk==='uf'||kk==='q') ? 1 : -1};
+      drawTable();
+    });
+  });
+}
+
+/* ---------- controles ---------- */
+function buildChips(){
+  var h=['<button class="chip" data-uf="__all">Todos</button>'];
+  UFS.forEach(function(u){ h.push('<button class="chip" data-uf="'+u+'" aria-pressed="true">'+u+'</button>'); });
+  var c=document.getElementById('ufchips'); c.innerHTML=h.join('');
+  c.addEventListener('click', function(ev){
+    var b=ev.target.closest('button[data-uf]'); if(!b) return;
+    var uf=b.dataset.uf;
+    if(uf==='__all'){ state.ufs = new Set(UFS); }
+    else if(state.ufs.size===UFS.length){ state.ufs = new Set([uf]); }
+    else if(state.ufs.has(uf)){ state.ufs.delete(uf); if(!state.ufs.size) state.ufs=new Set(UFS); }
+    else state.ufs.add(uf);
+    syncChips(); render();
+  });
+  syncChips();
+}
+function syncChips(){
+  Array.prototype.forEach.call(document.querySelectorAll('#ufchips button[data-uf]'), function(b){
+    if(b.dataset.uf==='__all'){ b.setAttribute('aria-pressed', state.ufs.size===UFS.length ? 'true':'false'); return; }
+    b.setAttribute('aria-pressed', state.ufs.has(b.dataset.uf) ? 'true':'false');
+  });
+}
+function pair(aId,bId,onA,onB){
+  var A=document.getElementById(aId), B=document.getElementById(bId);
+  A.addEventListener('click',function(){A.setAttribute('aria-pressed','true');B.setAttribute('aria-pressed','false');onA();});
+  B.addEventListener('click',function(){B.setAttribute('aria-pressed','true');A.setAttribute('aria-pressed','false');onB();});
+}
+pair('sc-log','sc-lin',function(){state.scale='log';drawChart();},function(){state.scale='lin';drawChart();});
+
+var views=[['v-chart','view-chart'],['v-sm','view-sm'],['v-tab','view-tab']];
+views.forEach(function(v){
+  document.getElementById(v[0]).addEventListener('click', function(){
+    views.forEach(function(w){
+      var on = w[0]===v[0];
+      document.getElementById(w[0]).setAttribute('aria-pressed', on?'true':'false');
+      document.getElementById(w[1]).classList.toggle('hidden', !on);
+    });
+    state.view = v[0]==='v-chart'?'chart':(v[0]==='v-sm'?'sm':'tab');
+    hideTip(); render();
+  });
+});
+var qEl=document.getElementById('q'), qt;
+qEl.addEventListener('input', function(){ clearTimeout(qt); qt=setTimeout(function(){ state.q=qEl.value; render(); },140); });
+
+function render(){
+  if(state.view==='chart') drawChart();
+  else if(state.view==='sm'){ drawSmall(); drawTiles(visible()); }
+  else { drawTable(); drawTiles(visible()); }
+}
+
+/* ---------- nota de qualidade dos dados ---------- */
+(function(){
+  var w=document.getElementById('warnbox');
+  if(!RAW.fixed || !RAW.fixed.length){ w.classList.add('hidden'); return; }
+  w.innerHTML = '<b>Ajuste de escala aplicado na base:</b> '+RAW.fixed.map(esc).join(', ')+
+    ' — o PIB total estava registrado em reais, não em R$ mil como todas as demais linhas, o que o deixava '+
+    'cerca de mil vezes maior e o transformava no segundo maior PIB da base inteira. O valor foi dividido por 1.000, '+
+    'o que o alinha ao produto de população × PIB per capita da própria linha. Vale conferir na planilha de origem.';
+})();
+
+buildChips();
+drawSizeKey();
+render();
+})();
+</script>
