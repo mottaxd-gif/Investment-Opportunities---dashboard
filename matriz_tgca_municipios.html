@@ -76,6 +76,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .axisline{stroke:var(--axis);stroke-width:1}
 .reflines{stroke:var(--axis);stroke-width:1.5}
 .trend{stroke:var(--ink-2);stroke-width:2;fill:none;stroke-linecap:round}
+.trend-alt{stroke:var(--muted);stroke-width:1.5;fill:none;stroke-linecap:round;opacity:.85}
 .tick{fill:var(--muted);font-size:11px;font-family:var(--mono);letter-spacing:-.02em}
 .axtitle{fill:var(--ink-2);font-size:12.5px;font-weight:500}
 .qlab{fill:var(--muted);font-size:11.5px;font-weight:600;letter-spacing:.01em;paint-order:stroke;stroke:var(--surface);stroke-width:3.5px;stroke-linejoin:round}
@@ -87,6 +88,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .dlabel{fill:var(--ink-2);font-size:11.5px;font-weight:500;paint-order:stroke;stroke:var(--surface);stroke-width:3.5px;stroke-linejoin:round}
 .refnote{fill:var(--muted);font-size:11px;font-weight:500;font-family:var(--mono)}
 .trendnote{fill:var(--ink-2);font-size:11.5px;font-weight:600;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
+.trendnote.alt{fill:var(--muted);font-weight:500}
 #tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;z-index:5;
   background:var(--surface);border:1px solid var(--hair);border-radius:9px;padding:9px 11px;
   box-shadow:0 6px 22px rgba(0,0,0,.14);font-size:12.5px;min-width:190px}
@@ -103,6 +105,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .serieskey i{width:13px;height:13px;border-radius:50%;display:inline-block;border:1.25px solid var(--s1);background:var(--s1-fill)}
 .serieskey .it.n i{border-color:var(--s2);background:var(--s2-fill)}
 .serieskey .it.l i{width:20px;height:0;border-radius:0;border:0;border-top:2px solid var(--ink-2);background:none}
+.serieskey .it.l.alt i{border-top:1.5px solid var(--muted)}
 .legend .lt{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;font-weight:500}
 .sizekey{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
 .sizekey .item{display:flex;flex-direction:column;align-items:center;gap:4px}
@@ -136,7 +139,22 @@ footer b{color:var(--ink-2);font-weight:600}
 .note{background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--ink-2);
   border-radius:8px;padding:12px 15px;margin-top:14px;font-size:13px;color:var(--ink-2);line-height:1.65}
 .note b{color:var(--ink)}
-.note code{font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+.note code{font-family:var(--mono);font-size:12px;color:var(--ink);white-space:nowrap}
+.mtable{overflow-x:auto;margin:12px 0 14px}
+.mtable table{width:100%;border-collapse:collapse;font-size:12.5px}
+.mtable th[scope=col]{position:static;background:none;top:auto;text-transform:uppercase;font-size:10.5px;letter-spacing:.06em;
+  color:var(--muted);font-weight:500;text-align:right;padding:0 10px 7px;white-space:nowrap;cursor:default}
+.mtable th[scope=col]:first-child,.mtable th[scope=col]:nth-child(2){text-align:left}
+.mtable th[scope=row]{text-align:left;font-weight:600;color:var(--ink);padding:9px 10px;vertical-align:top;
+  border-top:1px solid var(--hair);white-space:normal;min-width:210px;position:static;background:none;
+  text-transform:none;letter-spacing:normal;font-size:13px;cursor:default}
+.mtable td{text-align:right;padding:9px 10px;border-top:1px solid var(--hair);vertical-align:top;
+  font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.mtable td:first-of-type{text-align:left}
+.mtable tr.on th[scope=row],.mtable tr.on td{background:var(--s1-soft)}
+.mtable .d{font-weight:400;font-size:11.5px;color:var(--muted);line-height:1.45;display:block;margin-top:3px}
+.mtable .badge{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.06em;
+  padding:2px 7px;border-radius:999px;background:var(--s1);color:#fff;vertical-align:1px}
 .warn{background:var(--surface);border:1px solid var(--hair);border-left:3px solid #fab219;
   border-radius:8px;padding:11px 14px;margin-top:14px;font-size:13px;color:var(--ink-2)}
 .warn b{color:var(--ink)}
@@ -161,6 +179,13 @@ footer b{color:var(--ink-2);font-weight:600}
   <div class="cgroup">
     <span class="clab">Faixa de população</span>
     <div class="chips" id="rangechips"></div>
+  </div>
+  <div class="cgroup">
+    <span class="clab">Ponderação da linha</span>
+    <div class="chips" id="wchips">
+      <button class="chip ghost" data-w="capped" aria-pressed="true">Limitada</button>
+      <button class="chip ghost" data-w="full" aria-pressed="false">Integral</button>
+    </div>
   </div>
   <div class="cgroup">
     <span class="clab">Prioridade</span>
@@ -203,7 +228,8 @@ footer b{color:var(--ink-2);font-weight:600}
       <div class="serieskey">
         <span class="it"><i></i>Prioritário — acima da linha</span>
         <span class="it n"><i></i>Não prioritário — abaixo da linha</span>
-        <span class="it l"><i></i>Tendência ponderada pelo PIB</span>
+        <span class="it l"><i></i>Linha ativa — define a classificação</span>
+        <span class="it l alt"><i></i>A outra ponderação, para comparação</span>
       </div>
     </div>
     <div>
@@ -253,22 +279,43 @@ var REF = RAW.ref, ROWS = RAW.rows.map(function(r){
 });
 var UFS = Array.from(new Set(ROWS.map(function(d){return d.uf;}))).sort();
 
-/* Tendencia: minimos quadrados de TGCA sobre log10(populacao), ponderado pelo PIB total.
-   Ajustada UMA vez sobre a base inteira (677), para que "prioritario" seja um atributo
-   fixo de cada municipio e nao mude conforme os filtros da tela. */
-var TREND = (function(){
+/* Tendencia: minimos quadrados de TGCA sobre log10(populacao), ponderado pelo PIB.
+   Duas versoes do mesmo ajuste, diferindo so no peso de cada municipio:
+     integral  -> peso = PIB total (Sao Paulo sozinho vale 15,3% do peso)
+     limitada  -> peso = min(PIB, p95), que segura os outliers sem excluir ninguem
+   Ambas rodam sobre os 677 municipios da base, nao sobre a selecao da tela. */
+var PIBS_ORD = ROWS.map(function(d){return d.pib;}).sort(function(a,b){return a-b;});
+var PCAP = PIBS_ORD[Math.floor(0.95*(PIBS_ORD.length-1))];
+var NCAP = ROWS.filter(function(d){return d.pib > PCAP;}).length;
+
+function fit(wfn){
   var sw=0, mx=0, my=0;
-  ROWS.forEach(function(d){ sw+=d.pib; });
-  ROWS.forEach(function(d){ mx += d.pib*Math.log10(d.pop)/sw; my += d.pib*d.tgca/sw; });
+  ROWS.forEach(function(d){ sw+=wfn(d); });
+  ROWS.forEach(function(d){ var w=wfn(d); mx += w*Math.log10(d.pop)/sw; my += w*d.tgca/sw; });
   var sxx=0, sxy=0;
-  ROWS.forEach(function(d){ var dx=Math.log10(d.pop)-mx; sxx+=d.pib*dx*dx; sxy+=d.pib*dx*(d.tgca-my); });
-  var b=sxy/sxx, a=my-b*mx;
-  var ssr=0, sst=0;
-  ROWS.forEach(function(d){ var f=a+b*Math.log10(d.pop); ssr+=d.pib*(d.tgca-f)*(d.tgca-f); sst+=d.pib*(d.tgca-my)*(d.tgca-my); });
-  return {a:a, b:b, r2:1-ssr/sst};
-})();
-function trendAt(pop){ return TREND.a + TREND.b*Math.log10(pop); }
-ROWS.forEach(function(d){ d.gap = d.tgca - trendAt(d.pop); d.pri = d.gap > 0; });
+  ROWS.forEach(function(d){ var w=wfn(d), dx=Math.log10(d.pop)-mx; sxx+=w*dx*dx; sxy+=w*dx*(d.tgca-my); });
+  var b=sxy/sxx, a=my-b*mx, ssr=0, sst=0;
+  ROWS.forEach(function(d){ var w=wfn(d), f=a+b*Math.log10(d.pop);
+    ssr+=w*(d.tgca-f)*(d.tgca-f); sst+=w*(d.tgca-my)*(d.tgca-my); });
+  var maior=ROWS.reduce(function(x,y){return wfn(y)>wfn(x)?y:x;});
+  return {a:a, b:b, r2:1-ssr/sst, topShare:wfn(maior)/sw, topName:maior.mun};
+}
+var FITS = {
+  full:   fit(function(d){ return d.pib; }),
+  capped: fit(function(d){ return Math.min(d.pib, PCAP); })
+};
+var WLABEL = {full:'Ponderação integral', capped:'Ponderação limitada'};
+function curFit(){ return FITS[state.w]; }
+function altKey(){ return state.w==='full' ? 'capped' : 'full'; }
+function lineAt(f, pop){ return f.a + f.b*Math.log10(pop); }
+function trendAt(pop){ return lineAt(curFit(), pop); }
+function applyFit(){
+  ROWS.forEach(function(d){ d.gap = d.tgca - trendAt(d.pop); d.pri = d.gap > 0; });
+}
+/* municipios que trocam de lado entre as duas versoes */
+var SWITCHERS = ROWS.filter(function(d){
+  return (d.tgca > lineAt(FITS.full, d.pop)) !== (d.tgca > lineAt(FITS.capped, d.pop));
+}).map(function(d){ return d.mun+'/'+d.uf; });
 var PIBMAX = Math.max.apply(null, ROWS.map(function(d){return d.pib;}));
 
 /* ---------- formatação ---------- */
@@ -306,7 +353,8 @@ var RANGES = [
   {v:1000000, lab:'Até 1 milhão'},
   {v:Infinity,lab:'Toda a base'}
 ];
-var state = {ufs:new Set(UFS), scale:'log', q:'', view:'chart', range:500000, pri:'all', sort:{key:'pop', dir:-1}};
+var state = {ufs:new Set(UFS), scale:'log', q:'', view:'chart', range:500000, pri:'all', w:'capped', sort:{key:'pop', dir:-1}};
+applyFit();
 function visible(){
   var term = state.q.trim().toLowerCase();
   return ROWS.filter(function(d){
@@ -413,20 +461,32 @@ function drawChart(){
   s.push('<text class="refnote" x="'+(M.l-10)+'" y="'+(ry-6)+'" text-anchor="end">0,36%</text>');
 
   /* linha de tendencia ponderada pelo PIB */
-  var D=xdom(), tpts=[];
-  for(var i=0;i<=80;i++){
-    var frac=i/80;
-    var popv = state.scale==='log'
-      ? Math.pow(10, Math.log10(D.min) + frac*(Math.log10(D.max)-Math.log10(D.min)))
-      : Math.max(D.min, frac*D.linmax);
-    var yv = trendAt(popv);
-    if(yv<YD.min || yv>YD.max) continue;
-    tpts.push(sx(popv).toFixed(1)+','+sy(yv).toFixed(1));
+  var D=xdom();
+  function linePts(f){
+    var out=[];
+    for(var i=0;i<=80;i++){
+      var frac=i/80;
+      var popv = state.scale==='log'
+        ? Math.pow(10, Math.log10(D.min) + frac*(Math.log10(D.max)-Math.log10(D.min)))
+        : Math.max(D.min, frac*D.linmax);
+      var yv = lineAt(f, popv);
+      if(yv<YD.min || yv>YD.max) continue;
+      out.push(sx(popv).toFixed(1)+','+sy(yv).toFixed(1));
+    }
+    return out;
   }
+  /* a versao inativa fica visivel como comparacao, mas nao classifica ninguem */
+  var apts = linePts(FITS[altKey()]);
+  if(apts.length>1){
+    s.push('<polyline class="trend-alt" points="'+apts.join(' ')+'"/>');
+    var af=apts[Math.floor(apts.length*0.58)].split(',');
+    s.push('<text class="trendnote alt" x="'+(+af[0])+'" y="'+(+af[1]+17)+'" text-anchor="middle">'+WLABEL[altKey()]+'</text>');
+  }
+  var tpts = linePts(curFit());
   if(tpts.length>1){
     s.push('<polyline class="trend" points="'+tpts.join(' ')+'"/>');
     var first=tpts[0].split(','), lx0=+first[0], ly0=+first[1];
-    s.push('<text class="trendnote" x="'+(lx0+7)+'" y="'+(ly0-13)+'" text-anchor="start">Tendência ponderada pelo PIB</text>');
+    s.push('<text class="trendnote" x="'+(lx0+7)+'" y="'+(ly0-13)+'" text-anchor="start">'+WLABEL[state.w]+' — classifica</text>');
   }
 
   /* bolhas: maiores primeiro, menores por cima */
@@ -682,6 +742,17 @@ function buildRangeChips(){
     hideTip(); render();
   });
 }
+function buildWChips(){
+  var c=document.getElementById('wchips');
+  c.addEventListener('click', function(ev){
+    var b=ev.target.closest('button[data-w]'); if(!b) return;
+    state.w=b.dataset.w;
+    Array.prototype.forEach.call(c.querySelectorAll('button[data-w]'), function(x){
+      x.setAttribute('aria-pressed', x===b ? 'true':'false');
+    });
+    applyFit(); drawMethod(); hideTip(); render();
+  });
+}
 function buildPriChips(){
   var c=document.getElementById('prichips');
   c.addEventListener('click', function(ev){
@@ -722,26 +793,47 @@ function render(){
 }
 
 /* ---------- nota metodologica da tendencia ---------- */
-(function(){
-  var sw=0; ROWS.forEach(function(d){sw+=d.pib;});
-  var maior = ROWS.slice().sort(function(x,y){return y.pib-x.pib;})[0];
-  var peso = (maior.pib/sw*100).toFixed(1);
-  var npri = ROWS.filter(function(d){return d.pri;}).length;
-  var pibpri = ROWS.filter(function(d){return d.pri;}).reduce(function(a,d){return a+d.pib;},0);
+function eqn(f){
+  return 'TGCA = ' + nf(f.a,3) + ' ' + (f.b<0?'−':'+') + ' ' + nf(Math.abs(f.b),3) + ' × log10(pop)';
+}
+function drawMethod(){
+  function stats(key){
+    var f=FITS[key];
+    var pri=ROWS.filter(function(d){ return d.tgca > lineAt(f,d.pop); });
+    var pibpri=pri.reduce(function(a,d){return a+d.pib;},0);
+    var pibtot=ROWS.reduce(function(a,d){return a+d.pib;},0);
+    return {f:f, n:pri.length, pib:Math.round(pibpri/pibtot*100)};
+  }
+  var A=stats('capped'), B=stats('full');
+  function row(key,st,desc){
+    var on = state.w===key;
+    return '<tr'+(on?' class="on"':'')+'><th scope="row">'+WLABEL[key]+(on?' <span class="badge">ativa</span>':'')+
+      '<br><span class="d">'+desc+'</span></th>'+
+      '<td><code>'+eqn(st.f)+'</code></td>'+
+      '<td>'+nf(st.f.r2,3)+'</td>'+
+      '<td>'+nf(st.f.topShare*100,1)+'%</td>'+
+      '<td>'+st.n+'</td>'+
+      '<td>'+st.pib+'%</td></tr>';
+  }
   document.getElementById('methodbox').innerHTML =
-    '<b>Como a linha é calculada.</b> Mínimos quadrados de TGCA sobre log10(população), com cada município ' +
-    'pesado pelo seu PIB total — é a média ponderada pedida, na forma de regressão. A reta ajustada é ' +
-    '<code>TGCA = ' + nf(TREND.a,3) + ' ' + (TREND.b<0?'−':'+') + ' ' + nf(Math.abs(TREND.b),3) + ' × log10(pop)</code>, ' +
-    'com R² ponderado de ' + nf(TREND.r2,3) + '. Ela é ajustada uma única vez sobre os 677 municípios da base, ' +
-    'e não sobre a seleção da tela: assim “prioritário” é um atributo fixo de cada município e não muda quando você ' +
-    'filtra. Resultado: <b>' + npri + ' prioritários</b>, que concentram ' + Math.round(pibpri/sw*100) + '% do PIB da base.' +
-    '<br><br><b>Onde ela é frágil.</b> Ponderar pelo PIB concentra o peso em pouquíssimos pontos: ' +
-    esc(maior.mun) + ' sozinho responde por ' + peso + '% do peso total, e os oito maiores PIBs somam 31%. ' +
-    'Sem os municípios acima de 1 milhão de habitantes a inclinação cai de −0,67 para −0,42 e o R² ponderado vai a 0,02. ' +
-    'Sem ponderação nenhuma a inclinação é praticamente zero (R² 0,000): a relação entre porte e crescimento que a linha ' +
-    'mostra vem do peso do PIB, não de uma tendência forte nos dados brutos. Use a linha como um corte de priorização ' +
-    'defensável, não como previsão.';
-})();
+    '<b>Duas versões da mesma linha.</b> Mínimos quadrados de TGCA sobre log10(população), com cada município ' +
+    'pesado pelo seu PIB. As duas versões diferem apenas no peso, e ambas são ajustadas sobre os 677 municípios da base — ' +
+    'nunca sobre a seleção da tela — para que a classificação não mude quando você filtra.' +
+    '<div class="mtable"><table><thead><tr><th scope="col">Versão</th><th scope="col">Reta ajustada</th>' +
+    '<th scope="col">R² pond.</th><th scope="col">Peso do maior</th><th scope="col">Prioritários</th><th scope="col">% do PIB</th></tr></thead><tbody>' +
+    row('capped', A, 'peso = min(PIB, R$ '+nf(PCAP/1e6,1)+' bi), o percentil 95 — '+NCAP+' municípios chegam ao teto, nenhum é excluído') +
+    row('full',   B, 'peso = PIB total, sem teto') +
+    '</tbody></table></div>' +
+    '<b>O que o teto resolve.</b> Na versão integral, ' + esc(FITS.full.topName) + ' sozinho responde por ' +
+    nf(FITS.full.topShare*100,1) + '% de todo o peso, e os oito maiores PIBs somam 31%: a inclinação da reta era, na prática, ' +
+    'decisão de um punhado de pontos. O teto derruba esse peso para ' + nf(FITS.capped.topShare*100,1) + '% sem tirar ninguém da ' +
+    'conta, e a inclinação passa de ' + nf(FITS.full.b,3) + ' para ' + nf(FITS.capped.b,3) + '. Só <b>' + SWITCHERS.length +
+    ' municípios</b> trocam de lado entre as duas: ' + SWITCHERS.map(esc).join(', ') + '.' +
+    '<br><br><b>Sobre o R² menor.</b> O R² ponderado cai de ' + nf(FITS.full.r2,3) + ' para ' + nf(FITS.capped.r2,3) + ', e isso é ' +
+    'esperado: o valor alto da versão integral vinha de São Paulo dominar peso e variância ao mesmo tempo. Sem ponderação ' +
+    'nenhuma a inclinação é praticamente zero (R² 0,000) — a relação entre porte e crescimento é fraca nos dados brutos, e a ' +
+    'linha limitada mostra isso com honestidade. Use qualquer uma das duas como corte de priorização defensável, não como previsão.';
+}
 
 /* ---------- nota de qualidade dos dados ---------- */
 (function(){
@@ -753,9 +845,11 @@ function render(){
     'o que o alinha ao produto de população × PIB per capita da própria linha. Vale conferir na planilha de origem.';
 })();
 
+drawMethod();
 buildChips();
 buildRangeChips();
 buildPriChips();
+buildWChips();
 drawSizeKey();
 render();
 })();
